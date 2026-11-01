@@ -620,13 +620,20 @@ const GOOGLE_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxA03eiBo
 
 async function postToGoogleSheet(payload) {
   try {
+    const params = new URLSearchParams();
+    for (const key in payload) {
+      if (Object.prototype.hasOwnProperty.call(payload, key)) {
+        params.append(key, payload[key]);
+      }
+    }
+
     await fetch(GOOGLE_SHEET_ENDPOINT, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: JSON.stringify(payload)
+      body: params.toString()
     });
     return true;
   } catch (err) {
