@@ -30,8 +30,8 @@ const ZERO_THEMES = [
       "Lighthouse 99+ Performance score",
       "Full SEO Schema.org structured data"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/aurora/",
-    repoUrl: "https://github.com/username/aurora-saas-theme",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/aurora/",
+    repoUrl: "https://github.com/mujtabacloud/aurora-saas-theme",
     downloadSize: "2.4 MB",
     version: "2.4.0",
     sales: 1420
@@ -62,8 +62,8 @@ const ZERO_THEMES = [
       "Interactive resume and contact overlay",
       "Smooth page transitions without frameworks"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/kanso/",
-    repoUrl: "https://github.com/username/kanso-minimalist-portfolio",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/kanso/",
+    repoUrl: "https://github.com/mujtabacloud/kanso-minimalist-portfolio",
     downloadSize: "1.8 MB",
     version: "1.9.1",
     sales: 890
@@ -94,8 +94,8 @@ const ZERO_THEMES = [
       "Interactive consultation booking modal",
       "WCAG 2.1 AA accessibility compliant"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/novus/",
-    repoUrl: "https://github.com/username/novus-creative-agency",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/novus/",
+    repoUrl: "https://github.com/mujtabacloud/novus-creative-agency",
     downloadSize: "3.1 MB",
     version: "2.1.0",
     sales: 730
@@ -125,8 +125,8 @@ const ZERO_THEMES = [
       "Inline and sidebar ad slots (AdSense / Carbon)",
       "Newsletter capture box integration"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/chronicle/",
-    repoUrl: "https://github.com/username/chronicle-blog-theme",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/chronicle/",
+    repoUrl: "https://github.com/mujtabacloud/chronicle-blog-theme",
     downloadSize: "1.5 MB",
     version: "3.0.2",
     sales: 1120
@@ -155,8 +155,8 @@ const ZERO_THEMES = [
       "Instant multi-faceted product filtering",
       "Zero hosting fees on GitHub Pages"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/luxe/",
-    repoUrl: "https://github.com/username/luxe-ecommerce-catalog",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/luxe/",
+    repoUrl: "https://github.com/mujtabacloud/luxe-ecommerce-catalog",
     downloadSize: "3.5 MB",
     version: "2.3.0",
     sales: 980
@@ -186,8 +186,8 @@ const ZERO_THEMES = [
       "Dark mode code editor themes",
       "GitHub repo edit-this-page link"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/docucraft/",
-    repoUrl: "https://github.com/username/docucraft-documentation-theme",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/docucraft/",
+    repoUrl: "https://github.com/mujtabacloud/docucraft-documentation-theme",
     downloadSize: "2.1 MB",
     version: "1.8.0",
     sales: 820
@@ -216,8 +216,8 @@ const ZERO_THEMES = [
       "Light/Dark theme sync with system",
       "Fully responsive on mobile & tablets"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/nexus/",
-    repoUrl: "https://github.com/username/nexus-admin-ui",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/nexus/",
+    repoUrl: "https://github.com/mujtabacloud/nexus-admin-ui",
     downloadSize: "3.8 MB",
     version: "1.2.0",
     sales: 450
@@ -247,8 +247,8 @@ const ZERO_THEMES = [
       "Recommendation / testimonial quotes carousel",
       "Quick contact modal"
     ],
-    demoUrl: "https://username.github.io/zero-themes/demo/zenith/",
-    repoUrl: "https://github.com/username/zenith-developer-cv",
+    demoUrl: "https://mujtabacloud.github.io/zero-themes/demo/zenith/",
+    repoUrl: "https://github.com/mujtabacloud/zenith-developer-cv",
     downloadSize: "1.2 MB",
     version: "2.0.4",
     sales: 1680

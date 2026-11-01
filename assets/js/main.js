@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initCodeCopy();
   initNewsletter();
+  initContactForm();
   initCursorFollower();
   initInteractiveCircuit();
 });
@@ -612,19 +613,101 @@ function initCodeCopy() {
 }
 
 /* ==========================================================================
-   9. NEWSLETTER SUBSCRIPTION / CONNECT WITH US
+   9. GOOGLE SHEETS FORM INTEGRATION & NEWSLETTER
+   Endpoints: https://script.google.com/macros/s/AKfycbxA03eiBo9CGMpjSH5MlWxhZKolwJNwYQ69KgfcWY8DpOSv0ocx-XBGt-Y290nq27M7/exec
    ========================================================================== */
+const GOOGLE_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxA03eiBo9CGMpjSH5MlWxhZKolwJNwYQ69KgfcWY8DpOSv0ocx-XBGt-Y290nq27M7/exec';
+
+async function postToGoogleSheet(payload) {
+  try {
+    await fetch(GOOGLE_SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    return true;
+  } catch (err) {
+    console.warn('Google Sheet submission warning:', err);
+    return false;
+  }
+}
+
 function initNewsletter() {
   const forms = document.querySelectorAll('.newsletter-form');
   forms.forEach(form => {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const input = form.querySelector('input[type="email"]');
-      if (input && input.value) {
-        showToast(`🎉 Thanks for connecting with us! We will send you new theme releases.`, 'success');
-        input.value = '';
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (!input || !input.value) return;
+
+      const email = input.value.trim();
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Connect with Us';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Saving...';
+      }
+
+      await postToGoogleSheet({
+        email: email,
+        name: 'Newsletter Subscriber',
+        topic: 'Newsletter / Connect',
+        message: 'Subscribed to Zero Themes updates'
+      });
+
+      showToast(`🎉 Thanks for connecting! Your email has been saved to our Google Sheet.`, 'success');
+      input.value = '';
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
       }
     });
+  });
+}
+
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('contact-submit-btn') || form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Message';
+
+    const nameInput = form.querySelector('[name="name"]');
+    const emailInput = form.querySelector('[name="email"]');
+    const topicSelect = form.querySelector('[name="topic"]');
+    const messageInput = form.querySelector('[name="message"]');
+
+    const name = nameInput ? nameInput.value.trim() : 'Anonymous';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const topic = topicSelect ? topicSelect.value : 'General Inquiry';
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending Message...';
+    }
+
+    await postToGoogleSheet({
+      name: name,
+      email: email,
+      topic: topic,
+      message: message
+    });
+
+    showToast('🎉 Message sent successfully! Saved to our Google Sheet. We will reply within 24 hours.', 'success');
+    form.reset();
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
   });
 }
 

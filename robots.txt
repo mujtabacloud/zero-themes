@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap pointer
-Sitemap: https://username.github.io/zero-themes/sitemap.xml
+Sitemap: https://mujtabacloud.github.io/zero-themes/sitemap.xml

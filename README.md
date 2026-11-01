@@ -9,7 +9,7 @@ Zero Themes provides high-end, responsive static website templates built with pu
 ## 🚀 Key Features & Strategy
 
 1. **GitHub Pages & Repository Workflow**:
-   - **Live Demos**: Hosted live on GitHub Pages (`https://username.github.io/zero-themes/demo/theme-name`).
+   - **Live Demos**: Hosted live on GitHub Pages (`https://mujtabacloud.github.io/zero-themes/demo/theme-name`).
    - **Get Themes / Source Code**: Each theme links directly to its own GitHub repository for cloning, downloading ZIP files, or starring/forking.
    - **Zero Build Step**: Native HTML/CSS/JS ready to deploy immediately to GitHub Pages.
 

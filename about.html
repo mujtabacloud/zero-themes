@@ -8,7 +8,7 @@
   <meta name="description" content="Learn about Zero Themes, our mission to empower developers with high-converting, zero-hosting-cost static website themes on GitHub Pages." />
   <meta name="keywords" content="about zero themes, static website themes, github pages templates, open source web design" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://username.github.io/zero-themes/about.html" />
+  <link rel="canonical" href="https://mujtabacloud.github.io/zero-themes/about.html" />
 
   <!-- Favicon & Styles -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
@@ -179,34 +179,34 @@
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.4rem;">Have a question about GitHub Pages deployment, need help, or want a custom bespoke theme?</p>
       </div>
 
-      <form id="contact-form" onsubmit="event.preventDefault(); showToast('🎉 Message sent! Our team will reply within 24 hours.', 'success'); this.reset();">
+      <form id="contact-form">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
           <div>
             <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Your Name</label>
-            <input type="text" required placeholder="Alex Mercer" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none;" />
+            <input type="text" name="name" required placeholder="Alex Mercer" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none;" />
           </div>
           <div>
             <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Your Email</label>
-            <input type="email" required placeholder="alex@company.com" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none;" />
+            <input type="email" name="email" required placeholder="alex@company.com" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none;" />
           </div>
         </div>
 
         <div style="margin-bottom: 1rem;">
           <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Inquiry Topic</label>
-          <select style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none;">
-            <option>Theme Purchase &amp; Licensing Inquiry</option>
-            <option>GitHub Pages Deployment Assistance</option>
-            <option>Custom Bespoke Theme Development</option>
-            <option>Affiliate &amp; Sponsorship Opportunities</option>
+          <select name="topic" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none;">
+            <option value="Theme Inquiry &amp; Setup">Theme Inquiry &amp; Setup</option>
+            <option value="GitHub Pages Deployment Assistance">GitHub Pages Deployment Assistance</option>
+            <option value="Custom Bespoke Theme Development">Custom Bespoke Theme Development</option>
+            <option value="General Question / Feedback">General Question / Feedback</option>
           </select>
         </div>
 
         <div style="margin-bottom: 1.5rem;">
           <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Your Message</label>
-          <textarea rows="4" required placeholder="Tell us how we can help you with your GitHub Pages site..." style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none; resize: vertical;"></textarea>
+          <textarea name="message" rows="4" required placeholder="Tell us how we can help you with your website or theme..." style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-muted); color: var(--text-main); outline: none; resize: vertical;"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem;">
+        <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem;">
           Send Message
         </button>
       </form>
