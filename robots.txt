@@ -1,0 +1,6 @@
+# Robots.txt for Zero Themes
+User-agent: *
+Allow: /
+
+# Sitemap pointer
+Sitemap: https://username.github.io/zero-themes/sitemap.xml

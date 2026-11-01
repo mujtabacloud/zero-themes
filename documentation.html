@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Documentation & Deployment Guide – Zero Themes</title>
+  <meta name="description" content="Step-by-step documentation for deploying, configuring, and monetizing static themes on GitHub Pages (username.github.io/website_name)." />
+  <meta name="keywords" content="github pages documentation, static site hosting guide, custom domain github pages, dark mode setup, adsense static site" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://username.github.io/zero-themes/documentation.html" />
+
+  <!-- Favicon & Styles -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <script defer src="./assets/js/themes-data.js"></script>
+  <script defer src="./assets/js/main.js"></script>
+</head>
+<body>
+
+  <div class="bg-grid-pattern"></div>
+  <div class="ambient-glow"></div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">Z</div>
+        <span>Zero <span class="gradient-text">Themes</span></span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="desktop-nav">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="themes.html" class="nav-link">Themes</a></li>
+          <li><a href="documentation.html" class="nav-link active">Documentation</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="cart-toggle-btn" class="cart-btn" aria-label="View Saved Themes Basket" title="View Basket">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="theme-switch-btn" aria-label="Toggle Light/Dark Theme"></button>
+
+        <!-- Right Side Menu Toggle Button -->
+        <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Open Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LEFT-SIDE SLIDING DRAWER -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <aside id="sidebar-drawer" class="sidebar-drawer" aria-label="Side Navigation">
+    <div class="drawer-header">
+      <div class="brand">
+        <div class="brand-icon">Z</div>
+        <span>Zero <span class="gradient-text">Themes</span></span>
+      </div>
+      <button id="drawer-close-btn" class="drawer-close-btn">&times;</button>
+    </div>
+
+    <ul class="drawer-nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="themes.html">Themes Catalog</a></li>
+      <li><a href="documentation.html" class="active">Documentation</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </aside>
+
+  <!-- DOCS 3-COLUMN LAYOUT -->
+  <div class="docs-layout">
+    
+    <!-- LEFT STICKY DOCS NAVIGATION -->
+    <aside class="docs-sidebar">
+      <div class="docs-nav-group">
+        <div class="docs-group-title">Getting Started</div>
+        <ul class="docs-links-list">
+          <li><a href="#overview" class="active">Overview & Requirements</a></li>
+          <li><a href="#github-pages-setup">GitHub Pages Deployment</a></li>
+          <li><a href="#project-structure">Folder Structure</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-nav-group">
+        <div class="docs-group-title">Configuration</div>
+        <ul class="docs-links-list">
+          <li><a href="#subfolder-path">Path & BaseURL Safety</a></li>
+          <li><a href="#custom-domains">Custom Domain & SSL</a></li>
+          <li><a href="#theming">Dark & Light Mode</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-nav-group">
+        <div class="docs-group-title">Monetization & SEO</div>
+        <ul class="docs-links-list">
+          <li><a href="#adsense-integration">Google AdSense Setup</a></li>
+          <li><a href="#seo-config">SEO & Meta Tags</a></li>
+          <li><a href="#licensing">Licenses & Terms</a></li>
+          <li><a href="#faq">FAQ & Troubleshooting</a></li>
+        </ul>
+      </div>
+
+      <!-- Sponsor Card inside Docs Sidebar -->
+      <div style="background: var(--bg-surface); border: 1px dashed var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-top: 2rem;">
+        <span style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">Partner Ad</span>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0 0.8rem;">Need enterprise Git CI/CD automated deployment with zero config?</p>
+        <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="width: 100%; font-size: 0.75rem;">Explore GitHub Actions</a>
+      </div>
+    </aside>
+
+    <!-- CENTER DOCUMENTATION CONTENT -->
+    <article class="docs-content">
+      
+      <!-- Section 1 -->
+      <section id="overview">
+        <span class="badge badge-featured">Documentation Handbook</span>
+        <h1 style="margin-top: 0.8rem;">Zero Themes on GitHub Pages</h1>
+        <p>
+          Welcome to the official developer documentation for <strong>Zero Themes</strong>. Our templates are designed from the ground up to eliminate the common pitfalls of hosting static websites on GitHub Pages, specifically supporting repository project subpaths (e.g. <code>https://username.github.io/website_name/</code>) without broken stylesheet links, broken image assets, or 404 routing errors.
+        </p>
+
+        <div class="docs-callout docs-callout-success">
+          <strong>Key Benefit:</strong> Zero build step required! You don't need Node.js, Ruby, or complex Docker containers to launch your website. Push pure HTML, CSS, and JS directly to GitHub.
+        </div>
+      </section>
+
+      <!-- Section 2: GitHub Pages Deployment -->
+      <section id="github-pages-setup">
+        <h2>GitHub Pages Deployment (60 Seconds)</h2>
+        <p>
+          Deploying your purchased theme to GitHub Pages takes less than a minute. Follow these three simple steps:
+        </p>
+
+        <h3>Step 1: Create a GitHub Repository</h3>
+        <p>Log in to your GitHub account and create a new repository (e.g. <code>my-premium-website</code>). You can make it Public or Private (Private repositories also support GitHub Pages on GitHub Pro/Enterprise plans, while Public repositories support GitHub Pages on free accounts).</p>
+
+        <h3>Step 2: Upload or Push Your Theme Files</h3>
+        <p>Clone the repository to your local computer and extract your Zero Theme files into the root folder:</p>
+
+        <pre><code># Initialize your local git folder
+cd "D:/Premium Web"
+git init
+git add .
+git commit -m "Launch Zero Themes on GitHub Pages"
+git branch -M main
+git remote add origin https://github.com/your-username/your-repository-name.git
+git push -u origin main</code></pre>
+
+        <h3>Step 3: Enable GitHub Pages</h3>
+        <p>In your GitHub repository web interface:</p>
+        <ol style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+          <li>Go to <strong>Settings</strong> &gt; <strong>Pages</strong>.</li>
+          <li>Under <strong>Build and deployment</strong>, set <em>Source</em> to <strong>Deploy from a branch</strong>.</li>
+          <li>Under <em>Branch</em>, select <code>main</code> and folder <code>/ (root)</code>, then click <strong>Save</strong>.</li>
+          <li>Within 30–60 seconds, your site will be live at <code>https://&lt;username&gt;.github.io/&lt;repository-name&gt;/</code>!</li>
+        </ol>
+      </section>
+
+      <!-- Section 3: Subfolder Path Safety -->
+      <section id="subfolder-path">
+        <h2>Subfolder Path &amp; BaseURL Safety</h2>
+        <p>
+          The most frequent reason websites fail on GitHub Pages is the use of absolute root paths (such as <code>/assets/css/style.css</code>). When a project site is deployed at <code>username.github.io/website_name/</code>, an absolute path looks at <code>username.github.io/assets/...</code>, resulting in a 404 error and unstyled pages.
+        </p>
+        <div class="docs-callout callout-warning">
+          <strong>Important Rule:</strong> Zero Themes uses relative paths (<code>./assets/css/style.css</code>) throughout all templates. This ensures that your pages load cleanly whether viewed locally on disk, under a GitHub repository subfolder, or on a root custom domain!
+        </div>
+      </section>
+
+      <!-- Section 4: Custom Domains -->
+      <section id="custom-domains">
+        <h2>Custom Domain &amp; Free SSL Certificate</h2>
+        <p>
+          If you want to use your own domain (e.g. <code>https://www.yourdomain.com</code>) instead of <code>username.github.io</code>:
+        </p>
+        <ol style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+          <li>In your repository root, create a file named <code>CNAME</code> (all caps, no file extension).</li>
+          <li>In the file, write your domain name: <code>www.yourbrand.com</code>.</li>
+          <li>In your DNS provider (Cloudflare, Namecheap, GoDaddy), point your <code>CNAME</code> record for <code>www</code> to <code>username.github.io</code>.</li>
+          <li>In GitHub Pages Settings, check <strong>Enforce HTTPS</strong> to obtain a free Let's Encrypt SSL certificate automatically!</li>
+        </ol>
+      </section>
+
+      <!-- Section 5: Theming (Dark & Light Mode) -->
+      <section id="theming">
+        <h2>Customizing Dark &amp; Light Mode</h2>
+        <p>
+          All color tokens are cleanly declared as CSS variables in <code>assets/css/style.css</code>. You can easily modify brand colors or default shades:
+        </p>
+
+        <pre><code>/* Customize your brand color in assets/css/style.css */
+:root {
+  --primary: #4f46e5;       /* Your primary brand accent */
+  --accent: #06b6d4;        /* Secondary gradient accent */
+  --bg-main: #f8fafc;       /* Light mode background */
+  --text-main: #0f172a;     /* Light mode text */
+}
+
+[data-theme="dark"] {
+  --bg-main: #090d16;       /* Dark mode obsidian background */
+  --text-main: #f8fafc;     /* Dark mode text */
+  --primary: #6366f1;       /* Vibrant dark accent */
+}</code></pre>
+        <p>The state is automatically persisted in <code>localStorage.getItem('zero_theme')</code> so user preferences are remembered on return visits.</p>
+      </section>
+
+      <!-- Section 6: AdSense & Monetization -->
+      <section id="adsense-integration">
+        <h2>Google AdSense &amp; Ads Integration</h2>
+        <p>
+          Zero Themes are designed to be 100% ad-friendly and compliant with Google AdSense, Carbon Ads, and EthAds policies.
+        </p>
+        <p>To enable AdSense across all pages:</p>
+        <ol style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.2rem;">
+          <li>Sign in to your Google AdSense account and copy your publisher code.</li>
+          <li>Paste the Google script tag into the <code>&lt;head&gt;</code> section of your HTML files:</li>
+        </ol>
+
+        <pre><code>&lt;!-- Google AdSense Header Script --&gt;
+&lt;script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"&gt;&lt;/script&gt;</code></pre>
+
+        <p>
+          Then replace the contents inside any <code>&lt;div class="ad-container"&gt;</code> element with your responsive AdSense display ad unit:
+        </p>
+
+        <pre><code>&lt;!-- Example AdSense Display Unit --&gt;
+&lt;div class="ad-container"&gt;
+  &lt;ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"&gt;&lt;/ins&gt;
+  &lt;script&gt;
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  &lt;/script&gt;
+&lt;/div&gt;</code></pre>
+      </section>
+
+      <!-- Section 7: SEO -->
+      <section id="seo-config">
+        <h2>Search Engine Optimization (SEO)</h2>
+        <p>
+          Every page is pre-structured with Semantic HTML5 (<code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>footer</code>) and search-engine metadata:
+        </p>
+        <ul style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+          <li><strong>Canonical URLs:</strong> Prevents duplicate content penalties when hosted on both custom domains and GitHub Pages subdomains.</li>
+          <li><strong>OpenGraph &amp; Twitter Cards:</strong> Rich previews with full-bleed cards when shared on Slack, Twitter/X, Discord, and LinkedIn.</li>
+          <li><strong>XML Sitemap:</strong> Pre-generated <code>sitemap.xml</code> with clean frequency and priority attributes.</li>
+          <li><strong>Robots.txt:</strong> Allows all major search engine crawlers with direct pointer to the sitemap.</li>
+        </ul>
+      </section>
+
+      <!-- Section 8: Licensing -->
+      <section id="licensing">
+        <h2>Open Source Licensing &amp; Usage Rights</h2>
+        <p>
+          All themes on Zero Themes are <strong>100% Free and Open Source under the MIT License</strong>.
+        </p>
+        <p>
+          You are free to clone the theme repositories from GitHub, customize the design and code, deploy to GitHub Pages, and use them for personal projects, client websites, startups, and commercial apps with zero fees.
+        </p>
+      </section>
+
+      <!-- Section 9: FAQ -->
+      <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        
+        <div style="margin-bottom: 1.5rem; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Can I run a contact form on a static GitHub Pages site?</h4>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Yes! Zero Themes supports form endpoints like Formspree, Formkeep, or Web3Forms with zero server backend. Simply replace the form action attribute with your endpoint URL.</p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Do I need to pay GitHub for hosting?</h4>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">No. GitHub Pages is completely free for standard public static sites with up to 100 GB/month bandwidth and 1 GB repository storage.</p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Why does the hamburger menu open from the left?</h4>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">By design, the quick trigger button is easily reachable on the right side of the navigation bar, while the navigation drawer slides out ergonomically from the left side to provide maximum viewing breadth for links and widgets.</p>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- RIGHT TABLE OF CONTENTS -->
+    <aside class="docs-toc" style="position: sticky; top: 90px; height: calc(100vh - 120px); overflow-y: auto;">
+      <div class="docs-group-title">On This Page</div>
+      <ul class="docs-links-list" style="font-size: 0.82rem;">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#github-pages-setup">GitHub Pages Setup</a></li>
+        <li><a href="#subfolder-path">Path & BaseURL</a></li>
+        <li><a href="#custom-domains">Custom Domains & SSL</a></li>
+        <li><a href="#theming">Dark/Light Theming</a></li>
+        <li><a href="#adsense-integration">Google AdSense</a></li>
+        <li><a href="#seo-config">SEO & Meta Tags</a></li>
+        <li><a href="#licensing">Licensing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="brand" style="margin-bottom: 1rem;">
+          <div class="brand-icon">Z</div>
+          <span>Zero <span class="gradient-text">Themes</span></span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Modern static website themes and templates for any platform.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="themes.html">Themes</a></li>
+          <li><a href="documentation.html">Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Zero Themes. Built for GitHub Pages. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- CART MODAL -->
+  <div id="cart-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Shopping Cart</h3>
+        <button class="drawer-close-btn modal-close-trigger">&times;</button>
+      </div>
+      <div id="cart-modal-body" class="modal-body"></div>
+      <div id="cart-modal-footer" class="modal-footer"></div>
+    </div>
+  </div>
+
+</body>
+</html>

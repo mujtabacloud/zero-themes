@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title id="detail-page-title">Theme Details – Zero Themes</title>
+  <meta name="description" content="View theme specifications, live preview demos, and source code for premium website themes and templates." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <script defer src="./assets/js/themes-data.js"></script>
+  <script defer src="./assets/js/main.js"></script>
+</head>
+<body>
+
+  <div class="bg-grid-pattern"></div>
+  <div class="ambient-glow"></div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">Z</div>
+        <span>Zero <span class="gradient-text">Themes</span></span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="desktop-nav">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="themes.html" class="nav-link active">Themes</a></li>
+          <li><a href="documentation.html" class="nav-link">Documentation</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="cart-toggle-btn" class="cart-btn" aria-label="View Saved Themes Basket" title="View Basket">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="theme-switch-btn" aria-label="Toggle Light/Dark Theme"></button>
+
+        <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Open Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LEFT-SIDE SLIDING DRAWER -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <aside id="sidebar-drawer" class="sidebar-drawer" aria-label="Side Navigation">
+    <div class="drawer-header">
+      <div class="brand">
+        <div class="brand-icon">Z</div>
+        <span>Zero <span class="gradient-text">Themes</span></span>
+      </div>
+      <button id="drawer-close-btn" class="drawer-close-btn">&times;</button>
+    </div>
+
+    <ul class="drawer-nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="themes.html" class="active">Themes Catalog</a></li>
+      <li><a href="documentation.html">Documentation</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN DETAIL CONTAINER -->
+  <main class="section-container" id="detail-main-container">
+    <!-- Breadcrumb -->
+    <nav style="display: flex; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="themes.html">Themes</a>
+      <span>/</span>
+      <span id="breadcrumb-current" style="color: var(--text-main); font-weight: 600;">Theme Details</span>
+    </nav>
+
+    <!-- Theme Header Block -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+      <div style="max-width: 800px;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
+          <span id="detail-badge" class="badge badge-hot">Best Seller</span>
+          <span class="badge badge-gh">GitHub Pages Ready</span>
+          <span id="detail-category-label" style="font-size: 0.85rem; color: var(--primary); font-weight: 700;">SaaS & Tech</span>
+        </div>
+        <h1 id="detail-title" style="font-size: 2.6rem; letter-spacing: -0.03em; margin-bottom: 0.6rem;">Aurora SaaS & Startup</h1>
+        <p id="detail-tagline" style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6;">Ultra-sleek dark/light landing page for modern tech & AI startups.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.4rem; color: #f59e0b; font-size: 1.1rem; font-weight: 700;">
+          <span>★</span>
+          <span id="detail-rating">4.95</span>
+          <span id="detail-reviews" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">(128 verified reviews)</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+          Updated for GitHub Pages 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout: 2 Columns (Gallery + Sidebar Checkout) -->
+    <div style="display: grid; grid-template-columns: 1.7fr 1fr; gap: 2.5rem; margin-bottom: 4rem;">
+      
+      <!-- Left Column: Gallery & In-Depth Details -->
+      <div>
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 2rem;">
+          <img id="detail-hero-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Theme Hero Preview" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;" />
+          <div style="padding: 1.2rem; background: var(--bg-muted); display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color);">
+            <div style="font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: var(--success); font-weight: bold;">●</span>
+              <span>100% Static Responsive (Mobile, Tablet, Desktop)</span>
+            </div>
+            <button id="detail-live-demo-btn" class="btn btn-secondary btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              Open Full Demo
+            </button>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Theme Overview</h3>
+        <p id="detail-description" style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
+          Aurora is an award-winning SaaS template built specifically for high conversion. Featuring smooth scroll animations, interactive pricing calculators, feature showcases, customer proof bento grids, and lightning-fast loading speeds under 500ms on GitHub Pages.
+        </p>
+
+        <h3 style="font-size: 1.5rem; margin-bottom: 1.2rem;">What's Included in the Download</h3>
+        <div id="detail-features-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
+          <!-- Injected via JS -->
+        </div>
+
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">One-Minute GitHub Pages Quickstart</h3>
+        <div class="docs-callout">
+          <strong>Instant Setup:</strong> Clone the repository, push to your GitHub repo, and enable GitHub Pages in <code>Settings &gt; Pages</code> with Branch <code>main</code> and Folder <code>/(root)</code>.
+        </div>
+        <pre><code># 1. Clone your theme repository
+git clone https://github.com/your-username/my-new-site.git
+cd my-new-site
+
+# 2. Extract the Zero Theme files into your folder
+unzip zero-theme-package.zip -d .
+
+# 3. Commit and push to GitHub Pages
+git add .
+git commit -m "Initial launch on GitHub Pages"
+git push origin main
+
+# Your site is instantly live at: https://username.github.io/my-new-site/</code></pre>
+      </div>
+
+      <!-- Right Column: Purchasing & Technical Specs -->
+      <div>
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 2rem; position: sticky; top: 90px; box-shadow: var(--shadow-md);">
+          
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+            <div>
+              <span id="detail-price" style="font-size: 2.2rem; font-weight: 800; color: var(--success);">Free</span>
+              <span style="font-size: 0.95rem; color: var(--text-muted); margin-left: 0.4rem;">(Open Source)</span>
+            </div>
+            <span class="badge badge-new">MIT License</span>
+          </div>
+
+          <!-- License Selector -->
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.6rem;">License &amp; Usage Rights</label>
+            <div style="padding: 0.85rem 1rem; border: 1px solid var(--primary); border-radius: var(--radius-md); background: var(--primary-light);">
+              <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">Free for Personal &amp; Commercial Use</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Released under the standard MIT Open Source license. Clone, customize, or deploy client websites freely.</div>
+            </div>
+          </div>
+
+          <!-- Primary Actions -->
+          <a id="detail-repo-btn" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem; margin-bottom: 0.75rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            Get Theme on GitHub
+          </a>
+
+          <div style="display: flex; gap: 0.6rem;">
+            <button id="detail-basket-btn" class="btn btn-secondary" style="flex: 1;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+              Save to Basket
+            </button>
+            <button id="detail-preview-btn-2" class="btn btn-secondary" style="flex: 1;">
+              Live Demo
+            </button>
+          </div>
+
+          <!-- Guarantee Badge -->
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; padding: 0.8rem; background: var(--bg-muted); border-radius: var(--radius-md); font-size: 0.8rem; color: var(--text-muted);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--success); flex-shrink: 0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Deploy anywhere or host on GitHub Pages with zero server fees. Full access to source code and assets.</span>
+          </div>
+
+          <!-- Specifications Table -->
+          <div style="margin-top: 2rem;">
+            <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem;">Technical Specifications</h4>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.88rem;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                <span style="color: var(--text-muted);">Compatible Platform</span>
+                <span style="font-weight: 600;">Any Web Host / GitHub Pages</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                <span style="color: var(--text-muted);">Dark / Light Theme</span>
+                <span style="font-weight: 600; color: var(--success);">Yes (Auto + Toggle)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                <span style="color: var(--text-muted);">AdSense Ready</span>
+                <span style="font-weight: 600;">Yes (Pre-configured)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                <span style="color: var(--text-muted);">Performance Score</span>
+                <span style="font-weight: 600; color: var(--primary);">99 / 100 Lighthouse</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-muted);">Current Version</span>
+                <span id="detail-version" style="font-weight: 600;">2.4.0</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="brand" style="margin-bottom: 1rem;">
+          <div class="brand-icon">Z</div>
+          <span>Zero <span class="gradient-text">Themes</span></span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Modern static website themes and templates.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="themes.html">Themes</a></li>
+          <li><a href="documentation.html">Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Zero Themes. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div id="preview-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog modal-large">
+      <div class="modal-header">
+        <h3 id="preview-modal-title">Live Preview</h3>
+        <button class="drawer-close-btn modal-close-trigger">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 1rem; background: var(--bg-muted);">
+        <div id="preview-frame-container" style="width: 100%; height: 100%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Shopping Cart</h3>
+        <button class="drawer-close-btn modal-close-trigger">&times;</button>
+      </div>
+      <div id="cart-modal-body" class="modal-body"></div>
+      <div id="cart-modal-footer" class="modal-footer"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPT TO HYDRATE THEME DETAIL DATA FROM QUERY PARAM -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const themeId = urlParams.get('id') || 'aurora-saas';
+      const theme = (typeof ZERO_THEMES !== 'undefined' ? ZERO_THEMES : []).find(t => t.id === themeId) || ZERO_THEMES[0];
+
+      if (theme) {
+        document.title = `${theme.name} – Zero Themes`;
+        const breadcrumb = document.getElementById('breadcrumb-current');
+        if (breadcrumb) breadcrumb.textContent = theme.name;
+
+        const title = document.getElementById('detail-title');
+        if (title) title.textContent = theme.name;
+
+        const tagline = document.getElementById('detail-tagline');
+        if (tagline) tagline.textContent = theme.tagline;
+
+        const price = document.getElementById('detail-price');
+        if (price) price.textContent = 'Free';
+
+        const rating = document.getElementById('detail-rating');
+        if (rating) rating.textContent = theme.rating;
+
+        const reviews = document.getElementById('detail-reviews');
+        if (reviews) reviews.textContent = `(${theme.reviewsCount} verified reviews)`;
+
+        const desc = document.getElementById('detail-description');
+        if (desc) desc.textContent = theme.description;
+
+        const heroImg = document.getElementById('detail-hero-img');
+        if (heroImg) heroImg.src = theme.image;
+
+        const cat = document.getElementById('detail-category-label');
+        if (cat) cat.textContent = theme.categoryLabel;
+
+        const ver = document.getElementById('detail-version');
+        if (ver) ver.textContent = theme.version;
+
+        const featContainer = document.getElementById('detail-features-list');
+        if (featContainer) {
+          featContainer.innerHTML = theme.features.map(f => `
+            <div style="display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+              <span style="color: var(--success); font-weight: 800;">✓</span>
+              <span style="font-size: 0.95rem;">${f}</span>
+            </div>
+          `).join('');
+        }
+
+        const repoBtn = document.getElementById('detail-repo-btn');
+        if (repoBtn) {
+          repoBtn.href = theme.repoUrl || `https://github.com/username/${theme.id}`;
+        }
+
+        const basketBtn = document.getElementById('detail-basket-btn');
+        if (basketBtn) {
+          basketBtn.onclick = () => addToBasket(theme.id);
+        }
+
+        const demoBtn1 = document.getElementById('detail-live-demo-btn');
+        const demoBtn2 = document.getElementById('detail-preview-btn-2');
+        if (demoBtn1) demoBtn1.onclick = () => openPreviewModal(theme.id);
+        if (demoBtn2) demoBtn2.onclick = () => openPreviewModal(theme.id);
+      }
+    });
+  </script>
+</body>
+</html>
