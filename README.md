@@ -49,6 +49,7 @@ Zero Themes provides high-end, responsive static website templates built with pu
 
 ```
 D:/Premium Web/
+├── .pages.yml                   # PagesCMS configuration (Themes, Blog, Docs, Settings, Media)
 ├── index.html                   # Home: Hero, metrics, free themes grid, Bento features, testimonials, "Connect with Us"
 ├── themes.html                  # Catalog: Filter pills, instant search, sorting, free themes grid view
 ├── theme-detail.html            # Product page: Screenshot showcase, MIT open source rights, GitHub repo button, live demo
@@ -59,14 +60,43 @@ D:/Premium Web/
 ├── 404.html                     # Custom GitHub Pages 404 error page
 ├── sitemap.xml                  # Search engine XML sitemap
 ├── robots.txt                   # Search crawler directives
-├── assets/
-│   ├── css/
-│   │   └── style.css            # Unified design system: variables, glassmorphism, responsive grid
-│   └── js/
-│       ├── main.js              # Theme switcher, menu drawer, basket collection, live preview modal
-│       └── themes-data.js       # Curated JSON dataset of free premium static themes with GitHub repo links
-└── README.md
+├── content/
+│   ├── settings.json            # Site settings, Google Sheet endpoint, announcement banner
+│   ├── blog/                    # Markdown blog posts with YAML frontmatter
+│   │   ├── score-100-google-pagespeed.md
+│   │   ├── fixing-broken-asset-paths.md
+│   │   └── monetize-static-github-pages.md
+│   └── docs/                    # Markdown documentation articles
+│       ├── quick-start.md
+│       ├── github-pages-deployment.md
+│       └── google-sheets-contact-form.md
+└── assets/
+    ├── data/
+    │   └── themes.json          # Top-level array of themes managed visually via PagesCMS
+    ├── images/                  # Media library uploads folder (PagesCMS media picker)
+    ├── css/
+    │   └── style.css            # Unified design system: variables, glassmorphism, responsive grid
+    └── js/
+        ├── main.js              # Theme switcher, menu drawer, basket collection, live preview modal, Google Sheet integration
+        └── themes-data.js       # Curated JSON dataset fallback for offline / local viewing
 ```
+
+---
+
+## 🖥️ Content Management via PagesCMS (Zero Code)
+
+Zero Themes is 100% integrated with **[PagesCMS](https://pagescms.org)**, a free open-source Git-based CMS.
+
+### How to Manage Your Site Visually:
+1. Go to **[https://pagescms.org](https://pagescms.org)** and click **"Login with GitHub"**.
+2. Select your repository: `mujtabacloud/zero-themes` (branch `main`).
+3. You now have full managing control directly in your browser:
+   - **Themes & Templates**: Add new themes, edit titles, update screenshots, change demo URLs, reorder or delete templates.
+   - **Blog Posts**: Draft and publish Markdown articles with cover images, author bios, tags, and rich formatting.
+   - **Documentation**: Create and reorganize developer guides, technical docs, and FAQs.
+   - **Site Settings**: Update Google Apps Script form endpoint, announcement banners, and social links.
+   - **Media Library**: Upload images directly into `assets/images/` and pick them with 1-click in any post or theme.
+4. When you click **Save**, PagesCMS creates a Git commit and pushes directly to GitHub. GitHub Pages automatically deploys the update in 30–60 seconds!
 
 ---
 

@@ -4,10 +4,44 @@
  * GitHub Pages Compatible (username.github.io/website_name)
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+// Dynamic CMS configuration & data loaders with safe static fallbacks
+let SITE_SETTINGS = {
+  google_sheet_endpoint: 'https://script.google.com/macros/s/AKfycbxA03eiBo9CGMpjSH5MlWxhZKolwJNwYQ69KgfcWY8DpOSv0ocx-XBGt-Y290nq27M7/exec'
+};
+
+async function loadSiteSettings() {
+  try {
+    const res = await fetch('./content/settings.json', { cache: 'no-cache' });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.google_sheet_endpoint) {
+        SITE_SETTINGS = { ...SITE_SETTINGS, ...data };
+      }
+    }
+  } catch (e) {
+    // Offline or local file fallback
+  }
+}
+
+async function loadThemesData() {
+  try {
+    const res = await fetch('./assets/data/themes.json', { cache: 'no-cache' });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        window.ZERO_THEMES = data;
+      }
+    }
+  } catch (e) {
+    // Fallback to static ZERO_THEMES from themes-data.js
+  }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
   initThemeSwitcher();
   initSideDrawer();
   initBasket();
+  await Promise.all([loadSiteSettings(), loadThemesData()]);
   initThemesCatalog();
   initModals();
   initCodeCopy();
@@ -627,7 +661,8 @@ async function postToGoogleSheet(payload) {
       }
     }
 
-    await fetch(GOOGLE_SHEET_ENDPOINT, {
+    const endpoint = (SITE_SETTINGS && SITE_SETTINGS.google_sheet_endpoint) || GOOGLE_SHEET_ENDPOINT;
+    await fetch(endpoint, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
@@ -708,7 +743,7 @@ function initContactForm() {
       message: message
     });
 
-    showToast('🎉 Message sent successfully! Saved to our Google Sheet. We will reply within 24 hours.', 'success');
+    showToast('🎉 Message sent successfully! We will reply within 24 hours.', 'success');
     form.reset();
 
     if (submitBtn) {

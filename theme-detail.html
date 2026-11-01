@@ -283,7 +283,17 @@ git push origin main
 
   <!-- SCRIPT TO HYDRATE THEME DETAIL DATA FROM QUERY PARAM -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch('./assets/data/themes.json', { cache: 'no-cache' });
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            window.ZERO_THEMES = data;
+          }
+        }
+      } catch (e) {}
+
       const urlParams = new URLSearchParams(window.location.search);
       const themeId = urlParams.get('id') || 'aurora-saas';
       const theme = (typeof ZERO_THEMES !== 'undefined' ? ZERO_THEMES : []).find(t => t.id === themeId) || ZERO_THEMES[0];

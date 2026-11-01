@@ -1,0 +1,16 @@
+{
+  "site_name": "Zero Themes",
+  "tagline": "Free & Open Source Premium Website Templates for GitHub Pages",
+  "google_sheet_endpoint": "https://script.google.com/macros/s/AKfycbxA03eiBo9CGMpjSH5MlWxhZKolwJNwYQ69KgfcWY8DpOSv0ocx-XBGt-Y290nq27M7/exec",
+  "contact_email": "support@zerothemes.io",
+  "announcement": {
+    "enabled": true,
+    "text": "🎉 100% Free & Open Source Website Templates (MIT Licensed) — Deploy to GitHub Pages or any host!",
+    "link": "themes.html"
+  },
+  "social_links": {
+    "github": "https://github.com/mujtabacloud/zero-themes",
+    "twitter": "https://x.com",
+    "discord": "https://discord.gg"
+  }
+}

@@ -1,0 +1,353 @@
+# ==============================================================================
+# Pages CMS Configuration (.pages.yml)
+# Zero Themes - The Free & Open Source Website Templates Platform
+# Learn more: https://pagescms.org/docs
+# ==============================================================================
+
+# 1. Media Assets Upload Configuration
+media:
+  - name: images
+    label: "Images & Media"
+    input: assets/images
+    output: /assets/images
+    extensions: [png, jpg, jpeg, webp, svg, gif]
+    rename: safe
+
+# 2. General CMS Behavior & Git Commit Settings
+settings:
+  content:
+    merge: true
+  commit:
+    templates:
+      create: "CMS: Add {path}"
+      update: "CMS: Update {path}"
+      delete: "CMS: Delete {path}"
+
+# 3. Content Schemas (Themes, Blog Posts, Docs, and Site Settings)
+content:
+  # ----------------------------------------------------------------------------
+  # THEMES CATALOG (Full control over every theme card, demo, and tech specs)
+  # ----------------------------------------------------------------------------
+  - name: themes
+    label: "Themes & Templates"
+    type: file
+    path: assets/data/themes.json
+    format: json
+    list: true
+    description: "Manage, edit, reorder, or add new website templates to the catalog."
+    fields:
+      - name: id
+        label: "Unique Slug ID"
+        type: string
+        required: true
+        description: "URL-friendly identifier (e.g. aurora-saas, novus-agency)"
+
+      - name: name
+        label: "Theme Name"
+        type: string
+        required: true
+        description: "The official display title of the theme"
+
+      - name: tagline
+        label: "Tagline / Catchphrase"
+        type: string
+        required: true
+        description: "One-sentence pitch displayed below the title"
+
+      - name: category
+        label: "Category"
+        type: select
+        required: true
+        options:
+          values:
+            - saas
+            - portfolio
+            - agency
+            - blog
+            - ecommerce
+            - docs
+
+      - name: categoryLabel
+        label: "Category Display Label"
+        type: select
+        required: true
+        options:
+          values:
+            - "SaaS & Tech"
+            - "Portfolio"
+            - "Agency"
+            - "Blog & Editorial"
+            - "E-Commerce"
+            - "Documentation"
+
+      - name: badge
+        label: "Badge Text"
+        type: select
+        options:
+          values:
+            - "Featured"
+            - "Trending"
+            - "New"
+            - "Popular"
+            - "Top Rated"
+            - "Dev Choice"
+
+      - name: badgeType
+        label: "Badge Color Style"
+        type: select
+        options:
+          values:
+            - "featured"
+            - "trending"
+            - "new"
+            - "hot"
+            - "popular"
+
+      - name: price
+        label: "Price Display"
+        type: string
+        default: "Free"
+
+      - name: rating
+        label: "Star Rating (1.0 to 5.0)"
+        type: number
+        default: 4.9
+
+      - name: reviewsCount
+        label: "Reviews Count"
+        type: number
+        default: 80
+
+      - name: image
+        label: "Cover Image / Thumbnail URL"
+        type: image
+        required: true
+
+      - name: demoUrl
+        label: "Live Demo URL"
+        type: string
+        required: true
+
+      - name: repoUrl
+        label: "GitHub Repository URL"
+        type: string
+        required: true
+
+      - name: version
+        label: "Theme Version"
+        type: string
+        default: "1.0.0"
+
+      - name: downloadSize
+        label: "Download Package Size"
+        type: string
+        default: "2.1 MB"
+
+      - name: sales
+        label: "Clones / Popularity Metric"
+        type: number
+        default: 500
+
+      - name: description
+        label: "Full Theme Overview & Description"
+        type: text
+        required: true
+
+      - name: features
+        label: "Key Features (Bullet Points)"
+        type: string
+        list: true
+
+      - name: compatibleWith
+        label: "Compatible Tech Tags (e.g. GitHub Pages, Jekyll, HTML5)"
+        type: string
+        list: true
+
+      - name: gallery
+        label: "Gallery Screenshots"
+        type: image
+        list: true
+
+  # ----------------------------------------------------------------------------
+  # BLOG POSTS & ARTICLES
+  # ----------------------------------------------------------------------------
+  - name: blog
+    label: "Blog Posts"
+    type: collection
+    path: content/blog
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    description: "Write tutorials, design articles, and monetization guides."
+    fields:
+      - name: title
+        label: "Post Title"
+        type: string
+        required: true
+
+      - name: slug
+        label: "URL Slug"
+        type: string
+        required: true
+
+      - name: date
+        label: "Publish Date"
+        type: date
+        required: true
+
+      - name: category
+        label: "Category"
+        type: select
+        required: true
+        options:
+          values:
+            - "Tutorials"
+            - "Performance"
+            - "Monetization"
+            - "Design"
+            - "GitHub Pages"
+
+      - name: badge
+        label: "Badge"
+        type: select
+        options:
+          values:
+            - "Editor's Pick"
+            - "Trending"
+            - "Deep Dive"
+            - "Guide"
+
+      - name: author
+        label: "Author Name"
+        type: string
+        required: true
+
+      - name: authorRole
+        label: "Author Role"
+        type: string
+
+      - name: readTime
+        label: "Estimated Read Time"
+        type: string
+        default: "5 min read"
+
+      - name: coverImage
+        label: "Cover Image"
+        type: image
+
+      - name: excerpt
+        label: "Short Excerpt / Meta Description"
+        type: text
+        required: true
+
+      - name: tags
+        label: "Article Tags"
+        type: string
+        list: true
+
+      - name: body
+        label: "Article Content"
+        type: rich-text
+
+  # ----------------------------------------------------------------------------
+  # DOCUMENTATION
+  # ----------------------------------------------------------------------------
+  - name: docs
+    label: "Documentation"
+    type: collection
+    path: content/docs
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    description: "Manage technical guides, deployment handbooks, and FAQs."
+    fields:
+      - name: title
+        label: "Document Title"
+        type: string
+        required: true
+
+      - name: slug
+        label: "URL Slug"
+        type: string
+        required: true
+
+      - name: section
+        label: "Handbook Section"
+        type: select
+        required: true
+        options:
+          values:
+            - "Quick Start"
+            - "Deployment & Hosting"
+            - "Theme Customization"
+            - "Monetization & Ads"
+            - "Form Integration"
+            - "Troubleshooting"
+
+      - name: order
+        label: "Sort Order (1, 2, 3...)"
+        type: number
+        default: 1
+
+      - name: summary
+        label: "Summary Description"
+        type: text
+
+      - name: body
+        label: "Documentation Body"
+        type: rich-text
+
+  # ----------------------------------------------------------------------------
+  # SITE SETTINGS & METADATA
+  # ----------------------------------------------------------------------------
+  - name: settings
+    label: "Site Settings"
+    type: file
+    path: content/settings.json
+    format: json
+    description: "Manage global branding, Google Sheet web app endpoint, and social links."
+    fields:
+      - name: site_name
+        label: "Site Name"
+        type: string
+        default: "Zero Themes"
+
+      - name: tagline
+        label: "Tagline"
+        type: string
+        default: "Free & Open Source Premium Website Templates for GitHub Pages"
+
+      - name: google_sheet_endpoint
+        label: "Google Apps Script Web App URL"
+        type: string
+        description: "The /exec URL that receives contact form submissions"
+
+      - name: contact_email
+        label: "Contact Email"
+        type: string
+
+      - name: announcement
+        label: "Announcement Top Banner"
+        type: object
+        fields:
+          - name: enabled
+            label: "Enable Banner"
+            type: boolean
+          - name: text
+            label: "Banner Text"
+            type: string
+          - name: link
+            label: "Banner Target Link"
+            type: string
+
+      - name: social_links
+        label: "Social Links"
+        type: object
+        fields:
+          - name: github
+            label: "GitHub Profile / Org URL"
+            type: string
+          - name: twitter
+            label: "Twitter / X Profile URL"
+            type: string
+          - name: discord
+            label: "Discord Community URL"
+            type: string
