@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" fill="none">
+  <defs>
+    <radialGradient id="gridGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="dotGrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#6366f1" fill-opacity="0.18" />
+    </pattern>
+  </defs>
+
+  <!-- Background grid & subtle glow -->
+  <rect width="900" height="420" fill="url(#dotGrid)" rx="12" />
+  <rect width="900" height="420" fill="url(#gridGlow)" rx="12" />
+
+  <!-- Equator & latitude guides -->
+  <line x1="40" y1="210" x2="860" y2="210" stroke="#6366f1" stroke-opacity="0.1" stroke-dasharray="4 4" />
+  <line x1="40" y1="105" x2="860" y2="105" stroke="#6366f1" stroke-opacity="0.08" stroke-dasharray="4 4" />
+  <line x1="40" y1="315" x2="860" y2="315" stroke="#6366f1" stroke-opacity="0.08" stroke-dasharray="4 4" />
+
+  <!-- Stylized Landmass Silhouettes (Minimalist Tech Vectors) -->
+  <g class="world-continents" fill="#6366f1" fill-opacity="0.16" stroke="#6366f1" stroke-opacity="0.32" stroke-width="1.2">
+    <!-- North America -->
+    <path d="M120 70 L210 65 L270 95 L270 145 L220 180 L180 185 L180 150 L140 140 L100 110 Z" />
+    <path d="M225 180 L250 205 L235 220 L215 195 Z" />
+    <!-- South America -->
+    <path d="M245 225 L295 240 L340 280 L310 370 L280 380 L260 310 L240 260 Z" />
+    <!-- Europe -->
+    <path d="M430 75 L495 70 L520 100 L495 140 L450 140 L435 110 Z" />
+    <path d="M410 80 L425 80 L420 105 L405 100 Z" />
+    <!-- Africa -->
+    <path d="M430 160 L515 160 L545 230 L505 320 L465 320 L440 230 L425 180 Z" />
+    <path d="M535 270 L550 270 L545 300 L530 295 Z" />
+    <!-- Asia -->
+    <path d="M530 75 L675 60 L780 90 L810 140 L760 190 L710 170 L645 210 L590 190 L530 140 Z" />
+    <!-- Southeast Asia & Japan -->
+    <path d="M685 220 L720 220 L735 250 L695 260 Z" />
+    <path d="M760 120 L775 125 L770 150 L755 140 Z" />
+    <!-- Australia -->
+    <path d="M725 285 L815 280 L830 335 L765 365 L725 330 Z" />
+  </g>
+
+  <!-- Anycast Fiber Optic Interconnect Traces (Global Backbone) -->
+  <g class="fiber-backbone" stroke="#6366f1" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="3 3">
+    <path d="M160 140 Q205 130 255 135" />
+    <path d="M255 135 Q350 90 445 105" />
+    <path d="M445 105 L485 110" />
+    <path d="M485 110 Q535 135 580 160" />
+    <path d="M580 160 Q635 185 690 210" />
+    <path d="M690 210 Q730 170 765 135" />
+    <path d="M765 135 Q775 220 785 295" />
+    <path d="M690 210 Q740 250 785 295" />
+    <path d="M255 135 Q285 200 310 280" />
+    <path d="M445 105 Q375 200 310 280" />
+    <path d="M160 140 Q400 30 765 135" stroke-dasharray="2 4" stroke-opacity="0.2" />
+  </g>
+</svg>

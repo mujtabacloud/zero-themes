@@ -1,0 +1,19 @@
+{
+  "uptime": "99.995%",
+  "latency": "12.4ms",
+  "events": "1.24M/s",
+  "edgeLocations": 320,
+  "cacheHitRatio": "99.82%",
+  "activeConnections": "418,920",
+  "nodes": [
+    { "id": "sfo", "name": "San Francisco (US-West)", "latency": "9.2ms", "load": "38%", "status": "optimal", "x": 160, "y": 140 },
+    { "id": "iad", "name": "Virginia (US-East)", "latency": "13.8ms", "load": "64%", "status": "optimal", "x": 255, "y": 135 },
+    { "id": "gru", "name": "São Paulo (SA-East)", "latency": "24.6ms", "load": "42%", "status": "optimal", "x": 310, "y": 280 },
+    { "id": "lhr", "name": "London (UK-South)", "latency": "11.4ms", "load": "48%", "status": "optimal", "x": 445, "y": 105 },
+    { "id": "fra", "name": "Frankfurt (EU-Central)", "latency": "10.2ms", "load": "55%", "status": "optimal", "x": 485, "y": 110 },
+    { "id": "dxb", "name": "Dubai (ME-Central)", "latency": "17.1ms", "load": "36%", "status": "optimal", "x": 580, "y": 160 },
+    { "id": "sin", "name": "Singapore (AP-Southeast)", "latency": "15.3ms", "load": "59%", "status": "optimal", "x": 690, "y": 210 },
+    { "id": "nrt", "name": "Tokyo (AP-Northeast)", "latency": "18.5ms", "load": "41%", "status": "optimal", "x": 765, "y": 135 },
+    { "id": "syd", "name": "Sydney (AU-East)", "latency": "21.9ms", "load": "31%", "status": "optimal", "x": 785, "y": 295 }
+  ]
+}
