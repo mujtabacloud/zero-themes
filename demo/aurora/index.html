@@ -1,169 +1,390 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aurora SaaS &amp; Startup – Live Demo</title>
-  <style>
-    :root {
-      --primary: #6366f1;
-      --primary-hover: #4f46e5;
-      --bg: #090d16;
-      --surface: #111827;
-      --surface-border: rgba(255, 255, 255, 0.08);
-      --text: #f3f4f6;
-      --text-muted: #9ca3af;
-      --accent: #10b981;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .demo-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(17, 24, 39, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--surface-border);
-      padding: 0.6rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.85rem;
-    }
-    .demo-bar a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .demo-bar .btn-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.35rem 0.8rem;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      transition: background 0.2s;
-    }
-    .demo-bar .btn-back:hover { background: rgba(255, 255, 255, 0.2); }
-    .hero {
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .badge {
-      display: inline-block;
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(99, 102, 241, 0.15);
-      color: #818cf8;
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-    }
-    h1 span {
-      background: linear-gradient(135deg, #818cf8, #c084fc, #38bdf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    p.lead {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto 2rem;
-    }
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn {
-      padding: 0.75rem 1.6rem;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-    }
-    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
-    .btn-secondary {
-      background: var(--surface);
-      color: #fff;
-      border: 1px solid var(--surface-border);
-    }
-    .btn-secondary:hover { background: rgba(255, 255, 255, 0.05); }
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      max-width: 1100px;
-      margin: 3rem auto 5rem;
-      padding: 0 1.5rem;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 2rem;
-    }
-    .card h3 { font-size: 1.25rem; margin: 0.8rem 0 0.5rem; }
-    .card p { color: var(--text-muted); font-size: 0.95rem; }
-  </style>
+  
+  <title>Aurora SaaS &amp; Startup – Next-Gen Cloud Platform</title>
+  <meta name="description" content="Ultra-sleek dark/light landing page template for modern tech, AI, and developer startups. 100% Free & Open Source under MIT License.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+  
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
 </head>
 <body>
-  <div class="demo-bar">
-    <div><strong>Aurora SaaS</strong> &bull; Zero Themes Live Demo</div>
-    <a href="../../theme-detail.html?id=aurora-saas" class="btn-back">&larr; Back to Theme Details</a>
+
+  <!-- TOP ZERO THEMES DEMO BAR -->
+  <div class="demo-banner">
+    <div class="demo-banner-left">
+      <span class="demo-pill">Aurora SaaS</span>
+      <span>Official Zero Themes Live Preview</span>
+    </div>
+    <div class="demo-actions">
+      <a href="../../theme-detail.html?id=aurora-saas" class="btn-demo-return">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Zero Themes
+      </a>
+    </div>
   </div>
 
-  <main>
-    <section class="hero">
-      <div class="badge">Next-Generation AI Platform</div>
-      <h1>Build faster with <span>intelligent automation</span></h1>
-      <p class="lead">Supercharge your team's development cycle with automated cloud deployments, instantaneous performance monitoring, and unified telemetry.</p>
-      <div class="cta-group">
-        <a href="../../theme-detail.html?id=aurora-saas" class="btn btn-primary">Start Free Trial &rarr;</a>
-        <a href="#features" class="btn btn-secondary">Explore Features</a>
-      </div>
-    </section>
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand">
+        <div class="brand-logo-icon">▲</div>
+        <span>Aurora<span style="color: var(--primary-light);">.io</span></span>
+      </a>
 
-    <section id="features" class="bento-grid">
-      <div class="card">
-        <div style="font-size: 2rem;">⚡</div>
-        <h3>Lightning Fast</h3>
-        <p>Pre-rendered static architecture ensures sub-500ms response times anywhere across the global CDN.</p>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#bento" class="nav-link">Platform</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta-group">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode" title="Toggle theme">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <a href="#pricing" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Sign In</a>
+        <a href="#pricing" class="btn btn-primary" style="font-size: 0.9rem; padding: 0.5rem 1.1rem;">Get Started Free</a>
       </div>
-      <div class="card">
-        <div style="font-size: 2rem;">🛡️</div>
-        <h3>Enterprise Security</h3>
-        <p>Built-in SSL, encrypted credentials, and automated vulnerability scanning at zero extra cost.</p>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-glow-blob"></div>
+
+    <div class="hero-content">
+      <div class="badge-pill">
+        <span>✨ v2.4 Released</span>
+        <span style="opacity: 0.5;">•</span>
+        <span>Autonomous Edge Infrastructure</span>
       </div>
-      <div class="card">
-        <div style="font-size: 2rem;">📈</div>
-        <h3>Instant Analytics</h3>
-        <p>Real-time visual reports, conversion funnels, and customer telemetry out of the box.</p>
+
+      <h1 class="hero-title">
+        Deploy Next-Gen SaaS with <span class="gradient-text">Zero DevOps Friction</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Aurora provides autonomous cloud edge deployment, instant SSL orchestration, real-time observability, and sub-500ms global latency for modern AI and SaaS teams.
+      </p>
+
+      <div class="hero-cta-wrapper">
+        <a href="#pricing" class="btn btn-primary btn-lg">
+          Start 14-Day Free Trial
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#features" class="btn btn-secondary btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          Watch 2-Min Demo
+        </a>
       </div>
-    </section>
-  </main>
+    </div>
+
+    <!-- INTERACTIVE APP DASHBOARD PREVIEW MOCKUP -->
+    <div class="hero-mockup-wrapper">
+      <div class="mockup-header-bar">
+        <div class="mockup-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="mockup-url-pill">https://console.aurora.io/clusters/us-east-edge</div>
+        <div style="font-size: 0.75rem; color: var(--success); font-weight: 700;">● CLUSTER HEALTHY</div>
+      </div>
+
+      <div class="mockup-body">
+        <div class="mockup-sidebar">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-subtle); margin-bottom: 0.8rem;">TELEMETRY CONSOLE</div>
+          <div class="mockup-nav-item active">📊 Live Metrics</div>
+          <div class="mockup-nav-item">⚡ Edge Nodes</div>
+          <div class="mockup-nav-item">🛡️ Firewall Rules</div>
+          <div class="mockup-nav-item">📦 Containers</div>
+          <div class="mockup-nav-item">⚙️ Settings</div>
+        </div>
+
+        <div class="mockup-main-panel">
+          <div class="mockup-stats-row">
+            <div class="mini-stat-card">
+              <div class="mini-stat-label">Global Uptime</div>
+              <div class="mini-stat-val" style="color: var(--success);">99.995%</div>
+            </div>
+            <div class="mini-stat-card">
+              <div class="mini-stat-label">Edge Latency</div>
+              <div class="mini-stat-val" id="stat-latency" style="color: var(--secondary);">12.4ms</div>
+            </div>
+            <div class="mini-stat-card">
+              <div class="mini-stat-label">Events / Sec</div>
+              <div class="mini-stat-val" id="stat-events" style="color: var(--primary-light);">1.24M/s</div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+              <span style="font-size: 0.85rem; font-weight: 700;">Cluster Traffic Load (Last 60 Minutes)</span>
+              <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Sampling: 100ms</span>
+            </div>
+            <!-- CSS bar chart simulation -->
+            <div style="display: flex; align-items: flex-end; gap: 6px; height: 75px; padding-top: 10px;">
+              <div style="flex: 1; height: 35%; background: var(--primary); opacity: 0.5; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 50%; background: var(--primary); opacity: 0.6; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 42%; background: var(--primary); opacity: 0.5; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 68%; background: var(--primary); opacity: 0.7; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 55%; background: var(--primary); opacity: 0.6; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 82%; background: var(--primary); opacity: 0.85; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 74%; background: var(--primary); opacity: 0.8; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 95%; background: linear-gradient(180deg, var(--accent), var(--primary)); border-radius: 3px;"></div>
+              <div style="flex: 1; height: 88%; background: var(--primary); opacity: 0.9; border-radius: 3px;"></div>
+              <div style="flex: 1; height: 92%; background: var(--primary); border-radius: 3px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF / PARTNERS -->
+  <section class="trust-section">
+    <div class="trust-heading">Powering infrastructure for over 10,000+ developer teams</div>
+    <div class="trust-logos">
+      <div class="trust-logo">⚡ VERCEL</div>
+      <div class="trust-logo">▲ STRIPE</div>
+      <div class="trust-logo">◆ SUPABASE</div>
+      <div class="trust-logo">⬡ LINEAR</div>
+      <div class="trust-logo">● OPENAI</div>
+    </div>
+  </section>
+
+  <!-- BENTO GRID FEATURES -->
+  <section id="bento" class="section-wrapper">
+    <div class="section-header">
+      <span class="badge-pill">Architectural Mastery</span>
+      <h2 class="section-title">Engineered for Hyper-Growth</h2>
+      <p class="section-desc">Everything high-velocity engineering organizations need to ship resilient applications without managing complex Kubernetes clusters.</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Bento Card 1: Edge Execution (Large) -->
+      <div class="bento-card col-span-2">
+        <div class="bento-icon">🌐</div>
+        <h3>Global Anycast Edge Network</h3>
+        <p>Distribute web apps and AI inference endpoints across 300+ global edge locations. Requests are routed to the nearest compute node with zero cold starts.</p>
+        
+        <div class="code-box">
+          <span id="cli-code-text">$ npx aurora-cli deploy --cluster=edge --prod</span>
+          <button id="copy-cli-btn" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 0.8rem; font-weight: 600;">Copy</button>
+        </div>
+      </div>
+
+      <!-- Bento Card 2: Autonomous Scaling -->
+      <div class="bento-card">
+        <div class="bento-icon">⚡</div>
+        <h3>Zero-to-One-Million Scaling</h3>
+        <p>Instant traffic spikes are absorbed automatically with sub-second container spin-up and intelligent load dispersion.</p>
+      </div>
+
+      <!-- Bento Card 3: Deep Observability -->
+      <div class="bento-card">
+        <div class="bento-icon">📈</div>
+        <h3>Distributed Tracing &amp; Telemetry</h3>
+        <p>Inspect request headers, microsecond execution spans, and error traces with real-time visual waterflow diagrams.</p>
+      </div>
+
+      <!-- Bento Card 4: Enterprise Security (Span 2) -->
+      <div class="bento-card col-span-2">
+        <div class="bento-icon">🛡️</div>
+        <h3>SOC-2 Type II &amp; HIPAA Certified</h3>
+        <p>Bank-grade AES-256 encrypted storage, automatic mTLS encryption between services, and automated DDoS mitigation at layers 3, 4, and 7.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section id="pricing" class="section-wrapper">
+    <div class="section-header">
+      <span class="badge-pill">Predictable Economics</span>
+      <h2 class="section-title">Transparent, Developer-First Pricing</h2>
+      <p class="section-desc">Scale smoothly from side-projects to millions of requests without predatory surprise bills.</p>
+    </div>
+
+    <!-- Billing Switcher -->
+    <div class="pricing-toggle-wrapper">
+      <span style="font-weight: 600; font-size: 0.95rem;">Monthly</span>
+      <div id="pricing-switch" class="pricing-switch" role="button" aria-label="Toggle annual billing">
+        <div class="pricing-switch-handle"></div>
+      </div>
+      <span style="font-weight: 600; font-size: 0.95rem;">Annual Billing</span>
+      <span class="pricing-discount-badge">Save 20%</span>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Starter Plan -->
+      <div class="pricing-card">
+        <h3 class="pricing-plan-name">Hobby / Starter</h3>
+        <p class="pricing-plan-desc">Perfect for testing projects and prototypes.</p>
+        <div class="pricing-amount">
+          $0
+          <span class="pricing-period">/forever</span>
+        </div>
+        <ul class="pricing-features-list">
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> 3 Edge Applications</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> 100,000 monthly requests</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> Free SSL certificates</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> Community Discord support</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary" style="width: 100%;">Get Started Free</a>
+      </div>
+
+      <!-- Pro Plan (Featured) -->
+      <div class="pricing-card featured">
+        <div class="pricing-card-badge">MOST POPULAR</div>
+        <h3 class="pricing-plan-name">Pro Engineer</h3>
+        <p class="pricing-plan-desc">For production applications and growing startups.</p>
+        <div class="pricing-amount">
+          <span id="price-pro">$49</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <ul class="pricing-features-list">
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> Unlimited edge deployments</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> 10,000,000 monthly requests</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> Custom domains &amp; wildcards</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> Real-time telemetry &amp; logs</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> 99.99% SLA guarantee</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary" style="width: 100%;">Start 14-Day Free Trial</a>
+      </div>
+
+      <!-- Enterprise Plan -->
+      <div class="pricing-card">
+        <h3 class="pricing-plan-name">Enterprise</h3>
+        <p class="pricing-plan-desc">For high-throughput organizations with dedicated clusters.</p>
+        <div class="pricing-amount">
+          <span id="price-ent">$199</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <ul class="pricing-features-list">
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> Dedicated isolated VPC nodes</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> Custom multi-region failover</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> SOC2 &amp; HIPAA compliance pack</li>
+          <li class="pricing-feature-item"><span class="pricing-check-icon">✓</span> 24/7 dedicated Slack channel</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary" style="width: 100%;">Contact Solutions Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="section-wrapper">
+    <div class="section-header">
+      <span class="badge-pill">Got Questions?</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-desc">Everything you need to know about migrating and deploying with Aurora.</p>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item open">
+        <button class="faq-question">
+          <span>How does Aurora achieve sub-15ms edge latency?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Aurora deploys your containerized application across 300+ edge data centers worldwide. Anycast BGP routing automatically resolves DNS to the physical point-of-presence closest to the user, bypassing slow centralized origin hops.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Can I deploy this template on GitHub Pages?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Yes! Aurora is 100% pure semantic HTML5, modern CSS3 variables, and vanilla ES6 JavaScript. It requires zero npm build steps and deploys effortlessly to GitHub Pages, Netlify, Vercel, or any static host.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Is the source code free for commercial use?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Yes. This theme is distributed under the permissive MIT Open Source License via Zero Themes. You are free to customize, rebrand, and deploy it for client and commercial projects.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Does it support custom domains and SSL?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          All modern static web hosts (including GitHub Pages) provide automatic Let's Encrypt SSL certificates for both standard subdomain URLs and custom apex domains.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALLOUT CONVERSION BANNER -->
+  <section id="cta" class="section-wrapper" style="padding-top: 2rem;">
+    <div class="cta-banner">
+      <h2>Build Faster. Scale Fearlessly.</h2>
+      <p>Join thousands of ambitious engineers and launch your next breakthrough product today.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="#pricing" class="btn btn-primary btn-lg">Start Building Free</a>
+        <a href="../../theme-detail.html?id=aurora-saas" class="btn btn-secondary btn-lg">Get Template on Zero Themes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RICH SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <div class="brand-logo-icon">▲</div>
+          <span>Aurora<span style="color: var(--primary-light);">.io</span></span>
+        </a>
+        <p>The developer platform for autonomous cloud edge computing and real-time containerized applications.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul class="footer-links">
+          <li><a href="#features">Edge Compute</a></li>
+          <li><a href="#bento">Global Network</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#">CLI Tooling</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Reference</a></li>
+          <li><a href="#">Status Page</a></li>
+          <li><a href="#">Community Forum</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Template</h4>
+        <ul class="footer-links">
+          <li><a href="../../theme-detail.html?id=aurora-saas">Theme Details</a></li>
+          <li><a href="../../themes.html">All Zero Themes</a></li>
+          <li><a href="../../documentation.html">Deployment Guide</a></li>
+          <li><a href="https://github.com/mujtabacloud/aurora-saas-theme" target="_blank" rel="noopener">GitHub Repo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Aurora Cloud Inc. Distributed under MIT License via Zero Themes.</div>
+      <div>Designed with &hearts; for developers worldwide.</div>
+    </div>
+  </footer>
+
 </body>
 </html>
