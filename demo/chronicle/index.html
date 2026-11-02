@@ -1,43 +1,381 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chronicle Editorial – Live Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fff; color: #111; line-height: 1.6; }
-    .demo-bar { position: sticky; top: 0; z-index: 100; background: #18181b; color: #fff; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; }
-    .demo-bar a { color: #fff; text-decoration: none; font-weight: 600; }
-    .btn-back { padding: 0.35rem 0.8rem; background: rgba(255,255,255,0.15); border-radius: 4px; }
-    .container { max-width: 820px; margin: 0 auto; padding: 3rem 1.5rem; }
-    .pub-header { border-bottom: 2px solid #111; padding-bottom: 1.5rem; margin-bottom: 3rem; text-align: center; }
-    .pub-header h1 { font-family: "Georgia", serif; font-size: 3rem; font-weight: 900; letter-spacing: -0.03em; }
-    .article-card { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; align-items: center; }
-    .article-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 6px; }
-    .tag { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #e11d48; margin-bottom: 0.5rem; }
-    .article-card h2 { font-size: 1.5rem; line-height: 1.3; margin-bottom: 0.5rem; }
-    .meta { font-size: 0.85rem; color: #71717a; }
-  </style>
+  
+  <title>The Chronicle – Editorial, Systems &amp; Modern Thought</title>
+  <meta name="description" content="A content-centric editorial publication theme with reading progress, dark mode, typography controls, and distraction-free reader. 100% Free & Open Source under MIT License.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11d48'><path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/><path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/></svg>">
+  
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
 </head>
-<body>
-  <div class="demo-bar">
-    <div><strong>Chronicle Editorial</strong> &bull; Zero Themes Live Demo</div>
-    <a href="../../theme-detail.html?id=chronicle-blog" class="btn-back">&larr; Back to Theme Details</a>
-  </div>
-  <div class="container">
-    <div class="pub-header">
-      <h1>THE CHRONICLE</h1>
-      <p style="color: #71717a; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">A Journal of Design, Technology &amp; Philosophy</p>
+<body class="font-serif">
+
+  <!-- SCROLL READING PROGRESS BAR -->
+  <div id="reading-progress-bar" class="reading-progress-bar"></div>
+
+  <!-- TOP ZERO THEMES DEMO BAR -->
+  <div class="demo-banner">
+    <div class="demo-banner-left">
+      <span class="demo-pill">Chronicle Editorial</span>
+      <span>Official Zero Themes Live Preview</span>
     </div>
-    <article class="article-card">
-      <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" alt="Chronicle Post">
-      <div>
-        <div class="tag">Architecture</div>
-        <h2>The Renaissance of Static Hypertext Systems</h2>
-        <p class="meta">By Thomas Wright &bull; 6 min read</p>
-      </div>
-    </article>
+    <div class="demo-actions">
+      <a href="../../theme-detail.html?id=chronicle-blog" class="btn-demo-return">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Zero Themes
+      </a>
+    </div>
   </div>
+
+  <!-- PUBLICATION EDITION TOP BAR -->
+  <div class="edition-bar">
+    <div class="edition-container">
+      <div class="edition-meta">
+        <span>VOL. XXIV &bull; NO. 14</span>
+        <span class="edition-sep">&bull;</span>
+        <span id="current-date-display">NOVEMBER 2026</span>
+        <span class="edition-sep">&bull;</span>
+        <span>NEW YORK &bull; LONDON &bull; TOKYO</span>
+      </div>
+      <div class="edition-weather">
+        <span>EST. 2024 &bull; IMMUTABLE WEB EDITION</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE HEADER / MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-container">
+      <div class="masthead-pretitle">A Journal of Systems, Technology &amp; Modern Thought</div>
+      <h1 class="masthead-title">
+        <a href="#">THE CHRONICLE</a>
+      </h1>
+      <p class="masthead-sub">Independent critical analysis on software architecture, artificial intelligence, and digital civilization.</p>
+    </div>
+
+    <!-- MAIN EDITORIAL NAV & READER TOOLBAR -->
+    <nav class="editorial-nav" aria-label="Editorial Navigation">
+      <div class="nav-container">
+        <!-- Categories -->
+        <ul class="nav-category-list">
+          <li><button class="nav-cat-btn active" data-filter="all">All Dispatches</button></li>
+          <li><button class="nav-cat-btn" data-filter="Architecture">Architecture</button></li>
+          <li><button class="nav-cat-btn" data-filter="Artificial Intelligence">AI &amp; Reason</button></li>
+          <li><button class="nav-cat-btn" data-filter="Design">Typography</button></li>
+          <li><button class="nav-cat-btn" data-filter="Systems">Systems</button></li>
+          <li><button class="nav-cat-btn" data-filter="Philosophy">Philosophy</button></li>
+        </ul>
+
+        <!-- Reader Controls & Actions -->
+        <div class="reader-actions-group">
+          <!-- Live Search Bar Toggle -->
+          <div class="search-box-wrapper">
+            <input type="text" id="masthead-search-input" placeholder="Search essays (Ctrl+K)..." autocomplete="off">
+            <span class="search-icon">🔍</span>
+          </div>
+
+          <!-- Typography Adjuster (A- / A+) -->
+          <div class="reader-control-pill" title="Adjust text size">
+            <button id="font-decrease-btn" aria-label="Decrease font size">A-</button>
+            <span class="ctrl-sep">|</span>
+            <button id="font-increase-btn" aria-label="Increase font size">A+</button>
+          </div>
+
+          <!-- Font Serif / Sans Toggle -->
+          <button id="font-family-toggle" class="btn-text-ctrl" title="Toggle Serif / Sans-serif typography">
+            <span id="font-toggle-label">Sans</span>
+          </button>
+
+          <!-- Bookmarked Reading List Tray Button -->
+          <button id="bookmarks-tray-btn" class="btn-bookmarks-tray" title="View Saved Reading List">
+            <span>🔖</span>
+            <span class="tray-label">Saved</span>
+            <span id="bookmark-count-badge" class="badge-count">0</span>
+          </button>
+
+          <!-- Dark / Light Theme Toggle -->
+          <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark / Light Mode" title="Toggle theme">
+            <span id="theme-icon">☀️</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- TRENDING DISPATCH TICKER -->
+  <div class="trending-ticker-bar">
+    <div class="ticker-container">
+      <span class="ticker-badge">LATEST DISPATCH</span>
+      <div class="ticker-marquee">
+        <span class="ticker-text">
+          <strong>The Renaissance of Static Hypertext Systems</strong> &bull; Why modern engineering is discarding multi-tier complexity for immutable edge files &bull; Read the essay below &rarr;
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN EDITORIAL CONTENT -->
+  <main class="main-container">
+
+    <!-- HERO SECTION: COVER ESSAY & EDITORS' PICKS -->
+    <section class="editorial-hero-grid" id="lead-story-section">
+      <!-- Big Cover Essay -->
+      <article class="cover-article" id="featured-cover-article">
+        <div class="cover-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80" alt="Lead Essay Image" class="cover-image">
+          <span class="cover-tag">Cover Story &bull; Architecture</span>
+        </div>
+        <div class="cover-meta-row">
+          <span class="cover-date">NOVEMBER 2, 2026</span>
+          <span class="meta-dot">&bull;</span>
+          <span class="cover-readtime">7 MIN READ</span>
+          <button class="btn-bookmark-action" data-id="post-1" title="Save to Reading List">
+            <span class="bm-icon">🔖</span>
+          </button>
+        </div>
+        <h2 class="cover-title">
+          <a href="#" class="open-article-link" data-id="post-1">The Renaissance of Static Hypertext Systems</a>
+        </h2>
+        <p class="cover-excerpt">
+          Why modern software engineering is discarding multi-tier complexity in favor of immutable files, edge distribution, and the eternal clarity of plain text.
+        </p>
+        <div class="cover-author-box">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Dr. Thomas Wright" class="author-avatar">
+          <div class="author-info">
+            <span class="author-name">Dr. Thomas Wright</span>
+            <span class="author-role">Staff Architect, Systems Theory</span>
+          </div>
+          <button class="btn-read-now open-article-link" data-id="post-1">Read Essay &rarr;</button>
+        </div>
+      </article>
+
+      <!-- Editors' Picks Side Column -->
+      <aside class="editors-column">
+        <div class="editors-header">
+          <h3>EDITORS' DISPATCHES</h3>
+          <span class="curated-pill">CURATED</span>
+        </div>
+
+        <div class="editors-list">
+          <!-- Pick 1 -->
+          <article class="editors-item">
+            <div class="item-tag" style="color: #8b5cf6;">Artificial Intelligence</div>
+            <h4 class="item-title">
+              <a href="#" class="open-article-link" data-id="post-2">Autonomous Neural Agents and the Epistemology of Proof</a>
+            </h4>
+            <div class="item-meta">
+              <span>Elena Rostova</span>
+              <span>&bull;</span>
+              <span>9 min read</span>
+            </div>
+          </article>
+
+          <!-- Pick 2 -->
+          <article class="editors-item">
+            <div class="item-tag" style="color: #06b6d4;">Design &amp; Craft</div>
+            <h4 class="item-title">
+              <a href="#" class="open-article-link" data-id="post-3">The Lost Art of Clean Typography in Digital Spaces</a>
+            </h4>
+            <div class="item-meta">
+              <span>Marcus Sterling</span>
+              <span>&bull;</span>
+              <span>5 min read</span>
+            </div>
+          </article>
+
+          <!-- Pick 3 -->
+          <article class="editors-item">
+            <div class="item-tag" style="color: #10b981;">Systems Hardware</div>
+            <h4 class="item-title">
+              <a href="#" class="open-article-link" data-id="post-4">Deep Memory: Why Silicon Physics Demands Radical Architecture</a>
+            </h4>
+            <div class="item-meta">
+              <span>Julian Vance</span>
+              <span>&bull;</span>
+              <span>11 min read</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Weekly Dispatch Newsletter Callout in Sidebar -->
+        <div class="sidebar-newsletter-card">
+          <div class="sn-icon">📬</div>
+          <h4>The Sunday Dispatch</h4>
+          <p>48,000+ engineers receive our weekly long-form essay on technology and civilization.</p>
+          <form class="sidebar-newsletter-form" id="sidebar-newsletter-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Join &rarr;</button>
+          </form>
+          <div class="sn-status hidden" id="sidebar-sn-status">✓ You're subscribed to The Sunday Dispatch.</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- SECTION DIVIDER -->
+    <div class="editorial-divider">
+      <span class="divider-label">ESSAYS, INVESTIGATIONS &amp; CRITIQUE</span>
+    </div>
+
+    <!-- FILTER & SEARCH STATUS BAR -->
+    <div class="catalog-status-bar">
+      <div id="catalog-count-text">Showing <strong>6</strong> essays</div>
+      <div class="catalog-filter-tags" id="active-filter-badge">Filter: <span>All Dispatches</span></div>
+    </div>
+
+    <!-- MAGAZINE ARTICLE GRID -->
+    <section class="articles-grid" id="articles-grid">
+      <!-- Dynamically injected via script.js from articles.json -->
+    </section>
+
+    <!-- SPONSORED / CARBON ADVERTISEMENT MODULE -->
+    <section class="sponsor-banner">
+      <div class="sponsor-inner">
+        <span class="sponsor-label">SPECIAL SPONSOR REPORT</span>
+        <div class="sponsor-content">
+          <h4>Autonomous Edge Infrastructure for Mission-Critical APIs</h4>
+          <p>Discover how the Aurora Cloud Edge Mesh deploys serverless containers across 320 Points of Presence with sub-15ms global latency.</p>
+          <a href="../aurora/" class="btn-sponsor-link">Explore Aurora SaaS &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LARGE NEWSLETTER SECTION -->
+    <section class="newsletter-section">
+      <div class="newsletter-card">
+        <span class="badge-pill">The Chronicle Press</span>
+        <h2>Slow Thought in an Accelerated Culture</h2>
+        <p>Every Sunday morning, we publish an essay that explores the deeper currents beneath technology, philosophy, and modern engineering. No hype. No clickbait. No advertising tracker cookies.</p>
+        
+        <form class="newsletter-form-wide" id="main-newsletter-form">
+          <input type="email" id="main-newsletter-email" placeholder="Enter your email for the Sunday edition..." required>
+          <button type="submit" class="btn-newsletter-submit">Subscribe Free</button>
+        </form>
+        <div class="newsletter-success hidden" id="main-newsletter-success">
+          ✨ <strong>Welcome to The Chronicle!</strong> A confirmation dispatch has been logged to your inbox.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       INTERACTIVE COMPONENTS: ARTICLE READER MODAL, BOOKMARKS DRAWER, TOAST
+       ========================================================================= -->
+
+  <!-- IMMERSIVE ARTICLE READER MODAL -->
+  <div id="article-reader-modal" class="article-modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="article-modal-backdrop" id="article-modal-backdrop"></div>
+    <div class="article-modal-dialog">
+      <!-- Reader Header Bar -->
+      <div class="reader-modal-header">
+        <div class="reader-header-left">
+          <span class="reader-pub-badge">THE CHRONICLE</span>
+          <span class="reader-dot">&bull;</span>
+          <span id="modal-article-tag" class="reader-tag">Architecture</span>
+        </div>
+        <div class="reader-header-controls">
+          <button id="modal-bookmark-btn" class="btn-ctrl-icon" title="Save to bookmarks">
+            <span>🔖</span>
+          </button>
+          <button id="modal-share-btn" class="btn-ctrl-icon" title="Share essay">
+            <span>🔗</span>
+          </button>
+          <button id="article-modal-close" class="btn-modal-close" aria-label="Close reader">&times;</button>
+        </div>
+      </div>
+
+      <!-- Modal Article Body Container -->
+      <article class="article-modal-body" id="modal-article-content">
+        <!-- Injected via script.js -->
+      </article>
+
+      <!-- Reader Modal Footer -->
+      <div class="reader-modal-footer">
+        <button id="modal-prev-article" class="btn-nav-prev">&larr; Previous Essay</button>
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('article-reader-modal').classList.add('hidden')">Close Reader</button>
+        <button id="modal-next-article" class="btn-nav-next">Next Essay &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVED BOOKMARKS / READING LIST SLIDE-OUT DRAWER -->
+  <div id="bookmarks-drawer" class="bookmarks-drawer hidden" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>🔖</span>
+        <h3>Saved Reading List</h3>
+      </div>
+      <button id="bookmarks-close-btn" class="btn-close-drawer">&times;</button>
+    </div>
+
+    <div class="bookmarks-body" id="bookmarks-body">
+      <!-- Injected via script.js -->
+      <div class="empty-bookmarks">
+        <p>No saved essays yet.</p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Click the 🔖 bookmark icon on any article to store it for offline reading.</p>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button id="clear-all-bookmarks-btn" class="btn-clear-bookmarks">Clear Reading List</button>
+    </div>
+  </div>
+  <div id="drawer-backdrop" class="drawer-backdrop hidden"></div>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div id="chronicle-toast" class="chronicle-toast hidden">
+    <span id="toast-icon">✓</span>
+    <span id="toast-message">Action completed</span>
+  </div>
+
+  <!-- RICH EDITORIAL FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand-col">
+        <h3>THE CHRONICLE</h3>
+        <p>An open-access journal and publication template for long-form essays, computer architecture, philosophy, and digital craftsmanship.</p>
+        <div class="footer-meta-line">
+          <span>Distributed under MIT Open Source License.</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="#" class="nav-cat-btn" data-filter="Architecture">Architecture</a></li>
+          <li><a href="#" class="nav-cat-btn" data-filter="Artificial Intelligence">AI &amp; Reason</a></li>
+          <li><a href="#" class="nav-cat-btn" data-filter="Design">Typography</a></li>
+          <li><a href="#" class="nav-cat-btn" data-filter="Systems">Systems</a></li>
+          <li><a href="#" class="nav-cat-btn" data-filter="Philosophy">Philosophy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Publication</h4>
+        <ul>
+          <li><a href="../../themes.html">Zero Themes Catalog</a></li>
+          <li><a href="../../theme-detail.html?id=chronicle-blog">Chronicle Specs</a></li>
+          <li><a href="../../documentation.html">GitHub Pages Setup</a></li>
+          <li><a href="https://github.com/mujtabacloud/zero-themes" target="_blank" rel="noopener">GitHub Repository</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Colophon</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          Typeset in editorial serif and monospace. Formatted with zero front-end frameworks. Valid semantic HTML5, accessible CSS variables, and vanilla ES6.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 The Chronicle Publishing Society &bull; MIT License via Zero Themes.</div>
+      <div>Designed for thinkers, writers &amp; systems engineers worldwide.</div>
+    </div>
+  </footer>
+
 </body>
 </html>
