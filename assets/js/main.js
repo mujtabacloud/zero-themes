@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNewsletter();
   initContactForm();
   initCursorFollower();
+  initDiceRollWidget();
 });
 
 /* ==========================================================================
@@ -794,10 +795,147 @@ function initCursorFollower() {
   requestAnimationFrame(loop);
 
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, .cat-pill, .theme-card')) {
+    if (e.target.closest('a, button, .cat-pill, .theme-card, .btn-roll-trigger, .dice-scene')) {
       aura.classList.add('hovering-interactive');
     } else {
       aura.classList.remove('hovering-interactive');
     }
   }, { passive: true });
+}
+
+/* ==========================================================================
+   11. 🎲 SURPRISE ME 3D DICE ROLL & FLIP CARD WIDGET
+   ========================================================================== */
+function initDiceRollWidget() {
+  const widget = document.getElementById('dice-widget');
+  if (!widget) return;
+
+  const diceTrigger = document.getElementById('dice-trigger');
+  const btnRoll = document.getElementById('btn-roll');
+  const diceCube = document.getElementById('dice-cube');
+  const flipInner = document.getElementById('dice-flip-inner');
+  const particlesWrap = document.getElementById('dice-particles');
+
+  const themeImg = document.getElementById('dice-theme-img');
+  const themeBadge = document.getElementById('dice-theme-badge');
+  const themeCat = document.getElementById('dice-theme-cat');
+  const themeName = document.getElementById('dice-theme-name');
+  const themeTagline = document.getElementById('dice-theme-tagline');
+  const demoLink = document.getElementById('dice-demo-link');
+  const detailsLink = document.getElementById('dice-details-link');
+
+  let isRolling = false;
+  let currentThemeId = null;
+  let rollCount = 0;
+
+  function rollDice() {
+    if (isRolling) return;
+    isRolling = true;
+
+    const themes = (typeof ZERO_THEMES !== 'undefined' ? ZERO_THEMES : []);
+    if (themes.length === 0) {
+      isRolling = false;
+      return;
+    }
+
+    rollCount++;
+
+    // Pick random theme different from current
+    let availableThemes = themes.filter(t => t.id !== currentThemeId);
+    if (availableThemes.length === 0) availableThemes = themes;
+    const picked = availableThemes[Math.floor(Math.random() * availableThemes.length)];
+    currentThemeId = picked.id;
+
+    // 3D physics-like random tumbling angles with isometric perspective offset
+    const baseRotX = 720 + (rollCount * 360) + (Math.floor(Math.random() * 4) * 90) - 22;
+    const baseRotY = 1080 + (rollCount * 360) + (Math.floor(Math.random() * 4) * 90) - 32;
+    const baseRotZ = (Math.floor(Math.random() * 2) * 180);
+
+    if (diceCube) {
+      diceCube.style.transform = `rotateX(${baseRotX}deg) rotateY(${baseRotY}deg) rotateZ(${baseRotZ}deg)`;
+    }
+
+    // If card was already flipped, flip back to mystery for a moment
+    if (flipInner && flipInner.classList.contains('flipped')) {
+      flipInner.classList.remove('flipped');
+    }
+
+    // Populate theme card data
+    setTimeout(() => {
+      if (themeImg) {
+        themeImg.src = picked.image;
+        themeImg.alt = picked.name;
+      }
+      if (themeBadge) {
+        themeBadge.textContent = picked.badge || 'FREE';
+        themeBadge.className = `badge badge-${picked.badgeType || 'hot'}`;
+      }
+      if (themeCat) themeCat.textContent = picked.categoryLabel || 'Template';
+      if (themeName) themeName.textContent = picked.name;
+      if (themeTagline) themeTagline.textContent = picked.tagline;
+      if (demoLink) {
+        demoLink.href = picked.demoUrl || '#';
+      }
+      if (detailsLink) {
+        detailsLink.href = `theme-detail.html?id=${picked.id}`;
+      }
+
+      // 3D Flip reveal
+      if (flipInner) {
+        flipInner.classList.add('flipped');
+      }
+
+      // Sparkles burst
+      createSparkleBurst();
+    }, 450);
+
+    setTimeout(() => {
+      isRolling = false;
+    }, 850);
+  }
+
+  function createSparkleBurst() {
+    if (!particlesWrap) return;
+    particlesWrap.innerHTML = '';
+    const colors = ['#6366f1', '#a855f7', '#06b6d4', '#10b981', '#fbbf24'];
+
+    for (let i = 0; i < 16; i++) {
+      const sparkle = document.createElement('span');
+      sparkle.className = 'dice-sparkle';
+      const angle = (Math.PI * 2 / 16) * i + (Math.random() * 0.3 - 0.15);
+      const dist = 30 + Math.random() * 45;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist;
+
+      sparkle.style.setProperty('--dx', `${dx}px`);
+      sparkle.style.setProperty('--dy', `${dy}px`);
+      sparkle.style.left = '60px';
+      sparkle.style.top = '65px';
+      sparkle.style.background = colors[i % colors.length];
+      sparkle.style.boxShadow = `0 0 6px ${colors[i % colors.length]}`;
+
+      particlesWrap.appendChild(sparkle);
+    }
+
+    setTimeout(() => {
+      particlesWrap.innerHTML = '';
+    }, 850);
+  }
+
+  if (diceTrigger) {
+    diceTrigger.addEventListener('click', rollDice);
+    diceTrigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        rollDice();
+      }
+    });
+  }
+
+  if (btnRoll) {
+    btnRoll.addEventListener('click', (e) => {
+      e.stopPropagation();
+      rollDice();
+    });
+  }
 }

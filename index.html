@@ -213,6 +213,69 @@
         </a>
       </div>
 
+      <!-- 🎲 SURPRISE ME 3D DICE ROLL WIDGET -->
+      <div class="dice-widget-container" id="dice-widget">
+        <div class="dice-widget-header">
+          <div class="dice-header-badge">
+            <span class="dice-sparkle-icon">✨</span>
+            <span>Surprise Me</span>
+          </div>
+          <span class="dice-hint-text">Can't decide? Roll for a random free theme</span>
+        </div>
+
+        <div class="dice-widget-body">
+          <!-- 3D Interactive Rolling Die -->
+          <div class="dice-scene" id="dice-trigger" role="button" tabindex="0" title="Click to roll the 3D dice!">
+            <div class="dice-cube" id="dice-cube">
+              <div class="dice-face face-front face-1"><span class="pip pip-center pip-red"></span></div>
+              <div class="dice-face face-back face-2"><span class="pip pip-tl"></span><span class="pip pip-br"></span></div>
+              <div class="dice-face face-right face-3"><span class="pip pip-tl"></span><span class="pip pip-center"></span><span class="pip pip-br"></span></div>
+              <div class="dice-face face-left face-4"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+              <div class="dice-face face-top face-5"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-center"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+              <div class="dice-face face-bottom face-6"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-ml"></span><span class="pip pip-mr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+            </div>
+            <div class="dice-shadow"></div>
+            <button type="button" class="btn-roll-trigger" id="btn-roll"><span>Roll</span> <span class="roll-dice-icon">🎲</span></button>
+          </div>
+
+          <!-- 3D Flip Card Container -->
+          <div class="dice-card-flip-wrap" id="dice-card-flip">
+            <div class="dice-flip-card-inner" id="dice-flip-inner">
+              
+              <!-- Front Face: Mystery state -->
+              <div class="dice-card-face dice-card-front">
+                <div class="mystery-box">
+                  <div class="mystery-question-mark">?</div>
+                  <div class="mystery-prompt">Tap the dice to roll and unveil your random match</div>
+                </div>
+              </div>
+
+              <!-- Back Face: Revealed Theme Card -->
+              <div class="dice-card-face dice-card-back">
+                <div class="revealed-content">
+                  <img id="dice-theme-img" src="" alt="Theme preview" class="revealed-img">
+                  <div class="revealed-info">
+                    <div class="revealed-meta">
+                      <span id="dice-theme-badge" class="badge badge-hot">Featured</span>
+                      <span id="dice-theme-cat" class="revealed-cat">SaaS &amp; Tech</span>
+                    </div>
+                    <h4 id="dice-theme-name" class="revealed-title">Aurora SaaS</h4>
+                    <p id="dice-theme-tagline" class="revealed-tagline">Short description</p>
+                    <div class="revealed-actions">
+                      <a id="dice-demo-link" href="#" class="btn btn-primary btn-sm">Live Demo</a>
+                      <a id="dice-details-link" href="#" class="btn btn-secondary btn-sm">Details &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div id="dice-particles" class="dice-particles-container"></div>
+      </div>
+
       <!-- Live Metric Stats -->
       <div class="hero-stats-row">
         <div class="stat-item">
