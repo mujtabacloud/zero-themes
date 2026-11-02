@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initProposalCalculator();
   initBookingModal();
+  initCaseStudyModal();
 });
 
 /* ==========================================================================
@@ -214,4 +215,115 @@ function initBookingModal() {
       }, 2500);
     });
   }
+}
+
+/* ==========================================================================
+   4. CASE STUDY MODAL (Written Form)
+   ========================================================================== */
+const NOVUS_CASE_STUDIES = {
+  hyperion: {
+    title: "Hyperion Robotics OS",
+    client: "Hyperion Robotics Inc. (San Francisco)",
+    year: "2026",
+    badge: "Awwwards Site of the Day",
+    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+    challenge: "Industrial autonomous robotics systems have traditionally suffered from dense, impenetrable engineering interfaces. Hyperion needed to shift perception from pure hardware mechanics to an enterprise-grade software intelligence ecosystem prior to their Series B funding round.",
+    solution: "Novus engineered an end-to-end digital experience: a custom WebGL spatial telemetry cockpit where factory directors can visualize real-time robot arm kinematics, coupled with bold monochromatic brand typography and an interactive investor data room.",
+    impact: "+340% increase in inbound tier-1 automotive enterprise pilots within 60 days of launch; contributed directly to the closure of their $48M Series B round.",
+    metrics: ["$48M Series B Closed", "+340% Pilot Pipeline", "60 FPS WebGL Performance"]
+  },
+  kinetic: {
+    title: "Kinetic Card & Pay",
+    client: "Kinetic FinTech Global (London / NYC)",
+    year: "2025",
+    badge: "Red Dot Best of the Best",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    challenge: "In a heavily saturated neo-banking landscape dominated by lookalike fintech apps, Kinetic needed an audacious design language that could scale across 4+ million physical credit cards and millions of daily app transactions without sacrificing security.",
+    solution: "We designed a tactile design system blending heavy tactile typography with haptic feedback micro-interactions. The web and mobile apps feature instant virtual card generation, fluid gesture controls, and a real-time spending radar.",
+    impact: "Achieved a 4.9 App Store rating across 80,000+ verified customer reviews, with an 84% reduction in user drop-off during new account onboarding.",
+    metrics: ["4.9 App Store Rating", "4.2M+ Active Cards", "-84% Onboarding Drop-off"]
+  },
+  veloce: {
+    title: "Veloce Hypercar Configurator",
+    client: "Veloce Automobili (Munich)",
+    year: "2025",
+    badge: "FWA of the Month",
+    img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+    challenge: "Selling multi-million dollar electric hypercars requires visceral emotional resonance. Ultra-high-net-worth clients expected an in-browser configurator with photorealistic lighting, metallic lacquer reflections, and bespoke carbon weaves that could run smoothly even on mobile devices.",
+    solution: "Novus developed a bespoke WebGL ray-marched rendering pipeline with zero external plugins. Users can customize wheels, active aero spoilers, bespoke Alcantara stitching, and audition the electric motor sound profile in 3D binaural spatial audio.",
+    impact: "All 150 limited allocation production vehicles sold out within 48 hours of the digital premiere, generating over $280M in gross vehicle reservations.",
+    metrics: ["150 Units Sold Out", "$280M+ Pre-Orders", "Sub-1.2s Initial Load"]
+  },
+  aura: {
+    title: "Aura Acoustic Systems",
+    client: "Aura Sound Labs (Stockholm)",
+    year: "2024",
+    badge: "Design Week Gold",
+    img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80",
+    challenge: "Conveying the emotional depth of high-end acoustic monitors and reference-grade headphones through a flat glass screen without physical acoustic trial.",
+    solution: "We built an interactive frequency response audition tool right in the browser, allowing prospective buyers to compare audio soundstages across different musical genres, paired with sculptural Scandinavian product photography and storytelling.",
+    impact: "Generated $18.4M in first-year direct-to-consumer sales, with an average order value 45% above consumer audio benchmarks.",
+    metrics: ["$18.4M Direct Sales", "+45% Higher AOV", "2.8x Average Time on Site"]
+  }
+};
+
+function initCaseStudyModal() {
+  const modal = document.getElementById('case-study-modal');
+  const triggers = document.querySelectorAll('.view-case-study-trigger');
+  const closeBtn = document.getElementById('close-study-btn');
+
+  if (!modal) return;
+
+  function openStudy(id) {
+    const data = NOVUS_CASE_STUDIES[id];
+    if (!data) return;
+
+    document.getElementById('study-title').textContent = data.title;
+    document.getElementById('study-meta').textContent = `${data.client} • ${data.year}`;
+    document.getElementById('study-badge').textContent = data.badge;
+    document.getElementById('study-img').src = data.img;
+    document.getElementById('study-img').alt = data.title;
+    document.getElementById('study-challenge').textContent = data.challenge;
+    document.getElementById('study-solution').textContent = data.solution;
+    document.getElementById('study-impact').textContent = data.impact;
+
+    const metricsContainer = document.getElementById('study-metrics');
+    if (metricsContainer) {
+      metricsContainer.innerHTML = data.metrics.map(m => `
+        <div class="case-metric-pill"><span class="dot">●</span> ${m}</div>
+      `).join('');
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeStudy() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  triggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const caseId = btn.dataset.caseId;
+      openStudy(caseId);
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeStudy);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeStudy();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeStudy();
+    }
+  });
 }

@@ -213,51 +213,6 @@
         </a>
       </div>
 
-      <!-- ==========================================================================
-           INTERACTIVE POWER CIRCUIT (Light Playful Feature: Drag Cable to Switch)
-           ========================================================================== -->
-      <div class="interactive-circuit-container" id="circuit-box" aria-label="Interactive circuit power simulation">
-        <div class="circuit-header">
-          <div class="circuit-title">
-            <span class="circuit-indicator-dot" id="circuit-dot"></span>
-            <span id="circuit-status-text">⚡ POWER GRID: STANDBY (HOLD &amp; CONNECT CABLE TO SWITCH)</span>
-          </div>
-          <button type="button" class="circuit-hint-badge" title="Click to auto-toggle power">Drag &amp; Snap Cable</button>
-        </div>
-        
-        <div class="circuit-canvas-wrap" id="circuit-canvas-area">
-          <svg class="circuit-svg" id="circuit-svg" aria-hidden="true">
-            <path id="circuit-wire-glow" class="circuit-wire-glow" d="" />
-            <path id="circuit-wire" class="circuit-wire-path" d="" />
-          </svg>
-          
-          <div class="circuit-port port-source" id="circuit-source">
-            <div class="port-jack"></div>
-            <span class="port-label">SOURCE</span>
-          </div>
-          
-          <div class="circuit-plug" id="circuit-plug" title="Hold &amp; drag me to connect to the switch!">
-            <div class="plug-body">
-              <div class="plug-handle"></div>
-              <div class="plug-pins">
-                <span></span><span></span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="circuit-port port-target" id="circuit-target" title="Click to snap cable into switch">
-            <div class="target-receiver">
-              <div class="target-slots">
-                <span></span><span></span>
-              </div>
-            </div>
-            <span class="port-label" id="target-label">SWITCH (OFF)</span>
-          </div>
-
-          <div id="circuit-sparks" class="circuit-sparks-wrap"></div>
-        </div>
-      </div>
-
       <!-- Live Metric Stats -->
       <div class="hero-stats-row">
         <div class="stat-item">

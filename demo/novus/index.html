@@ -121,7 +121,7 @@
           <p class="case-desc">Complete brand architecture, real-time 3D web platform, and visual telemetry cockpit for an industrial robotics platform.</p>
           <div class="case-footer">
             <span class="case-impact">+340% Series B Inbound Interest</span>
-            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+            <button class="case-link-btn view-case-study-trigger" data-case-id="hyperion" style="background: none; border: none; cursor: pointer; font-family: inherit;">Read Study &rarr;</button>
           </div>
         </div>
       </article>
@@ -138,7 +138,7 @@
           <p class="case-desc">Card issuance platform redesign, dynamic micro-interactions, and high-velocity mobile design system deployed across 4M+ cards.</p>
           <div class="case-footer">
             <span class="case-impact">4.9 App Store Rating Across 80k Reviews</span>
-            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+            <button class="case-link-btn view-case-study-trigger" data-case-id="kinetic" style="background: none; border: none; cursor: pointer; font-family: inherit;">Read Study &rarr;</button>
           </div>
         </div>
       </article>
@@ -155,7 +155,7 @@
           <p class="case-desc">Photorealistic real-time 3D WebGL vehicle customizer delivering sub-60fps fluid performance without external plugins.</p>
           <div class="case-footer">
             <span class="case-impact">100% Pre-Orders Sold Out in 48 Hours</span>
-            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+            <button class="case-link-btn view-case-study-trigger" data-case-id="veloce" style="background: none; border: none; cursor: pointer; font-family: inherit;">Read Study &rarr;</button>
           </div>
         </div>
       </article>
@@ -172,7 +172,7 @@
           <p class="case-desc">Global e-commerce flagship and interactive acoustic frequency visualizer celebrating audiophile hardware craftsmanship.</p>
           <div class="case-footer">
             <span class="case-impact">$18.4M First-Year Direct Revenue</span>
-            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+            <button class="case-link-btn view-case-study-trigger" data-case-id="aura" style="background: none; border: none; cursor: pointer; font-family: inherit;">Read Study &rarr;</button>
           </div>
         </div>
       </article>
@@ -330,6 +330,37 @@
       </div>
     </div>
   </section>
+
+  <!-- WRITTEN CASE STUDY MODAL -->
+  <div id="case-study-modal" class="case-modal" aria-hidden="true" role="dialog">
+    <div class="case-modal-box">
+      <button id="close-study-btn" class="btn-close-modal" aria-label="Close Case Study">&times;</button>
+      
+      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem;">
+        <span id="study-badge" class="case-badge" style="position: static; display: inline-block;">Award Winner</span>
+        <span id="study-meta" style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Client &bull; Year</span>
+      </div>
+
+      <h2 id="study-title" style="font-size: 2.2rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 1.5rem;">
+        Case Study Title
+      </h2>
+
+      <img id="study-img" class="case-modal-img" src="" alt="Case Study Preview">
+
+      <div class="case-section-title">The Client &amp; Challenge</div>
+      <p id="study-challenge" class="case-section-p">Challenge text.</p>
+
+      <div class="case-section-title">Our Solution &amp; Craft</div>
+      <p id="study-solution" class="case-section-p">Solution text.</p>
+
+      <div class="case-section-title">The Measured Impact</div>
+      <p id="study-impact" class="case-section-p">Impact text.</p>
+
+      <div id="study-metrics" class="case-metrics-badge-row">
+        <!-- Metric pills injected by script.js -->
+      </div>
+    </div>
+  </div>
 
   <!-- CONSULTATION BOOKING MODAL -->
   <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog">
