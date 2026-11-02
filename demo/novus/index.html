@@ -1,31 +1,393 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novus Creative Agency – Live Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #000; color: #fff; line-height: 1.6; }
-    .demo-bar { position: sticky; top: 0; z-index: 100; background: #111; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; border-bottom: 1px solid #222; }
-    .demo-bar a { color: #fff; text-decoration: none; font-weight: 600; }
-    .btn-back { padding: 0.35rem 0.8rem; background: rgba(255,255,255,0.15); border-radius: 4px; }
-    .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 1.5rem; }
-    h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; letter-spacing: -0.04em; text-transform: uppercase; margin-bottom: 1.5rem; }
-    p.sub { font-size: 1.3rem; color: #888; max-width: 600px; margin-bottom: 2.5rem; }
-    .btn-bold { background: #fff; color: #000; font-weight: 700; padding: 1rem 2.2rem; border-radius: 999px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; }
-    .btn-bold:hover { background: #e5e5e5; }
-  </style>
+  
+  <title>Novus Creative Agency – Digital Product &amp; Brand Studio</title>
+  <meta name="description" content="Bold typography, interactive proposal calculator, and high-impact case study showcase for creative agencies and digital studios. 100% Free under MIT License via Zero Themes.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccff00'><polygon points='12 2 2 22 22 22'/></svg>">
+  
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
 </head>
 <body>
-  <div class="demo-bar">
-    <div><strong>Novus Agency</strong> &bull; Zero Themes Live Demo</div>
-    <a href="../../theme-detail.html?id=novus-agency" class="btn-back">&larr; Back to Theme Details</a>
+
+  <!-- ZERO THEMES TOP DEMO BAR -->
+  <div class="demo-banner">
+    <div class="demo-banner-left">
+      <span class="demo-pill">Novus Agency</span>
+      <span>Official Zero Themes Live Preview</span>
+    </div>
+    <a href="../../theme-detail.html?id=novus-agency" class="btn-demo-return">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Zero Themes
+    </a>
   </div>
-  <div class="hero">
-    <h1>We Shape<br>Iconic Brands</h1>
-    <p class="sub">Award-winning digital creative agency delivering immersive visual stories and bold digital products.</p>
-    <a href="../../theme-detail.html?id=novus-agency" class="btn-bold">Explore Our Work</a>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand">
+        NOVUS<span class="accent-dot">.</span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#work" class="nav-link">Work</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#calculator" class="nav-link">Calculator</a></li>
+          <li><a href="#team" class="nav-link">Team</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle theme">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button class="btn btn-accent open-booking-trigger" style="font-size: 0.85rem; padding: 0.55rem 1.2rem;">
+          Book a Call
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-pill">
+      <span>●</span>
+      <span>Strategic Brand &amp; Digital Engineering Studio</span>
+    </div>
+
+    <h1 class="hero-title">
+      We Engineer Brands That <span class="highlight">Defy Gravity</span>
+    </h1>
+
+    <p class="hero-sub">
+      Novus is an award-winning creative studio partnering with venture-backed tech pioneers and culture-defining brands to launch category-leading digital products.
+    </p>
+
+    <div class="hero-cta-group">
+      <a href="#calculator" class="btn btn-accent btn-lg">
+        Calculate Project Budget &rarr;
+      </a>
+      <a href="#work" class="btn btn-outline btn-lg">
+        Explore Case Studies
+      </a>
+    </div>
+
+    <!-- METRICS TICKER -->
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="metric-number">$1.4B+</div>
+        <div class="metric-label">Client Capital Raised</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-number">42</div>
+        <div class="metric-label">Global Design Awards</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-number">180+</div>
+        <div class="metric-label">Digital Products Shipped</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-number">99.4%</div>
+        <div class="metric-label">Partner Retention Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK -->
+  <section id="work" class="section-wrapper">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Selected Work</h2>
+      </div>
+      <p class="section-subtitle">
+        A curated showcase of recent digital flagships, spatial operating systems, and high-impact identity overhauls.
+      </p>
+    </div>
+
+    <div class="cases-grid">
+      <!-- Case 1 -->
+      <article class="case-card">
+        <div class="case-img-box">
+          <img class="case-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Hyperion Robotics">
+          <div class="case-badge">Awwwards SOTD</div>
+        </div>
+        <div class="case-content">
+          <div class="case-meta">Autonomous Robotics &bull; San Francisco</div>
+          <h3 class="case-title">Hyperion Robotics OS</h3>
+          <p class="case-desc">Complete brand architecture, real-time 3D web platform, and visual telemetry cockpit for an industrial robotics platform.</p>
+          <div class="case-footer">
+            <span class="case-impact">+340% Series B Inbound Interest</span>
+            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Case 2 -->
+      <article class="case-card">
+        <div class="case-img-box">
+          <img class="case-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Kinetic Pay">
+          <div class="case-badge">Red Dot Winner</div>
+        </div>
+        <div class="case-content">
+          <div class="case-meta">FinTech &bull; London / New York</div>
+          <h3 class="case-title">Kinetic Card &amp; Pay</h3>
+          <p class="case-desc">Card issuance platform redesign, dynamic micro-interactions, and high-velocity mobile design system deployed across 4M+ cards.</p>
+          <div class="case-footer">
+            <span class="case-impact">4.9 App Store Rating Across 80k Reviews</span>
+            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Case 3 -->
+      <article class="case-card">
+        <div class="case-img-box">
+          <img class="case-img" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80" alt="Veloce Electric">
+          <div class="case-badge">FWA of the Month</div>
+        </div>
+        <div class="case-content">
+          <div class="case-meta">Automotive &bull; Munich</div>
+          <h3 class="case-title">Veloce Hypercar Configurator</h3>
+          <p class="case-desc">Photorealistic real-time 3D WebGL vehicle customizer delivering sub-60fps fluid performance without external plugins.</p>
+          <div class="case-footer">
+            <span class="case-impact">100% Pre-Orders Sold Out in 48 Hours</span>
+            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Case 4 -->
+      <article class="case-card">
+        <div class="case-img-box">
+          <img class="case-img" src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80" alt="Aura Spatial Sound">
+          <div class="case-badge">Design Week Gold</div>
+        </div>
+        <div class="case-content">
+          <div class="case-meta">Acoustics &bull; Stockholm</div>
+          <h3 class="case-title">Aura Acoustic Systems</h3>
+          <p class="case-desc">Global e-commerce flagship and interactive acoustic frequency visualizer celebrating audiophile hardware craftsmanship.</p>
+          <div class="case-footer">
+            <span class="case-impact">$18.4M First-Year Direct Revenue</span>
+            <a href="#" class="case-link-btn open-booking-trigger">View Study &rarr;</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE CLIENT PROPOSAL & BUDGET CALCULATOR -->
+  <section id="calculator" class="section-wrapper">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Proposal Calculator</h2>
+      </div>
+      <p class="section-subtitle">
+        Get an instantaneous, transparent investment estimate and production timeline tailored to your exact scope.
+      </p>
+    </div>
+
+    <div class="calculator-card">
+      <div class="calc-controls">
+        <div class="calc-options-title">1. Select Core Deliverable</div>
+        <div class="calc-grid-select">
+          <button class="calc-btn-option" data-calc-deliverable="brand">
+            <strong>Brand Identity</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.2rem;">Naming, Guidelines, Assets</div>
+          </button>
+          <button class="calc-btn-option selected" data-calc-deliverable="web">
+            <strong>Web Platform</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.2rem;">Design &amp; Custom Edge Build</div>
+          </button>
+          <button class="calc-btn-option" data-calc-deliverable="mobile">
+            <strong>Mobile Product</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.2rem;">iOS &amp; Android App System</div>
+          </button>
+          <button class="calc-btn-option" data-calc-deliverable="full">
+            <strong>Full Ecosystem</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.2rem;">Brand, Web, Mobile &amp; Growth</div>
+          </button>
+        </div>
+
+        <div class="calc-options-title">2. Choose Delivery Velocity</div>
+        <div class="calc-grid-select" style="grid-template-columns: 1fr 1fr;">
+          <button class="calc-btn-option selected" data-calc-velocity="1.0">
+            <strong>Standard Velocity</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.2rem;">Normal phased milestone delivery</div>
+          </button>
+          <button class="calc-btn-option" data-calc-velocity="1.25">
+            <strong>Sprint Turbo (+25%)</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.2rem;">30% faster with dedicated dual-leads</div>
+          </button>
+        </div>
+
+        <div class="calc-options-title">3. Add Specialized Modules</div>
+        <div class="calc-grid-select">
+          <button class="calc-btn-option" data-calc-addon="motion">
+            <strong>+ 3D / WebGL Motion</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7;">+$8,000</div>
+          </button>
+          <button class="calc-btn-option" data-calc-addon="designSystem">
+            <strong>+ Design System</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7;">+$6,500</div>
+          </button>
+          <button class="calc-btn-option" data-calc-addon="seo">
+            <strong>+ Technical SEO &amp; Copy</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7;">+$4,500</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Calculated Summary -->
+      <div class="calc-summary-box">
+        <div>
+          <div class="calc-result-header">Estimated Project Investment</div>
+          <div id="calc-price" class="calc-price-display">$24,000</div>
+          <div id="calc-timeline" class="calc-timeline-display">Estimated Delivery: ~6 Weeks • Full Dedicated Sprint Team</div>
+          
+          <ul id="calc-specs" class="calc-specs-list">
+            <!-- Dynamically populated via script.js -->
+          </ul>
+        </div>
+
+        <button class="btn btn-accent open-booking-trigger" style="width: 100%;">
+          Schedule Project Pitch &rarr;
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES BENTO GRID -->
+  <section id="services" class="section-wrapper">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Core Capabilities</h2>
+      </div>
+      <p class="section-subtitle">
+        We bridge the gap between creative boundary-pushing and rigorous technical engineering.
+      </p>
+    </div>
+
+    <div class="services-bento">
+      <div class="service-card span-2">
+        <div class="service-icon">⚡</div>
+        <h3>High-Performance Web Platforms</h3>
+        <p>Engineered for sub-300ms global speeds using static edge architectures, head-turning micro-animations, and full conversion rate optimization.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <h3>Brand Architecture</h3>
+        <p>Strategic positioning, verbal naming, and visual identity systems that distinguish you from copycats.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⬡</div>
+        <h3>3D WebGL &amp; Kinetic Motion</h3>
+        <p>Custom three-dimensional models, interactive physics shaders, and fluid storytelling that commands attention.</p>
+      </div>
+      <div class="service-card span-2">
+        <div class="service-icon">⚙️</div>
+        <h3>Enterprise Design Systems</h3>
+        <p>Figma token libraries paired directly with production-ready React component code to scale velocity across engineering teams.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM LEADERSHIP -->
+  <section id="team" class="section-wrapper">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Leadership</h2>
+      </div>
+      <p class="section-subtitle">
+        Led by seasoned practitioners who work hands-on on every client engagement.
+      </p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <img class="team-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Marcus Thorne">
+        <div class="team-info">
+          <div class="team-name">Marcus Thorne</div>
+          <div class="team-role">Founder &bull; Executive Creative Director</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Dr. Yasmine Chen">
+        <div class="team-info">
+          <div class="team-name">Dr. Yasmine Chen</div>
+          <div class="team-role">VP of Digital Engineering</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Viktor Lindqvist">
+        <div class="team-info">
+          <div class="team-name">Viktor Lindqvist</div>
+          <div class="team-role">Principal 3D &amp; Spatial Architect</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTATION BOOKING MODAL -->
+  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog">
+    <div class="modal-box">
+      <button id="close-booking-btn" class="btn-close-modal" aria-label="Close dialog">&times;</button>
+      <h3 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 0.4rem; text-transform: uppercase;">
+        Schedule a Consultation
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.8rem;">
+        Speak directly with our partners to review your product roadmap and budget.
+      </p>
+
+      <form id="booking-form">
+        <div class="form-field">
+          <label for="b-name">Your Full Name</label>
+          <input type="text" id="b-name" class="form-input" placeholder="Alexander Wright" required>
+        </div>
+        <div class="form-field">
+          <label for="b-email">Work Email</label>
+          <input type="email" id="b-email" class="form-input" placeholder="alex@company.com" required>
+        </div>
+        <div class="form-field">
+          <label for="b-scope">Target Launch Date</label>
+          <input type="date" id="b-scope" class="form-input" required>
+        </div>
+        <div class="form-field">
+          <label for="b-notes">Project Vision / Notes</label>
+          <textarea id="b-notes" rows="3" class="form-input" placeholder="Share a brief overview of your goals..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 0.5rem;">
+          Confirm Strategy Call &rarr;
+        </button>
+      </form>
+    </div>
   </div>
+
+  <!-- BRUTALIST FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-hero-cta">
+        LET'S BUILD SOMETHING <span style="color: var(--accent);">UNFORGETTABLE</span>.
+      </div>
+      <div style="margin-bottom: 3rem;">
+        <a href="mailto:hello@novus-studio.agency" class="btn btn-accent btn-lg open-booking-trigger">
+          Book Consultation &bull; hello@novus-studio.agency
+        </a>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 NOVUS Creative Agency. Distributed under MIT License via Zero Themes.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="../../theme-detail.html?id=novus-agency" style="color: var(--text-muted); text-decoration: none;">Theme Details</a>
+          <a href="../../themes.html" style="color: var(--text-muted); text-decoration: none;">All Zero Themes</a>
+          <a href="https://github.com/mujtabacloud/novus-creative-agency" target="_blank" rel="noopener" style="color: var(--text-muted); text-decoration: none;">GitHub Repo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
