@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Admin UI – Live Demo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0f19; color: #f3f4f6; line-height: 1.6; }
+    .demo-bar { position: sticky; top: 0; z-index: 100; background: #111827; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; border-bottom: 1px solid #1f2937; }
+    .demo-bar a { color: #60a5fa; text-decoration: none; font-weight: 600; }
+    .btn-back { padding: 0.35rem 0.8rem; background: rgba(96, 165, 250, 0.15); border-radius: 4px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .stat-card { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 1.5rem; }
+    .stat-val { font-size: 2rem; font-weight: 800; color: #60a5fa; margin: 0.4rem 0; }
+    .table-card { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 1.5rem; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 0.8rem 1rem; border-bottom: 1px solid #1f2937; font-size: 0.9rem; }
+    th { color: #9ca3af; text-transform: uppercase; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div><strong>Nexus Admin UI</strong> &bull; Zero Themes Live Demo</div>
+    <a href="../../theme-detail.html?id=nexus-dashboard" class="btn-back">&larr; Back to Theme Details</a>
+  </div>
+  <div class="container">
+    <h2 style="margin-bottom: 1.5rem;">Analytics Overview</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div>Total Revenue</div>
+        <div class="stat-val">$84,230</div>
+        <div style="color: #10b981; font-size: 0.85rem;">+14.2% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div>Active Sessions</div>
+        <div class="stat-val">12,450</div>
+        <div style="color: #10b981; font-size: 0.85rem;">+8.7% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div>Avg. Conversion</div>
+        <div class="stat-val">4.82%</div>
+        <div style="color: #10b981; font-size: 0.85rem;">+1.1% vs last month</div>
+      </div>
+    </div>
+    <div class="table-card">
+      <h3 style="margin-bottom: 1rem;">Recent Transactions</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Acme Software Corp</td>
+            <td><span style="color: #10b981;">Completed</span></td>
+            <td>$1,200.00</td>
+            <td>Nov 02, 2026</td>
+          </tr>
+          <tr>
+            <td>Starlight Studio</td>
+            <td><span style="color: #10b981;">Completed</span></td>
+            <td>$450.00</td>
+            <td>Nov 01, 2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

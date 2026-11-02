@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora SaaS &amp; Startup – Live Demo</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #10b981;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .demo-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(17, 24, 39, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+    .demo-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .demo-bar .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: background 0.2s;
+    }
+    .demo-bar .btn-back:hover { background: rgba(255, 255, 255, 0.2); }
+    .hero {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #818cf8, #c084fc, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 2rem;
+    }
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--surface);
+      color: #fff;
+      border: 1px solid var(--surface-border);
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.05); }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 3rem auto 5rem;
+      padding: 0 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .card h3 { font-size: 1.25rem; margin: 0.8rem 0 0.5rem; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div><strong>Aurora SaaS</strong> &bull; Zero Themes Live Demo</div>
+    <a href="../../theme-detail.html?id=aurora-saas" class="btn-back">&larr; Back to Theme Details</a>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="badge">Next-Generation AI Platform</div>
+      <h1>Build faster with <span>intelligent automation</span></h1>
+      <p class="lead">Supercharge your team's development cycle with automated cloud deployments, instantaneous performance monitoring, and unified telemetry.</p>
+      <div class="cta-group">
+        <a href="../../theme-detail.html?id=aurora-saas" class="btn btn-primary">Start Free Trial &rarr;</a>
+        <a href="#features" class="btn btn-secondary">Explore Features</a>
+      </div>
+    </section>
+
+    <section id="features" class="bento-grid">
+      <div class="card">
+        <div style="font-size: 2rem;">⚡</div>
+        <h3>Lightning Fast</h3>
+        <p>Pre-rendered static architecture ensures sub-500ms response times anywhere across the global CDN.</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 2rem;">🛡️</div>
+        <h3>Enterprise Security</h3>
+        <p>Built-in SSL, encrypted credentials, and automated vulnerability scanning at zero extra cost.</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 2rem;">📈</div>
+        <h3>Instant Analytics</h3>
+        <p>Real-time visual reports, conversion funnels, and customer telemetry out of the box.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuCraft – Live Demo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+    .demo-bar { position: sticky; top: 0; z-index: 100; background: #1e293b; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; border-bottom: 1px solid #334155; }
+    .demo-bar a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+    .btn-back { padding: 0.35rem 0.8rem; background: rgba(56, 189, 248, 0.15); border-radius: 4px; }
+    .layout { display: grid; grid-template-columns: 240px 1fr; min-height: 90vh; }
+    .sidebar { background: #1e293b; border-right: 1px solid #334155; padding: 2rem 1.5rem; }
+    .sidebar ul { list-style: none; margin-top: 1rem; }
+    .sidebar li { margin-bottom: 0.8rem; }
+    .sidebar a { color: #94a3b8; text-decoration: none; font-size: 0.95rem; }
+    .sidebar a.active { color: #38bdf8; font-weight: 600; }
+    .content { padding: 3rem 4rem; max-width: 800px; }
+    h1 { font-size: 2.4rem; margin-bottom: 1rem; color: #fff; }
+    pre { background: #020617; border: 1px solid #1e293b; border-radius: 6px; padding: 1.2rem; margin: 1.5rem 0; overflow-x: auto; font-family: monospace; color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div><strong>DocuCraft</strong> &bull; Zero Themes Live Demo</div>
+    <a href="../../theme-detail.html?id=docsy-knowledge" class="btn-back">&larr; Back to Theme Details</a>
+  </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div style="font-weight: 700; color: #fff;">DOCUCRAFT v1.8</div>
+      <ul>
+        <li><a href="#" class="active">Getting Started</a></li>
+        <li><a href="#">CLI Installation</a></li>
+        <li><a href="#">Configuration</a></li>
+        <li><a href="#">Authentication</a></li>
+        <li><a href="#">Deployment</a></li>
+      </ul>
+    </aside>
+    <main class="content">
+      <h1>Getting Started with DocuCraft</h1>
+      <p>DocuCraft is an ultra-fast documentation handbook engine built specifically for GitHub Pages.</p>
+      <pre><code># Install CLI package
+curl -sSL https://get.docucraft.io | bash
+
+# Initialize docs repo
+docucraft init my-handbook</code></pre>
+    </main>
+  </div>
+</body>
+</html>
