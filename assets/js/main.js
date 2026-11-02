@@ -701,7 +701,7 @@ function initNewsletter() {
         message: 'Subscribed to Zero Themes updates'
       });
 
-      showToast(`🎉 Thanks for connecting! Your email has been saved to our Google Sheet.`, 'success');
+      showToast(`🎉 Thanks for connecting! Your email has been saved.`, 'success');
       input.value = '';
 
       if (submitBtn) {
