@@ -1,51 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DocuCraft – Live Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
-    .demo-bar { position: sticky; top: 0; z-index: 100; background: #1e293b; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; border-bottom: 1px solid #334155; }
-    .demo-bar a { color: #38bdf8; text-decoration: none; font-weight: 600; }
-    .btn-back { padding: 0.35rem 0.8rem; background: rgba(56, 189, 248, 0.15); border-radius: 4px; }
-    .layout { display: grid; grid-template-columns: 240px 1fr; min-height: 90vh; }
-    .sidebar { background: #1e293b; border-right: 1px solid #334155; padding: 2rem 1.5rem; }
-    .sidebar ul { list-style: none; margin-top: 1rem; }
-    .sidebar li { margin-bottom: 0.8rem; }
-    .sidebar a { color: #94a3b8; text-decoration: none; font-size: 0.95rem; }
-    .sidebar a.active { color: #38bdf8; font-weight: 600; }
-    .content { padding: 3rem 4rem; max-width: 800px; }
-    h1 { font-size: 2.4rem; margin-bottom: 1rem; color: #fff; }
-    pre { background: #020617; border: 1px solid #1e293b; border-radius: 6px; padding: 1.2rem; margin: 1.5rem 0; overflow-x: auto; font-family: monospace; color: #38bdf8; }
-  </style>
+
+  <title>DocuCraft – Developer Handbook &amp; Technical Documentation Engine</title>
+  <meta name="description" content="Search-powered technical handbook, API docs & guides theme. Built with pure ES6, zero external dependencies, Ctrl+K spotlight search, sticky scrollspy table of contents, and interactive REST playground.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><line x1='16' y1='13' x2='8' y2='13'/><line x1='16' y1='17' x2='8' y2='17'/><polyline points='10 9 9 9 8 9'/></svg>">
+
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
 </head>
 <body>
-  <div class="demo-bar">
-    <div><strong>DocuCraft</strong> &bull; Zero Themes Live Demo</div>
-    <a href="../../theme-detail.html?id=docsy-knowledge" class="btn-back">&larr; Back to Theme Details</a>
-  </div>
-  <div class="layout">
-    <aside class="sidebar">
-      <div style="font-weight: 700; color: #fff;">DOCUCRAFT v1.8</div>
-      <ul>
-        <li><a href="#" class="active">Getting Started</a></li>
-        <li><a href="#">CLI Installation</a></li>
-        <li><a href="#">Configuration</a></li>
-        <li><a href="#">Authentication</a></li>
-        <li><a href="#">Deployment</a></li>
-      </ul>
-    </aside>
-    <main class="content">
-      <h1>Getting Started with DocuCraft</h1>
-      <p>DocuCraft is an ultra-fast documentation handbook engine built specifically for GitHub Pages.</p>
-      <pre><code># Install CLI package
-curl -sSL https://get.docucraft.io | bash
 
-# Initialize docs repo
-docucraft init my-handbook</code></pre>
-    </main>
+  <!-- TOP ZERO THEMES DEMO BAR -->
+  <div class="demo-banner">
+    <div class="demo-banner-left">
+      <span class="demo-pill">DocuCraft Handbook</span>
+      <span>Official Zero Themes Live Preview</span>
+    </div>
+    <div class="demo-actions">
+      <a href="../../theme-detail.html?id=docsy-knowledge" class="btn-demo-return">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Zero Themes
+      </a>
+    </div>
   </div>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      
+      <!-- Left: Mobile Hamburger & Brand Logo -->
+      <div class="header-left">
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <a href="#quickstart" class="brand-logo" aria-label="DocuCraft Home">
+          <div class="brand-icon-box">D</div>
+          <span class="brand-name">DocuCraft</span>
+          <span class="version-badge">v2.4.0</span>
+        </a>
+      </div>
+
+      <!-- Center: Global Spotlight Search Trigger -->
+      <button id="btn-open-search" class="search-trigger-btn" aria-label="Open documentation search">
+        <div class="search-trigger-left">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Search documentation...</span>
+        </div>
+        <span class="kbd-shortcut">Ctrl K</span>
+      </button>
+
+      <!-- Right: Controls & Social Links -->
+      <div class="header-actions">
+        <!-- Version Selector -->
+        <select class="version-select" id="version-selector" aria-label="Documentation Version">
+          <option value="v2.4">v2.4 (Latest)</option>
+          <option value="v2.3">v2.3 (Stable)</option>
+          <option value="v1.9">v1.9 (LTS)</option>
+        </select>
+
+        <!-- Accessible Font Size Scaler -->
+        <div class="font-scale-group" title="Adjust Reader Font Scale">
+          <button id="btn-font-dec" class="font-btn" aria-label="Decrease Font Size">A-</button>
+          <button id="btn-font-inc" class="font-btn" aria-label="Increase Font Size">A+</button>
+        </div>
+
+        <!-- GitHub Stars Pill -->
+        <a href="https://github.com/mujtabacloud/docucraft-documentation-theme" target="_blank" rel="noopener" class="github-star-pill" title="View Source on GitHub">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>⭐ 4.2k</span>
+        </a>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle Theme">
+          <span id="theme-icon">☀️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- THREE-COLUMN MAIN LAYOUT -->
+  <div class="docs-layout-container">
+    
+    <!-- LEFT SIDEBAR (NAVIGATION TREE) -->
+    <aside class="docs-sidebar" id="docs-sidebar" aria-label="Documentation Navigation">
+      <div class="sidebar-search-box">
+        <input type="text" id="sidebar-filter" placeholder="Filter handbook topics..." autocomplete="off">
+      </div>
+      <nav id="sidebar-nav-container">
+        <!-- Dynamically rendered via script.js -->
+      </nav>
+    </aside>
+
+    <div id="docs-sidebar-backdrop" class="docs-sidebar-backdrop hidden"></div>
+
+    <!-- CENTER MAIN ARTICLE CONTENT -->
+    <main class="docs-main-wrapper" id="main-content">
+      <article class="docs-article-container">
+        
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs-bar" aria-label="Breadcrumbs">
+          <a href="#quickstart">Docs</a>
+          <span class="breadcrumb-sep">/</span>
+          <span id="breadcrumb-category">Getting Started</span>
+          <span class="breadcrumb-sep">/</span>
+          <span id="breadcrumb-current">Quickstart &amp; Architecture</span>
+        </nav>
+
+        <!-- Article Header -->
+        <header class="article-header">
+          <h1 class="article-title" id="article-title">Quickstart &amp; Architecture</h1>
+          <div class="article-meta-row">
+            <div class="meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span id="article-read-time">3 min read</span>
+            </div>
+            <div class="meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Updated <strong id="article-last-updated">November 2, 2026</strong></span>
+            </div>
+            <div class="meta-item">
+              <span>Verified for <strong>DocuCraft v2.4+</strong></span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Article Body Content -->
+        <div class="article-content" id="article-content">
+          <!-- Dynamically populated via script.js -->
+        </div>
+
+        <!-- Was This Page Helpful Feedback Widget -->
+        <div class="page-feedback-card" id="page-feedback-card">
+          <div class="feedback-question">Was this documentation chapter helpful to you?</div>
+          <div class="feedback-actions">
+            <button class="btn-feedback" id="btn-feedback-yes">👍 Yes, helpful</button>
+            <button class="btn-feedback" id="btn-feedback-no">👎 Needs improvement</button>
+          </div>
+        </div>
+
+        <!-- Previous / Next Navigation Pager -->
+        <nav class="article-nav-footer" aria-label="Pagination Navigation">
+          <a href="#" class="nav-pager-btn prev hidden" id="pager-prev">
+            <span class="pager-label">&larr; Previous Chapter</span>
+            <span class="pager-title">Getting Started</span>
+          </a>
+          <a href="#" class="nav-pager-btn next" id="pager-next">
+            <span class="pager-label">Next Chapter &rarr;</span>
+            <span class="pager-title">Installation &amp; Environments</span>
+          </a>
+        </nav>
+
+        <!-- Edit on GitHub Link -->
+        <div class="edit-github-row">
+          <a href="https://github.com/mujtabacloud/docucraft-documentation-theme" target="_blank" rel="noopener" class="edit-github-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>Suggest edits to this page on GitHub</span>
+          </a>
+        </div>
+
+      </article>
+    </main>
+
+    <!-- RIGHT SIDEBAR (ON THIS PAGE TABLE OF CONTENTS) -->
+    <aside class="docs-toc" id="docs-toc" aria-label="Table of Contents">
+      <div class="toc-heading">On This Page</div>
+      <ul class="toc-list" id="toc-list">
+        <!-- Dynamically rendered via script.js -->
+      </ul>
+
+      <!-- Page Quick Actions -->
+      <div class="toc-actions">
+        <button class="toc-action-btn" id="btn-copy-page-url">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span>Copy Page URL</span>
+        </button>
+        <button class="toc-action-btn" id="btn-share-x">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span>Share on X</span>
+        </button>
+        <button class="toc-action-btn" id="btn-print-page">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Print Handbook</span>
+        </button>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- CMD+K SPOTLIGHT SEARCH MODAL -->
+  <div id="search-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" id="search-backdrop"></div>
+    <div class="search-dialog">
+      <div class="search-dialog-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-tertiary);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-dialog-input" placeholder="Search guides, endpoints, parameters, error codes..." autocomplete="off">
+        <span class="kbd-shortcut">ESC</span>
+      </div>
+      <div class="search-dialog-results" id="search-dialog-results">
+        <!-- Dynamically rendered via script.js -->
+      </div>
+      <div class="search-dialog-footer">
+        <div class="search-hints">
+          <span><kbd class="kbd-shortcut">↑</kbd> <kbd class="kbd-shortcut">↓</kbd> Navigate</span>
+          <span><kbd class="kbd-shortcut">Enter</kbd> Select</span>
+        </div>
+        <div>DocuCraft Static Search</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div id="doc-toast" class="doc-toast hidden">
+    <span id="toast-icon">✓</span>
+    <span id="toast-text">Notification message</span>
+  </div>
+
 </body>
 </html>
