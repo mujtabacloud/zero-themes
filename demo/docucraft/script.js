@@ -1,16 +1,28 @@
 /**
  * DocuCraft - Developer Technical Documentation Engine
- * Pure ES6, zero external runtime dependencies.
- * Instant Ctrl+K search, dynamic table of contents scrollspy, multi-language code tabs,
- * interactive API playground, client-side routing, and font accessibility controls.
+ * World-class developer documentation experience. Pure ES6, zero runtime dependencies.
+ *
+ * Features:
+ * - Real-time reading progress scrollbar
+ * - Multi-endpoint interactive REST API playground (Swagger/Postman-grade)
+ * - Interactive in-browser CLI terminal emulator
+ * - Instant Ctrl+K spotlight search palette with fuzzy matching
+ * - Heading hover deep-anchor link copier
+ * - Multi-language code snippet tabs with memory persistence
+ * - Client-side code syntax highlighter (Bash, TS/JS, JSON, Python, Go)
+ * - Keyboard navigation shortcuts ([ Prev, ] Next, Ctrl+K)
+ * - Accessible reader font scaling (A- / A+)
+ * - Dark & light theme switcher
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
+  initFontSizeControls();
+  initReadingProgressBar();
+  initKeyboardShortcuts();
   initDocsRouting();
   initSearchModal();
   initScrollSpy();
-  initFontSizeControls();
   initFeedbackWidget();
   initMobileDrawer();
   initPageActions();
@@ -79,7 +91,53 @@ function initFontSizeControls() {
 }
 
 /* ==========================================================================
-   3. EMBEDDED DOCUMENTATION REPOSITORY & CLIENT-SIDE ROUTER
+   3. READING PROGRESS SCROLLBAR
+   ========================================================================== */
+function initReadingProgressBar() {
+  const bar = document.getElementById('reading-progress-bar');
+  if (!bar) return;
+
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    bar.style.width = Math.min(Math.max(scrolled, 0), 100) + '%';
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   4. KEYBOARD NAVIGATION SHORTCUTS
+   ========================================================================== */
+function initKeyboardShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Ignore keystrokes when typing inside input / textarea
+    const active = document.activeElement;
+    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) {
+      return;
+    }
+
+    if (e.key === '[') {
+      // Previous chapter
+      const prevBtn = document.getElementById('pager-prev');
+      if (prevBtn && !prevBtn.classList.contains('hidden')) {
+        prevBtn.click();
+      }
+    } else if (e.key === ']') {
+      // Next chapter
+      const nextBtn = document.getElementById('pager-next');
+      if (nextBtn && !nextBtn.classList.contains('hidden')) {
+        nextBtn.click();
+      }
+    } else if (e.key === 't' || e.key === 'T') {
+      // Focus table of contents
+      const firstToc = document.querySelector('.toc-link');
+      if (firstToc) firstToc.focus();
+    }
+  });
+}
+
+/* ==========================================================================
+   5. EMBEDDED DOCUMENTATION REPOSITORY & CLIENT-SIDE ROUTER
    ========================================================================== */
 let allDocsData = [];
 const fallbackDocs = [
@@ -89,7 +147,7 @@ const fallbackDocs = [
     "title": "Quickstart & Architecture",
     "slug": "quickstart",
     "readTime": "3 min read",
-    "lastUpdated": "November 2, 2026",
+    "lastUpdated": "November 3, 2026",
     "summary": "Bootstrap a high-performance documentation handbook in less than 3 minutes. Zero build configuration required.",
     "toc": [
       {
@@ -131,7 +189,7 @@ const fallbackDocs = [
     "title": "Installation & Environments",
     "slug": "installation",
     "readTime": "4 min read",
-    "lastUpdated": "November 2, 2026",
+    "lastUpdated": "November 3, 2026",
     "summary": "Detailed installation instructions for local development, CI/CD pipelines, containerized environments, and air-gapped setups.",
     "toc": [
       {
@@ -155,7 +213,39 @@ const fallbackDocs = [
         "level": 2
       }
     ],
-    "content": "\n      <div class=\"lead-text\">\n        DocuCraft is distributed as both an npm package, a standalone compiled binary for macOS/Linux/Windows, and a minimal Docker container (under 24MB).\n      </div>\n\n      <h2 id=\"package-managers\">Package Manager Options</h2>\n      <p>You can add DocuCraft as a local dev-dependency directly into your project root so all team members use the exact pinned version:</p>\n\n      <pre><code class=\"language-bash\"># Add as pinned project development dependency\npnpm add -D @docucraft/cli@^2.4.0\n\n# Add build scripts to package.json\nnpm pkg set scripts.docs:dev=\"docucraft dev\"\nnpm pkg set scripts.docs:build=\"docucraft build\"\nnpm pkg set scripts.docs:serve=\"docucraft serve --dist ./dist\"</code></pre>\n\n      <h2 id=\"docker-setup\">Docker Containerized Setup</h2>\n      <p>For organizations requiring strict container sandboxing or air-gapped CI workers, pull the official Alpine-based container:</p>\n\n      <pre><code class=\"language-bash\"># Pull the lightweight Alpine image\ndocker pull ghcr.io/docucraft/docucraft:2.4.0-alpine\n\n# Run local documentation server mounting your ./docs folder\ndocker run --rm -it \\\n  -p 4000:4000 \\\n  -v $(pwd)/docs:/app/docs \\\n  -v $(pwd)/docucraft.config.ts:/app/docucraft.config.ts \\\n  ghcr.io/docucraft/docucraft:2.4.0-alpine dev</code></pre>\n\n      <h2 id=\"ci-cd-pipelines\">CI/CD Automated Verification</h2>\n      <p>Validate broken links, invalid code blocks, and missing image references automatically inside your GitHub Actions pipeline:</p>\n\n      <pre><code class=\"language-yaml\"># .github/workflows/docs-validation.yml\nname: Documentation Lint & Build\n\non:\n  pull_request:\n    paths:\n      - 'docs/**'\n      - 'docucraft.config.ts'\n\njobs:\n  validate:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v3\n        with:\n          version: 9\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n          cache: 'pnpm'\n\n      - name: Install Dependencies\n        run: pnpm install --frozen-lockfile\n\n      - name: Lint Markdown & Dead Links\n        run: pnpm docucraft check --strict\n\n      - name: Compile Static Distribution\n        run: pnpm docucraft build</code></pre>\n\n      <h2 id=\"airgapped-offline\">Air-Gapped & Offline Bundles</h2>\n      <p>If operating inside high-security networks with zero external WAN connectivity, download the standalone archive containing all bundled font assets, search indexing routines, and icon sets without remote CDN calls:</p>\n\n      <pre><code class=\"language-bash\"># Download offline bundle archive\ncurl -O https://releases.docucraft.dev/v2.4.0/docucraft-offline-v2.4.0.tar.gz\n\n# Extract and run\ntar -xzf docucraft-offline-v2.4.0.tar.gz\n./docucraft/bin/docucraft serve --offline</code></pre>\n    "
+    "content": "\n      <div class=\"lead-text\">\n        DocuCraft is distributed as an npm package, a standalone compiled binary for macOS/Linux/Windows, and a minimal Docker container (under 24MB).\n      </div>\n\n      <h2 id=\"package-managers\">Package Manager Options</h2>\n      <p>You can add DocuCraft as a local dev-dependency directly into your project root so all team members use the exact pinned version:</p>\n\n      <pre><code class=\"language-bash\"># Add as pinned project development dependency\npnpm add -D @docucraft/cli@^2.4.0\n\n# Add build scripts to package.json\nnpm pkg set scripts.docs:dev=\"docucraft dev\"\nnpm pkg set scripts.docs:build=\"docucraft build\"\nnpm pkg set scripts.docs:serve=\"docucraft serve --dist ./dist\"</code></pre>\n\n      <h2 id=\"docker-setup\">Docker Containerized Setup</h2>\n      <p>For organizations requiring strict container sandboxing or air-gapped CI workers, pull the official Alpine-based container:</p>\n\n      <pre><code class=\"language-bash\"># Pull the lightweight Alpine image\ndocker pull ghcr.io/docucraft/docucraft:2.4.0-alpine\n\n# Run local documentation server mounting your ./docs folder\ndocker run --rm -it \\\n  -p 4000:4000 \\\n  -v $(pwd)/docs:/app/docs \\\n  -v $(pwd)/docucraft.config.ts:/app/docucraft.config.ts \\\n  ghcr.io/docucraft/docucraft:2.4.0-alpine dev</code></pre>\n\n      <h2 id=\"ci-cd-pipelines\">CI/CD Automated Verification</h2>\n      <p>Validate broken links, invalid code blocks, and missing image references automatically inside your GitHub Actions pipeline:</p>\n\n      <pre><code class=\"language-yaml\"># .github/workflows/docs-validation.yml\nname: Documentation Lint & Build\n\non:\n  pull_request:\n    paths:\n      - 'docs/**'\n      - 'docucraft.config.ts'\n\njobs:\n  validate:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v3\n        with:\n          version: 9\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n          cache: 'pnpm'\n\n      - name: Install Dependencies\n        run: pnpm install --frozen-lockfile\n\n      - name: Lint Markdown & Dead Links\n        run: pnpm docucraft check --strict\n\n      - name: Compile Static Distribution\n        run: pnpm docucraft build</code></pre>\n\n      <h2 id=\"airgapped-offline\">Air-Gapped & Offline Bundles</h2>\n      <p>If operating inside high-security networks with zero external WAN connectivity, download the standalone archive containing all bundled font assets, search indexing routines, and icon sets without remote CDN calls:</p>\n\n      <pre><code class=\"language-bash\"># Download offline bundle archive\ncurl -O https://releases.docucraft.dev/v2.4.0/docucraft-offline-v2.4.0.tar.gz\n\n# Extract and run\ntar -xzf docucraft-offline-v2.4.0.tar.gz\n./docucraft/bin/docucraft serve --offline</code></pre>\n    "
+  },
+  {
+    "id": "cli-reference",
+    "category": "Core Concepts",
+    "title": "CLI Toolchain Reference",
+    "slug": "cli-reference",
+    "readTime": "5 min read",
+    "lastUpdated": "November 3, 2026",
+    "summary": "Master the complete DocuCraft command line interface. Includes an interactive simulated terminal sandbox.",
+    "toc": [
+      {
+        "id": "cli-overview",
+        "title": "CLI Overview & Global Flags",
+        "level": 2
+      },
+      {
+        "id": "command-matrix",
+        "title": "Complete Command Matrix",
+        "level": 2
+      },
+      {
+        "id": "interactive-terminal",
+        "title": "Interactive Terminal Simulator",
+        "level": 2
+      },
+      {
+        "id": "exit-codes",
+        "title": "Standard Exit Codes",
+        "level": 2
+      }
+    ],
+    "content": "\n      <div class=\"lead-text\">\n        The DocuCraft CLI is a lightning-fast Rust-powered binary wrapped in a native Node.js bridge. It handles local hot-reload dev servers, link verification, AST compilation, and edge deployments.\n      </div>\n\n      <h2 id=\"cli-overview\">CLI Overview & Global Flags</h2>\n      <p>All DocuCraft subcommands inherit these universal execution flags:</p>\n      <div class=\"specs-table-wrapper\">\n        <table class=\"specs-table\">\n          <thead>\n            <tr>\n              <th>Flag</th>\n              <th>Type</th>\n              <th>Description</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><code>--config &lt;path&gt;</code></td>\n              <td>String</td>\n              <td>Explicit path to custom configuration file. Defaults to <code>./docucraft.config.ts</code>.</td>\n            </tr>\n            <tr>\n              <td><code>--verbose</code></td>\n              <td>Boolean</td>\n              <td>Print detailed internal compilation stages and AST timing breakdown.</td>\n            </tr>\n            <tr>\n              <td><code>--json</code></td>\n              <td>Boolean</td>\n              <td>Output machine-parseable JSON stdout for CI/CD automation pipelines.</td>\n            </tr>\n            <tr>\n              <td><code>--quiet</code></td>\n              <td>Boolean</td>\n              <td>Suppress non-critical log messages and ascii art banners.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h2 id=\"command-matrix\">Complete Command Matrix</h2>\n      <div class=\"specs-table-wrapper\">\n        <table class=\"specs-table\">\n          <thead>\n            <tr>\n              <th>Command</th>\n              <th>Arguments</th>\n              <th>Purpose & Example</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><code>docucraft init</code></td>\n              <td><code>[name] [--template]</code></td>\n              <td>Scaffolds a new handbook repository. Example: <code>docucraft init api-docs</code></td>\n            </tr>\n            <tr>\n              <td><code>docucraft dev</code></td>\n              <td><code>[--port] [--host] [--open]</code></td>\n              <td>Starts hot-module reloading local web server. Example: <code>docucraft dev -p 3000</code></td>\n            </tr>\n            <tr>\n              <td><code>docucraft build</code></td>\n              <td><code>[--outDir] [--clean]</code></td>\n              <td>Compiles static distribution to <code>./dist</code>. Zero JS runtime mode.</td>\n            </tr>\n            <tr>\n              <td><code>docucraft check</code></td>\n              <td><code>[--links] [--strict]</code></td>\n              <td>Audits documentation for 404 dead links, unclosed tags, and orphan images.</td>\n            </tr>\n            <tr>\n              <td><code>docucraft deploy</code></td>\n              <td><code>[--prod] [--token]</code></td>\n              <td>Pushes compiled release to DocuCraft Edge Network or GitHub Pages.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h2 id=\"interactive-terminal\">Interactive Terminal Simulator</h2>\n      <p>Test CLI commands directly in your browser without leaving this chapter. Click any quick command button below or type directly into the terminal prompt:</p>\n\n      <!-- INTERACTIVE TERMINAL WIDGET -->\n      <div class=\"cli-terminal-widget\" id=\"cli-terminal-widget\">\n        <div class=\"terminal-header\">\n          <div class=\"terminal-dots\">\n            <span class=\"dot red\"></span>\n            <span class=\"dot yellow\"></span>\n            <span class=\"dot green\"></span>\n          </div>\n          <span class=\"terminal-title\">docucraft-cli — zsh — 80x24</span>\n          <button id=\"btn-term-clear\" class=\"btn-term-clear\">Clear</button>\n        </div>\n\n        <div class=\"terminal-quick-pills\">\n          <button class=\"term-pill\" data-cmd=\"docucraft --version\">docucraft --version</button>\n          <button class=\"term-pill\" data-cmd=\"docucraft check --links\">docucraft check --links</button>\n          <button class=\"term-pill\" data-cmd=\"docucraft build --prod\">docucraft build --prod</button>\n          <button class=\"term-pill\" data-cmd=\"docucraft deploy\">docucraft deploy</button>\n          <button class=\"term-pill\" data-cmd=\"help\">help</button>\n        </div>\n\n        <div class=\"terminal-output\" id=\"terminal-output\">\n          <div class=\"term-line welcome\"><span class=\"term-accent\">DocuCraft CLI v2.4.0</span> (x86_64-apple-darwin)</div>\n          <div class=\"term-line text-muted\">Type 'help' or click any command pill above to simulate execution.</div>\n        </div>\n\n        <form class=\"terminal-input-row\" id=\"terminal-form\" onsubmit=\"return false;\">\n          <span class=\"term-prompt\">user@devbox:~/handbook $</span>\n          <input type=\"text\" id=\"terminal-input\" placeholder=\"Type command here...\" autocomplete=\"off\">\n        </form>\n      </div>\n\n      <h2 id=\"exit-codes\">Standard Exit Codes</h2>\n      <p>For shell scripting and GitHub Actions error trapping, DocuCraft uses predictable POSIX exit codes:</p>\n      <ul>\n        <li><code>0</code>: Success (All documents validated and built successfully).</li>\n        <li><code>1</code>: General compilation error (syntax error in Markdown or TS config).</li>\n        <li><code>2</code>: Dead link detected under <code>--strict</code> mode.</li>\n        <li><code>130</code>: Script terminated by user (<code>SIGINT / Ctrl+C</code>).</li>\n      </ul>\n    "
   },
   {
     "id": "configuration",
@@ -195,7 +285,7 @@ const fallbackDocs = [
     "title": "Authentication & API Keys",
     "slug": "authentication",
     "readTime": "4 min read",
-    "lastUpdated": "November 2, 2026",
+    "lastUpdated": "November 3, 2026",
     "summary": "Authenticate requests using Bearer tokens, workspace API keys, and cryptographically verified HMAC signatures.",
     "toc": [
       {
@@ -224,25 +314,25 @@ const fallbackDocs = [
   {
     "id": "api-reference",
     "category": "API Reference",
-    "title": "REST API: Deployments",
+    "title": "REST API Reference",
     "slug": "api-reference",
     "readTime": "6 min read",
     "lastUpdated": "November 3, 2026",
-    "summary": "Trigger automated documentation builds, check deployment status, and inspect build latency via the REST API.",
+    "summary": "Multi-endpoint interactive REST API console. Test deployments, check build status, and inspect releases in real time.",
     "toc": [
       {
-        "id": "post-deployment",
-        "title": "POST /v1/deployments",
-        "level": 2
-      },
-      {
-        "id": "parameters",
-        "title": "Request Body Parameters",
+        "id": "endpoints-overview",
+        "title": "Endpoints Directory",
         "level": 2
       },
       {
         "id": "interactive-console",
-        "title": "Live Interactive API Tester",
+        "title": "Interactive Multi-Endpoint Console",
+        "level": 2
+      },
+      {
+        "id": "parameters",
+        "title": "Request Body & Query Parameters",
         "level": 2
       },
       {
@@ -251,7 +341,71 @@ const fallbackDocs = [
         "level": 2
       }
     ],
-    "content": "\n      <div class=\"lead-text\">\n        The Deployments API empowers CI/CD bots and Git webhook triggers to compile and publish new revisions of your documentation handbook without accessing the command line.\n      </div>\n\n      <h2 id=\"post-deployment\">POST /v1/deployments</h2>\n      <p>Submits a build manifest to the distributed edge compilation queue.</p>\n\n      <div class=\"endpoint-badge-row\">\n        <span class=\"http-badge post\">POST</span>\n        <code class=\"endpoint-url\">https://api.docucraft.dev/v1/deployments</code>\n      </div>\n\n      <h2 id=\"parameters\">Request Body Parameters</h2>\n      <div class=\"specs-table-wrapper\">\n        <table class=\"specs-table\">\n          <thead>\n            <tr>\n              <th>Field</th>\n              <th>Type</th>\n              <th>Required</th>\n              <th>Description</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><code>environment</code></td>\n              <td><code>string (enum)</code></td>\n              <td><span class=\"req-badge\">Required</span></td>\n              <td>Target distribution environment: <code>\"production\"</code> or <code>\"preview\"</code>.</td>\n            </tr>\n            <tr>\n              <td><code>commit_sha</code></td>\n              <td><code>string</code></td>\n              <td><span class=\"req-badge\">Required</span></td>\n              <td>Full 40-character or 7-character Git commit hash being built.</td>\n            </tr>\n            <tr>\n              <td><code>branch</code></td>\n              <td><code>string</code></td>\n              <td><span class=\"opt-badge\">Optional</span></td>\n              <td>Git branch name. Defaults to <code>\"main\"</code>.</td>\n            </tr>\n            <tr>\n              <td><code>auto_rollback</code></td>\n              <td><code>boolean</code></td>\n              <td><span class=\"opt-badge\">Optional</span></td>\n              <td>If <code>true</code>, reverts to previous release if health checks fail. Defaults to <code>true</code>.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h2 id=\"interactive-console\">Live Interactive API Tester</h2>\n      <p>Test the deployment orchestrator directly from this handbook. Click <strong>Send Request</strong> to execute a simulated request to the edge runner:</p>\n\n      <!-- INTERACTIVE API RUNNER WIDGET -->\n      <div class=\"api-tester-card\" id=\"api-tester-card\">\n        <div class=\"api-tester-header\">\n          <div class=\"api-method-select\">\n            <span class=\"http-badge post\">POST</span>\n            <input type=\"text\" id=\"api-test-url\" value=\"/v1/deployments\" readonly>\n          </div>\n          <button id=\"btn-run-api-test\" class=\"btn-api-run\">\n            <span>⚡ Send Request</span>\n          </button>\n        </div>\n\n        <div class=\"api-tester-body\">\n          <div class=\"api-tester-col\">\n            <span class=\"tester-label\">Request Payload (JSON):</span>\n            <textarea id=\"api-test-payload\" class=\"tester-textarea\" rows=\"7\">{\n  \"environment\": \"production\",\n  \"commit_sha\": \"71ef3b6\",\n  \"branch\": \"main\",\n  \"auto_rollback\": true\n}</textarea>\n          </div>\n\n          <div class=\"api-tester-col\">\n            <div class=\"tester-status-row\">\n              <span class=\"tester-label\">Response:</span>\n              <span id=\"api-test-status\" class=\"status-pill idle\">Ready (Click Send)</span>\n            </div>\n            <pre class=\"tester-response-pre\"><code id=\"api-test-response\" class=\"language-json\">{\n  \"hint\": \"Click 'Send Request' to execute simulated deployment.\"\n}</code></pre>\n          </div>\n        </div>\n      </div>\n\n      <h2 id=\"response-schema\">Response Schema Specification</h2>\n      <p>A successful deployment registration returns HTTP <code>201 Created</code> with the following JSON model:</p>\n\n      <pre><code class=\"language-json\">{\n  \"id\": \"dep_9b4c10e82f71\",\n  \"object\": \"deployment\",\n  \"status\": \"queued\",\n  \"environment\": \"production\",\n  \"commit_sha\": \"71ef3b6\",\n  \"branch\": \"main\",\n  \"urls\": {\n    \"live\": \"https://handbook.company.com\",\n    \"inspect\": \"https://app.docucraft.dev/deployments/dep_9b4c10e82f71\"\n  },\n  \"created_at\": \"2026-11-03T18:24:00Z\"\n}</code></pre>\n    "
+    "content": "\n      <div class=\"lead-text\">\n        The DocuCraft REST API allows programmatic control over documentation deployments, branch rollbacks, webhook subscriptions, and build metrics.\n      </div>\n\n      <h2 id=\"endpoints-overview\">Endpoints Directory</h2>\n      <div class=\"endpoint-pills-row\" id=\"endpoint-pills-row\">\n        <button class=\"endpoint-selector-btn active\" data-endpoint=\"post-deploy\">\n          <span class=\"http-badge post\">POST</span> <code>/v1/deployments</code>\n        </button>\n        <button class=\"endpoint-selector-btn\" data-endpoint=\"get-deploys\">\n          <span class=\"http-badge get\">GET</span> <code>/v1/deployments</code>\n        </button>\n        <button class=\"endpoint-selector-btn\" data-endpoint=\"get-status\">\n          <span class=\"http-badge get\">GET</span> <code>/v1/deployments/:id</code>\n        </button>\n        <button class=\"endpoint-selector-btn\" data-endpoint=\"del-rollback\">\n          <span class=\"http-badge del\">DELETE</span> <code>/v1/deployments/:id</code>\n        </button>\n      </div>\n\n      <h2 id=\"interactive-console\">Interactive Multi-Endpoint Console</h2>\n      <p>Switch between endpoints using the tabs above. Tweak parameters and click <strong>Send Request</strong> to simulate an execution against the edge gateway:</p>\n\n      <!-- MULTI-ENDPOINT API TESTER WIDGET -->\n      <div class=\"api-tester-card\" id=\"api-tester-card\">\n        <div class=\"api-tester-header\">\n          <div class=\"api-method-select\">\n            <span id=\"api-method-badge\" class=\"http-badge post\">POST</span>\n            <input type=\"text\" id=\"api-test-url\" value=\"https://api.docucraft.dev/v1/deployments\" readonly>\n          </div>\n          <button id=\"btn-run-api-test\" class=\"btn-api-run\">\n            <span>⚡ Send Request</span>\n          </button>\n        </div>\n\n        <div class=\"api-tester-body\">\n          <div class=\"api-tester-col\" id=\"api-request-col\">\n            <span class=\"tester-label\">Request Payload (JSON):</span>\n            <textarea id=\"api-test-payload\" class=\"tester-textarea\" rows=\"7\">{\n  \"environment\": \"production\",\n  \"commit_sha\": \"71ef3b6\",\n  \"branch\": \"main\",\n  \"auto_rollback\": true\n}</textarea>\n          </div>\n\n          <div class=\"api-tester-col\">\n            <div class=\"tester-status-row\">\n              <span class=\"tester-label\">Live Gateway Response:</span>\n              <span id=\"api-test-status\" class=\"status-pill idle\">Ready (Click Send)</span>\n            </div>\n            <pre class=\"tester-response-pre\"><code id=\"api-test-response\" class=\"language-json\">{\n  \"hint\": \"Click 'Send Request' to execute simulated deployment.\"\n}</code></pre>\n          </div>\n        </div>\n      </div>\n\n      <h2 id=\"parameters\">Request Body & Query Parameters</h2>\n      <div class=\"specs-table-wrapper\">\n        <table class=\"specs-table\">\n          <thead>\n            <tr>\n              <th>Field</th>\n              <th>Type</th>\n              <th>Required</th>\n              <th>Description</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><code>environment</code></td>\n              <td><code>string (enum)</code></td>\n              <td><span class=\"req-badge\">Required</span></td>\n              <td>Target distribution environment: <code>\"production\"</code> or <code>\"preview\"</code>.</td>\n            </tr>\n            <tr>\n              <td><code>commit_sha</code></td>\n              <td><code>string</code></td>\n              <td><span class=\"req-badge\">Required</span></td>\n              <td>Full 40-character or 7-character Git commit hash being built.</td>\n            </tr>\n            <tr>\n              <td><code>branch</code></td>\n              <td><code>string</code></td>\n              <td><span class=\"opt-badge\">Optional</span></td>\n              <td>Git branch name. Defaults to <code>\"main\"</code>.</td>\n            </tr>\n            <tr>\n              <td><code>auto_rollback</code></td>\n              <td><code>boolean</code></td>\n              <td><span class=\"opt-badge\">Optional</span></td>\n              <td>If <code>true</code>, reverts to previous release if health checks fail. Defaults to <code>true</code>.</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h2 id=\"response-schema\">Response Schema Specification</h2>\n      <p>A successful deployment registration returns HTTP <code>201 Created</code> with the following JSON model:</p>\n\n      <pre><code class=\"language-json\">{\n  \"id\": \"dep_9b4c10e82f71\",\n  \"object\": \"deployment\",\n  \"status\": \"queued\",\n  \"environment\": \"production\",\n  \"commit_sha\": \"71ef3b6\",\n  \"branch\": \"main\",\n  \"build_latency\": \"38ms\",\n  \"urls\": {\n    \"live\": \"https://handbook.company.com\",\n    \"inspect\": \"https://app.docucraft.dev/deployments/dep_9b4c10e82f71\"\n  },\n  \"created_at\": \"2026-11-03T18:24:00Z\"\n}</code></pre>\n    "
+  },
+  {
+    "id": "webhooks",
+    "category": "API Reference",
+    "title": "Webhooks & Event Handlers",
+    "slug": "webhooks",
+    "readTime": "5 min read",
+    "lastUpdated": "November 3, 2026",
+    "summary": "Subscribe to real-time asynchronous deployment and schema change notifications with automatic retry backoff.",
+    "toc": [
+      {
+        "id": "event-types",
+        "title": "Supported Event Manifest",
+        "level": 2
+      },
+      {
+        "id": "headers-schema",
+        "title": "Inbound Webhook Headers",
+        "level": 2
+      },
+      {
+        "id": "verification-recipe",
+        "title": "Signature Verification Recipe",
+        "level": 2
+      },
+      {
+        "id": "retry-policy",
+        "title": "Exponential Retry Policy",
+        "level": 2
+      }
+    ],
+    "content": "\n      <div class=\"lead-text\">\n        DocuCraft webhooks deliver push notifications to your HTTP endpoints whenever an asynchronous event occurs, such as a deployment succeeding or a broken link being caught.\n      </div>\n\n      <h2 id=\"event-types\">Supported Event Manifest</h2>\n      <div class=\"specs-table-wrapper\">\n        <table class=\"specs-table\">\n          <thead>\n            <tr>\n              <th>Event Identifier</th>\n              <th>Trigger Condition</th>\n              <th>Sample Payload Entity</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><code>deployment.succeeded</code></td>\n              <td>Static AST built and deployed to CDN edge</td>\n              <td>Deployment Object with live URL and build latency</td>\n            </tr>\n            <tr>\n              <td><code>deployment.failed</code></td>\n              <td>Compile error, link failure, or AST syntax crash</td>\n              <td>Error Object with line number and commit SHA</td>\n            </tr>\n            <tr>\n              <td><code>schema.updated</code></td>\n              <td>API schema changed in OpenAPI manifest</td>\n              <td>Diff Object with added/removed endpoints</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n      <h2 id=\"headers-schema\">Inbound Webhook Headers</h2>\n      <p>Each delivery POST request includes authentication and audit headers:</p>\n\n      <pre><code class=\"language-http\">POST /api/webhooks/docucraft HTTP/1.1\nHost: your-api.company.com\nContent-Type: application/json\nUser-Agent: DocuCraft-Hookshot/2.4.0\nX-DocuCraft-Event: deployment.succeeded\nX-DocuCraft-Delivery: deliv_789f2a014bc9\nX-DocuCraft-Signature: sha256=5d8c36b94328d19f...\nX-DocuCraft-Timestamp: 1730680000</code></pre>\n\n      <h2 id=\"verification-recipe\">Signature Verification Recipe</h2>\n      <p>Always verify the HMAC-SHA256 signature before processing events in production:</p>\n\n      <div class=\"code-tabs\" data-group=\"webhook-verify\">\n        <div class=\"code-tabs-header\">\n          <button class=\"code-tab-btn active\" data-tab=\"node\">Node.js Express</button>\n          <button class=\"code-tab-btn\" data-tab=\"python\">Python FastAPI</button>\n        </div>\n        <div class=\"code-tab-content active\" data-tab=\"node\">\n          <pre><code class=\"language-typescript\">import express from 'express';\nimport crypto from 'node:crypto';\n\nconst app = express();\n\napp.post('/api/webhooks', express.raw({ type: 'application/json' }), (req, res) => {\n  const signature = req.headers['x-docucraft-signature'] as string;\n  const secret = process.env.DOCUCRAFT_WEBHOOK_SECRET!;\n\n  const expected = 'sha256=' + crypto\n    .createHmac('sha256', secret)\n    .update(req.body)\n    .digest('hex');\n\n  if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) {\n    return res.status(401).send('Invalid signature');\n  }\n\n  const event = JSON.parse(req.body.toString());\n  console.log('Received event:', event.type);\n  res.status(200).json({ received: true });\n});</code></pre>\n        </div>\n        <div class=\"code-tab-content\" data-tab=\"python\">\n          <pre><code class=\"language-python\">from fastapi import FastAPI, Request, HTTPException\nimport hmac, hashlib, os\n\napp = FastAPI()\n\n@app.post(\"/api/webhooks\")\nasync def handle_webhook(request: Request):\n    payload = await request.body()\n    signature = request.headers.get(\"x-docucraft-signature\", \"\")\n    secret = os.getenv(\"DOCUCRAFT_WEBHOOK_SECRET\", \"\").encode()\n\n    expected = \"sha256=\" + hmac.new(secret, payload, hashlib.sha256).hexdigest()\n    if not hmac.compare_digest(signature, expected):\n        raise HTTPException(status_code=401, detail=\"Invalid HMAC signature\")\n\n    return {\"status\": \"accepted\"}</code></pre>\n        </div>\n      </div>\n\n      <h2 id=\"retry-policy\">Exponential Retry Policy</h2>\n      <p>If your webhook receiver returns any status other than HTTP <code>2xx</code> (or times out after 10 seconds), DocuCraft automatically retries with exponential backoff:</p>\n      <ul>\n        <li><strong>Attempt 1:</strong> Immediate (0s)</li>\n        <li><strong>Attempt 2:</strong> 15 seconds</li>\n        <li><strong>Attempt 3:</strong> 2 minutes</li>\n        <li><strong>Attempt 4:</strong> 15 minutes</li>\n        <li><strong>Attempt 5:</strong> 1 hour (Final attempt before notification email)</li>\n      </ul>\n    "
+  },
+  {
+    "id": "deployments-hosting",
+    "category": "Operations",
+    "title": "Deployment & Cloud Providers",
+    "slug": "deployments-hosting",
+    "readTime": "4 min read",
+    "lastUpdated": "November 3, 2026",
+    "summary": "Deploy your handbook across GitHub Pages, Cloudflare Pages, Netlify, and Vercel with zero hosting costs.",
+    "toc": [
+      {
+        "id": "github-pages",
+        "title": "GitHub Pages (1-Click Action)",
+        "level": 2
+      },
+      {
+        "id": "cloudflare-pages",
+        "title": "Cloudflare Pages (Direct Git)",
+        "level": 2
+      },
+      {
+        "id": "vercel-netlify",
+        "title": "Vercel & Netlify Configs",
+        "level": 2
+      },
+      {
+        "id": "custom-domain-ssl",
+        "title": "Custom Domains & Edge SSL",
+        "level": 2
+      }
+    ],
+    "content": "\n      <div class=\"lead-text\">\n        DocuCraft outputs a pure static distribution directory (<code>dist/</code>). You can host your developer handbook completely free on any modern CDN or object storage bucket.\n      </div>\n\n      <h2 id=\"github-pages\">GitHub Pages (1-Click Action)</h2>\n      <p>The standard GitHub Pages deployment workflow automatically builds and publishes on every commit to <code>main</code>:</p>\n\n      <pre><code class=\"language-yaml\"># .github/workflows/deploy.yml\nname: Deploy Handbook to GitHub Pages\n\non:\n  push:\n    branches: [main]\n\npermissions:\n  contents: read\n  pages: write\n  id-token: write\n\nconcurrency:\n  group: 'pages'\n  cancel-in-progress: true\n\njobs:\n  deploy:\n    environment:\n      name: github-pages\n      url: ${{ steps.deployment.outputs.page_url }}\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v3\n        with:\n          version: 9\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n          cache: 'pnpm'\n\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm docucraft build\n\n      - uses: actions/upload-pages-artifact@v3\n        with:\n          path: './dist'\n      - id: deployment\n        uses: actions/deploy-pages@v4</code></pre>\n\n      <h2 id=\"cloudflare-pages\">Cloudflare Pages (Direct Git)</h2>\n      <p>Connect your GitHub repository directly in the Cloudflare dashboard with these settings:</p>\n      <ul>\n        <li><strong>Framework Preset:</strong> None (Custom)</li>\n        <li><strong>Build Command:</strong> <code>pnpm docucraft build</code></li>\n        <li><strong>Build Output Directory:</strong> <code>dist</code></li>\n        <li><strong>Node Version Environment Variable:</strong> <code>NODE_VERSION = 20</code></li>\n      </ul>\n\n      <h2 id=\"vercel-netlify\">Vercel & Netlify Configs</h2>\n      <p>Include a minimal <code>vercel.json</code> or <code>netlify.toml</code> at repository root for zero-config deploys:</p>\n\n      <div class=\"code-tabs\" data-group=\"hosting-config\">\n        <div class=\"code-tabs-header\">\n          <button class=\"code-tab-btn active\" data-tab=\"vercel\">vercel.json</button>\n          <button class=\"code-tab-btn\" data-tab=\"netlify\">netlify.toml</button>\n        </div>\n        <div class=\"code-tab-content active\" data-tab=\"vercel\">\n          <pre><code class=\"language-json\">{\n  \"buildCommand\": \"pnpm docucraft build\",\n  \"outputDirectory\": \"dist\",\n  \"cleanUrls\": true\n}</code></pre>\n        </div>\n        <div class=\"code-tab-content\" data-tab=\"netlify\">\n          <pre><code class=\"language-toml\">[build]\n  command = \"pnpm docucraft build\"\n  publish = \"dist\"\n\n[[redirects]]\n  from = \"/*\"\n  to = \"/index.html\"\n  status = 200</code></pre>\n        </div>\n      </div>\n\n      <h2 id=\"custom-domain-ssl\">Custom Domains & Edge SSL</h2>\n      <p>When provisioning custom subdomains (e.g. <code>docs.yourcompany.com</code>), configure a CNAME record pointing to your host. TLS certificates are provisioned automatically via Let's Encrypt with 0 downtime.</p>\n    "
   },
   {
     "id": "troubleshooting",
@@ -259,7 +413,7 @@ const fallbackDocs = [
     "title": "Troubleshooting & Error Index",
     "slug": "troubleshooting",
     "readTime": "4 min read",
-    "lastUpdated": "November 2, 2026",
+    "lastUpdated": "November 3, 2026",
     "summary": "Resolutions for common compiler errors, broken hyperlinks, image rendering anomalies, and custom domain SSL issues.",
     "toc": [
       {
@@ -324,14 +478,22 @@ function initDocsRouting() {
 }
 
 function handleHashNavigation() {
-  const hash = window.location.hash.replace('#', '').trim();
-  const found = allDocsData.find(d => d.id === hash || d.slug === hash);
-  if (found) {
-    activeDocId = found.id;
-  } else {
+  const rawHash = window.location.hash.replace('#', '').trim();
+  // Check if hash matches a doc id or a sub-heading anchor
+  const foundDoc = allDocsData.find(d => d.id === rawHash || d.slug === rawHash);
+  if (foundDoc) {
+    activeDocId = foundDoc.id;
+    loadArticle(activeDocId);
+  } else if (!rawHash) {
     activeDocId = allDocsData[0] ? allDocsData[0].id : 'quickstart';
+    loadArticle(activeDocId);
+  } else {
+    // Might be deep anchor inside current doc
+    const targetEl = document.getElementById(rawHash);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
+    }
   }
-  loadArticle(activeDocId);
 }
 
 function renderSidebarNav() {
@@ -360,7 +522,9 @@ function renderSidebarNav() {
               <a href="#${doc.id}" class="sidebar-nav-link ${doc.id === activeDocId ? 'active' : ''}" data-doc="${doc.id}">
                 <span>${doc.title}</span>
                 ${doc.id === 'quickstart' ? '<span class="item-badge new">Quick</span>' : ''}
+                ${doc.id === 'cli-reference' ? '<span class="item-badge api">CLI</span>' : ''}
                 ${doc.id === 'api-reference' ? '<span class="item-badge api">REST</span>' : ''}
+                ${doc.id === 'webhooks' ? '<span class="item-badge new">Events</span>' : ''}
               </a>
             </li>
           `).join('')}
@@ -415,9 +579,12 @@ function loadArticle(docId) {
   // Previous / Next Pagination
   renderArticlePagination(doc.id);
 
-  // Re-bind interactive widgets
+  // Re-bind interactive features
+  initHeadingAnchors();
   initCodeSnippets();
+  initCodeSyntaxHighlighting();
   initApiPlayground();
+  initTerminalSimulator();
 
   // Scroll to top of content
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -488,7 +655,35 @@ function renderArticlePagination(currentId) {
 }
 
 /* ==========================================================================
-   4. SCROLLSPY TABLE OF CONTENTS TRACKER
+   6. HEADING HOVER ANCHORS & DIRECT LINK COPIER
+   ========================================================================== */
+function initHeadingAnchors() {
+  document.querySelectorAll('.article-content h2, .article-content h3').forEach(heading => {
+    const id = heading.getAttribute('id');
+    if (!id || heading.querySelector('.heading-anchor')) return;
+
+    const anchor = document.createElement('a');
+    anchor.className = 'heading-anchor';
+    anchor.href = `#${id}`;
+    anchor.innerHTML = '#';
+    anchor.title = 'Copy direct anchor link';
+
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const directUrl = `${window.location.origin}${window.location.pathname}#${id}`;
+      navigator.clipboard.writeText(directUrl).then(() => {
+        showToast(`Direct link copied: #${id}`, '🔗');
+      });
+      history.replaceState(null, null, `#${id}`);
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    heading.appendChild(anchor);
+  });
+}
+
+/* ==========================================================================
+   7. SCROLLSPY TABLE OF CONTENTS TRACKER
    ========================================================================== */
 let scrollSpyObserver = null;
 
@@ -520,7 +715,37 @@ function initScrollSpy() {
 }
 
 /* ==========================================================================
-   5. INTERACTIVE MULTI-LANGUAGE CODE TABS & ONE-CLICK CLIPBOARD COPY
+   8. CLIENT-SIDE SYNTAX TOKEN HIGHLIGHTER (LIGHTWEIGHT REGEX ENGINE)
+   ========================================================================== */
+function initCodeSyntaxHighlighting() {
+  document.querySelectorAll('.article-content code[class*="language-"]').forEach(codeEl => {
+    if (codeEl.getAttribute('data-highlighted')) return;
+
+    let text = codeEl.innerHTML;
+    // Comments
+    text = text.replace(/(^|[^\])(#[^\n]*|\/\/[^\n]*)/g, '$1<span class="token-comment">$2</span>');
+
+    // Strings
+    text = text.replace(/(".*?"|'.*?'|`.*?`)/g, '<span class="token-string">$1</span>');
+
+    // JSON Keys
+    text = text.replace(/<span class="token-string">("(?:\\.|[^"\\])*")<\/span>(?=\s*:)/g, '<span class="token-key">$1</span>');
+
+    // Keywords
+    const keywords = ['import', 'export', 'from', 'const', 'let', 'var', 'function', 'return', 'async', 'await', 'class', 'type', 'interface', 'def', 'package', 'func', 'curl', 'pnpm', 'npm', 'yarn', 'docker', 'git'];
+    const kwRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
+    text = text.replace(kwRegex, '<span class="token-keyword">$1</span>');
+
+    // Numbers
+    text = text.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="token-number">$1</span>');
+
+    codeEl.innerHTML = text;
+    codeEl.setAttribute('data-highlighted', 'true');
+  });
+}
+
+/* ==========================================================================
+   9. INTERACTIVE MULTI-LANGUAGE CODE TABS & ONE-CLICK CLIPBOARD COPY
    ========================================================================== */
 function initCodeSnippets() {
   // Inject copy buttons to all standalone pre blocks
@@ -581,30 +806,142 @@ function copyCodeToClipboard(preElement, btnElement) {
 }
 
 /* ==========================================================================
-   6. INTERACTIVE REST API TESTER PLAYGROUND
+   10. INTERACTIVE MULTI-ENDPOINT REST API PLAYGROUND
    ========================================================================== */
+const API_ENDPOINTS = {
+  'post-deploy': {
+    method: 'POST',
+    url: 'https://api.docucraft.dev/v1/deployments',
+    payload: JSON.stringify({
+      environment: "production",
+      commit_sha: "71ef3b6",
+      branch: "main",
+      auto_rollback: true
+    }, null, 2),
+    mockResponse: (p) => ({
+      id: "dep_" + Math.random().toString(36).substring(2, 10),
+      object: "deployment",
+      status: "queued",
+      environment: p.environment || "production",
+      commit_sha: p.commit_sha || "71ef3b6",
+      branch: p.branch || "main",
+      build_latency: "38ms",
+      edge_region: "iad-us-east",
+      urls: {
+        live: `https://handbook-${p.environment || "production"}.docucraft.dev`,
+        inspect: "https://app.docucraft.dev/deployments/dep_demo"
+      },
+      created_at: new Date().toISOString()
+    }),
+    statusCode: '201 Created'
+  },
+  'get-deploys': {
+    method: 'GET',
+    url: 'https://api.docucraft.dev/v1/deployments?limit=3',
+    payload: '// GET requests do not require a request body.',
+    mockResponse: () => ({
+      object: "list",
+      data: [
+        { id: "dep_9b4c10", status: "ready", branch: "main", commit_sha: "71ef3b6", latency: "38ms" },
+        { id: "dep_8a2d19", status: "ready", branch: "main", commit_sha: "96fe578", latency: "42ms" },
+        { id: "dep_7c1b08", status: "ready", branch: "staging", commit_sha: "0db5e41", latency: "35ms" }
+      ],
+      has_more: false,
+      total_count: 3
+    }),
+    statusCode: '200 OK'
+  },
+  'get-status': {
+    method: 'GET',
+    url: 'https://api.docucraft.dev/v1/deployments/dep_9b4c10e82f71',
+    payload: '// GET requests do not require a request body.',
+    mockResponse: () => ({
+      id: "dep_9b4c10e82f71",
+      object: "deployment",
+      status: "ready",
+      environment: "production",
+      commit_sha: "71ef3b6",
+      branch: "main",
+      build_time_ms: 1240,
+      cached_ast_nodes: 418,
+      urls: { live: "https://docs.mycompany.com" }
+    }),
+    statusCode: '200 OK'
+  },
+  'del-rollback': {
+    method: 'DELETE',
+    url: 'https://api.docucraft.dev/v1/deployments/dep_9b4c10e82f71',
+    payload: '// DELETE requests do not require a request body.',
+    mockResponse: () => ({
+      id: "dep_9b4c10e82f71",
+      object: "deployment",
+      status: "rolled_back",
+      reverted_to: "dep_8a2d19e4bc10",
+      active_release_url: "https://docs.mycompany.com"
+    }),
+    statusCode: '200 OK (Rolled Back)'
+  }
+};
+
+let currentEndpointKey = 'post-deploy';
+
 function initApiPlayground() {
   const btnRun = document.getElementById('btn-run-api-test');
+  const methodBadge = document.getElementById('api-method-badge');
+  const urlInput = document.getElementById('api-test-url');
+  const payloadEl = document.getElementById('api-test-payload');
   const statusEl = document.getElementById('api-test-status');
   const responseEl = document.getElementById('api-test-response');
-  const payloadEl = document.getElementById('api-test-payload');
+  const pills = document.querySelectorAll('.endpoint-selector-btn');
 
   if (!btnRun || !responseEl) return;
 
+  // Endpoint Switchers
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const epKey = pill.getAttribute('data-endpoint');
+      const conf = API_ENDPOINTS[epKey];
+      if (!conf) return;
+
+      currentEndpointKey = epKey;
+      if (methodBadge) {
+        methodBadge.textContent = conf.method;
+        methodBadge.className = `http-badge ${conf.method.toLowerCase().substring(0, 3)}`;
+      }
+      if (urlInput) urlInput.value = conf.url;
+      if (payloadEl) payloadEl.value = conf.payload;
+      if (statusEl) {
+        statusEl.className = 'status-pill idle';
+        statusEl.textContent = 'Ready (Click Send)';
+      }
+      if (responseEl) {
+        responseEl.textContent = '// Click "Send Request" to simulate call to ' + conf.url;
+      }
+    });
+  });
+
+  // Run Request
   btnRun.addEventListener('click', () => {
     btnRun.disabled = true;
     btnRun.innerHTML = '<span>⚡ Executing...</span>';
+
+    const conf = API_ENDPOINTS[currentEndpointKey] || API_ENDPOINTS['post-deploy'];
 
     if (statusEl) {
       statusEl.className = 'status-pill idle';
       statusEl.textContent = 'Contacting edge runner...';
     }
 
-    let parsedPayload = {};
-    try {
-      parsedPayload = JSON.parse(payloadEl.value);
-    } catch {
-      parsedPayload = { environment: "production", commit_sha: "71ef3b6" };
+    let parsed = {};
+    if (payloadEl && conf.method === 'POST') {
+      try {
+        parsed = JSON.parse(payloadEl.value);
+      } catch {
+        parsed = { environment: "production" };
+      }
     }
 
     setTimeout(() => {
@@ -613,34 +950,116 @@ function initApiPlayground() {
 
       if (statusEl) {
         statusEl.className = 'status-pill success';
-        statusEl.textContent = '201 Created • 38ms';
+        statusEl.textContent = `${conf.statusCode} • 38ms`;
       }
 
-      const randomId = 'dep_' + Math.random().toString(36).substring(2, 10);
-      const mockResponse = {
-        id: randomId,
-        object: "deployment",
-        status: "queued",
-        environment: parsedPayload.environment || "production",
-        commit_sha: parsedPayload.commit_sha || "71ef3b6",
-        branch: parsedPayload.branch || "main",
-        build_latency: "38ms",
-        edge_region: "iad-us-east",
-        urls: {
-          live: `https://handbook-${parsedPayload.environment || "production"}.docucraft.dev`,
-          inspect: `https://app.docucraft.dev/deployments/${randomId}`
-        },
-        created_at: new Date().toISOString()
-      };
-
-      responseEl.textContent = JSON.stringify(mockResponse, null, 2);
-      showToast('API call completed (201 Created)', '🚀');
+      const res = conf.mockResponse(parsed);
+      responseEl.textContent = JSON.stringify(res, null, 2);
+      showToast(`Gateway responded: ${conf.statusCode}`, '🚀');
     }, 450);
   });
 }
 
 /* ==========================================================================
-   7. CMD+K SPOTLIGHT SEARCH ENGINE
+   11. INTERACTIVE CLI TERMINAL EMULATOR
+   ========================================================================== */
+function initTerminalSimulator() {
+  const form = document.getElementById('terminal-form');
+  const input = document.getElementById('terminal-input');
+  const output = document.getElementById('terminal-output');
+  const btnClear = document.getElementById('btn-term-clear');
+  const pills = document.querySelectorAll('.term-pill');
+
+  if (!output || !input) return;
+
+  function runCliCommand(rawCmd) {
+    const cmd = rawCmd.trim();
+    if (!cmd) return;
+
+    // Append command prompt
+    const cmdLine = document.createElement('div');
+    cmdLine.className = 'term-line cmd';
+    cmdLine.innerHTML = `<span style="color: #10b981;">user@devbox:~/handbook $</span> ${cmd}`;
+    output.appendChild(cmdLine);
+
+    // Process output
+    const outLine = document.createElement('div');
+    outLine.className = 'term-line';
+
+    const c = cmd.toLowerCase();
+    if (c === 'clear') {
+      output.innerHTML = '';
+      return;
+    } else if (c === 'help') {
+      outLine.innerHTML = `
+        <div style="color: #38bdf8; font-weight: 700;">DocuCraft CLI v2.4.0 Commands:</div>
+        <div>  <strong>docucraft dev</strong>       Start local hot-reload web server</div>
+        <div>  <strong>docucraft build</strong>     Compile static distribution to ./dist</div>
+        <div>  <strong>docucraft check</strong>     Audit 404 links, images and AST syntax</div>
+        <div>  <strong>docucraft deploy</strong>    Deploy to edge CDN or GitHub Pages</div>
+        <div>  <strong>docucraft --version</strong> Display CLI and engine build commit</div>
+        <div>  <strong>clear</strong>               Clear terminal display</div>
+      `;
+    } else if (c.includes('--version') || c.includes('-v')) {
+      outLine.innerHTML = `<span class="term-accent">docucraft/2.4.0</span> darwin-arm64 node-v20.11.0 (commit 80545fd)`;
+    } else if (c.includes('check')) {
+      outLine.innerHTML = `
+        <div style="color: #a78bfa;">[docucraft:check] Scanning 9 chapters across 418 AST nodes...</div>
+        <div>✓ Scanned 124 internal hyperlinks ... 0 broken links</div>
+        <div>✓ Scanned 32 static image assets ... 0 missing assets</div>
+        <div class="term-line success">✓ Audit passed with 0 errors and 0 warnings (took 32ms)</div>
+      `;
+    } else if (c.includes('build')) {
+      outLine.innerHTML = `
+        <div style="color: #38bdf8;">[docucraft:build] Compiling static distribution...</div>
+        <div>● Pre-rendering 9 AST HTML nodes ... done (18ms)</div>
+        <div>● Building in-memory search trie index ... done (6ms)</div>
+        <div>● Bundling styles and vanilla ES6 ... done (12ms)</div>
+        <div class="term-line success">✓ Compiled static distribution into ./dist (total size: 48.2 KB, took 44ms)</div>
+      `;
+    } else if (c.includes('deploy')) {
+      outLine.innerHTML = `
+        <div style="color: #38bdf8;">[docucraft:deploy] Connecting to edge deployment gate...</div>
+        <div>● Authenticated via service account key ... ok</div>
+        <div>● Uploaded 9 artifact pages to edge CDN ... ok</div>
+        <div class="term-line success">🚀 Deployed release dep_9b4c10 -> https://docs.mycompany.com (latency 38ms)</div>
+      `;
+    } else {
+      outLine.innerHTML = `<span style="color: #ef4444;">zsh: command not found: ${cmd}</span>. Type 'help' for available commands.`;
+    }
+
+    output.appendChild(outLine);
+    output.scrollTop = output.scrollHeight;
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      runCliCommand(input.value);
+      input.value = '';
+    });
+  }
+
+  if (btnClear) {
+    btnClear.addEventListener('click', () => {
+      output.innerHTML = '<div class="term-line text-muted">Terminal cleared.</div>';
+    });
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const cmd = pill.getAttribute('data-cmd');
+      if (cmd) {
+        input.value = cmd;
+        runCliCommand(cmd);
+        input.value = '';
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   12. CMD+K SPOTLIGHT SEARCH ENGINE
    ========================================================================== */
 function initSearchModal() {
   const modal = document.getElementById('search-modal');
@@ -678,6 +1097,9 @@ function initSearchModal() {
       } else {
         closeSearch();
       }
+    } else if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      openSearch();
     } else if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
       closeSearch();
     }
@@ -693,7 +1115,7 @@ function initSearchModal() {
     if (!query) {
       resultsContainer.innerHTML = `
         <div style="padding: 1.5rem; text-align: center; color: var(--text-tertiary); font-size: 0.85rem;">
-          Type keywords like <strong>"cli"</strong>, <strong>"api keys"</strong>, <strong>"deployments"</strong>, or <strong>"config"</strong> to search docs...
+          Type keywords like <strong>"cli"</strong>, <strong>"api keys"</strong>, <strong>"webhooks"</strong>, or <strong>"config"</strong> to search docs...
         </div>
       `;
       return;
@@ -768,7 +1190,7 @@ function initSearchModal() {
 }
 
 /* ==========================================================================
-   8. FEEDBACK WIDGET & PAGE ACTIONS
+   13. FEEDBACK WIDGET & PAGE ACTIONS
    ========================================================================== */
 function initFeedbackWidget() {
   const btnYes = document.getElementById('btn-feedback-yes');
@@ -823,7 +1245,7 @@ function initPageActions() {
 }
 
 /* ==========================================================================
-   9. MOBILE SIDEBAR DRAWER CONTROLLER
+   14. MOBILE SIDEBAR DRAWER CONTROLLER
    ========================================================================== */
 function initMobileDrawer() {
   const hamburger = document.getElementById('hamburger-btn');
@@ -851,7 +1273,7 @@ function closeMobileDrawer() {
 }
 
 /* ==========================================================================
-   10. FLOATING TOAST HELPER
+   15. FLOATING TOAST HELPER
    ========================================================================== */
 let toastTimeout;
 
