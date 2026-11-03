@@ -209,10 +209,23 @@ button, input, select, textarea {
   box-shadow: 0 4px 12px var(--primary-glow);
 }
 
+.gradient-text {
+  background: linear-gradient(135deg, #7263f3 0%, #a656f7 50%, #3abdf0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .brand span.gradient-text {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, #7263f3 0%, #a656f7 50%, #3abdf0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 /* Desktop Horizontal Nav Links */
