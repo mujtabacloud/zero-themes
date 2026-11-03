@@ -1,53 +1,389 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luxe E-Commerce Catalog – Live Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fdfbf7; color: #1c1917; line-height: 1.6; }
-    .demo-bar { position: sticky; top: 0; z-index: 100; background: #292524; color: #fff; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; }
-    .demo-bar a { color: #fff; text-decoration: none; font-weight: 600; }
-    .btn-back { padding: 0.35rem 0.8rem; background: rgba(255,255,255,0.15); border-radius: 4px; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
-    .hero { text-align: center; margin-bottom: 3.5rem; }
-    .hero h1 { font-family: "Georgia", serif; font-size: 3rem; margin-bottom: 0.5rem; }
-    .hero p { color: #78716c; font-size: 1.1rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
-    .product-card { background: #fff; border: 1px solid #e7e5e4; border-radius: 8px; overflow: hidden; }
-    .product-card img { width: 100%; height: 260px; object-fit: cover; }
-    .info { padding: 1.2rem; }
-    .info h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
-    .price { font-weight: 700; color: #b45309; }
-  </style>
+  
+  <title>Luxe Atelier – Luxury Goods, Horology &amp; Leatherware</title>
+  <meta name="description" content="Minimalist e-commerce catalog template with client-side shopping bag, currency converter, product quick-view, WhatsApp ordering, and zero hosting fees. 100% Free under MIT License.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d97706'><circle cx='12' cy='12' r='10'/><path d='M12 6v6l4 2' stroke='%23000' stroke-width='2'/></svg>">
+  
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
 </head>
 <body>
-  <div class="demo-bar">
-    <div><strong>Luxe Catalog</strong> &bull; Zero Themes Live Demo</div>
-    <a href="../../theme-detail.html?id=storefront-static" class="btn-back">&larr; Back to Theme Details</a>
-  </div>
-  <div class="container">
-    <div class="hero">
-      <h1>Luxe Goods</h1>
-      <p>Artisanal leather, horology, and everyday luxury essentials.</p>
+
+  <!-- TOP ZERO THEMES DEMO BAR -->
+  <div class="demo-banner">
+    <div class="demo-banner-left">
+      <span class="demo-pill">Luxe Storefront</span>
+      <span>Official Zero Themes Live Preview</span>
     </div>
-    <div class="grid">
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80" alt="Chronograph Watch">
-        <div class="info">
-          <h3>Heritage Chronograph</h3>
-          <p class="price">$340.00</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Leather Folio">
-        <div class="info">
-          <h3>Full-Grain Leather Folio</h3>
-          <p class="price">$185.00</p>
-        </div>
-      </div>
+    <div class="demo-actions">
+      <a href="../../theme-detail.html?id=storefront-static" class="btn-demo-return">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Zero Themes
+      </a>
     </div>
   </div>
+
+  <!-- ANNOUNCEMENT BAR TICKER -->
+  <div class="announcement-bar">
+    <div class="announcement-container">
+      <span>✨ COMPLIMENTARY EXPRESS GLOBAL SHIPPING ON ORDERS OVER <span id="announcement-threshold">$200</span></span>
+      <span class="announcement-sep">&bull;</span>
+      <span>LIFETIME CRAFTSMANSHIP GUARANTEE</span>
+      <span class="announcement-sep">&bull;</span>
+      <span>PROMO CODE: <strong>LUXE10</strong> FOR 10% OFF</span>
+    </div>
+  </div>
+
+  <!-- SITE HEADER / NAVIGATION -->
+  <header class="site-header">
+    <div class="header-container">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo">
+        <span class="brand-name">LUXE</span>
+        <span class="brand-tag">ATELIER</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><button class="nav-filter-btn active" data-category="all">All Objects</button></li>
+          <li><button class="nav-filter-btn" data-category="timepieces">Timepieces</button></li>
+          <li><button class="nav-filter-btn" data-category="leather">Leatherware</button></li>
+          <li><button class="nav-filter-btn" data-category="audio">Audio &amp; Optics</button></li>
+          <li><button class="nav-filter-btn" data-category="lifestyle">Everyday Carry</button></li>
+        </ul>
+      </nav>
+
+      <!-- Action Group -->
+      <div class="header-action-group">
+        
+        <!-- Live Search Input -->
+        <div class="header-search-box">
+          <input type="text" id="store-search-input" placeholder="Search catalog..." autocomplete="off">
+          <span class="search-icon">🔍</span>
+        </div>
+
+        <!-- Currency Selector -->
+        <div class="currency-picker-wrapper">
+          <select id="currency-selector" aria-label="Select Currency" title="Change Currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+          </select>
+        </div>
+
+        <!-- Wishlist Toggle Button -->
+        <button id="wishlist-toggle-btn" class="header-icon-btn" title="Saved Wishlist" aria-label="View Saved Wishlist">
+          <span>♡</span>
+          <span id="wishlist-badge" class="icon-badge hidden">0</span>
+        </button>
+
+        <!-- Shopping Bag Trigger Button -->
+        <button id="cart-toggle-btn" class="header-cart-btn" aria-label="Open Shopping Bag">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-label">Bag</span>
+          <span id="cart-badge" class="cart-count">0</span>
+        </button>
+
+        <!-- Dark/Light Mode Switcher -->
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Light / Dark Mode" title="Toggle theme">
+          <span id="theme-icon">☀️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- EDITORIAL HERO SPOTLIGHT -->
+  <section class="hero-spotlight">
+    <div class="hero-backdrop"></div>
+    <div class="hero-inner">
+      <span class="hero-badge">AUTUMN / WINTER 2026</span>
+      <h1 class="hero-title">Objects of Permanence &amp; Quiet Luxury</h1>
+      <p class="hero-desc">
+        Handcrafted timepieces, vegetable-tanned Tuscan leather, and acoustical instruments designed to outlive trends. Built for static web deployment with zero backend monthly fees.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#catalog" class="btn btn-primary btn-lg">Explore Handcrafted Pieces &darr;</a>
+        <button id="hero-quick-add" class="btn btn-secondary btn-lg" data-id="prod-1">Quick View: Heritage Chronograph</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORE CONTROLS & FILTER TOOLBAR -->
+  <section class="catalog-toolbar-section" id="catalog">
+    <div class="toolbar-container">
+      
+      <!-- Category Pills -->
+      <div class="category-pills-row">
+        <button class="cat-pill active" data-category="all">All Pieces</button>
+        <button class="cat-pill" data-category="timepieces">Timepieces</button>
+        <button class="cat-pill" data-category="leather">Leatherware</button>
+        <button class="cat-pill" data-category="audio">Audio &amp; Optics</button>
+        <button class="cat-pill" data-category="lifestyle">Everyday Carry</button>
+      </div>
+
+      <!-- Controls Right: Sort & Filter -->
+      <div class="toolbar-controls-right">
+        
+        <!-- Sort Dropdown -->
+        <div class="select-wrapper">
+          <label for="sort-select" class="visually-hidden">Sort By</label>
+          <select id="sort-select">
+            <option value="featured">Sort: Curated Picks</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Customer Rated</option>
+          </select>
+        </div>
+
+        <!-- In-Stock Only Switch -->
+        <label class="instock-switch" title="Filter items ready for immediate dispatch">
+          <input type="checkbox" id="instock-filter-check">
+          <span class="switch-slider"></span>
+          <span class="switch-text">In Stock</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Live Status Row -->
+    <div class="toolbar-status-bar">
+      <div id="catalog-count-display">Displaying <strong>8</strong> Handcrafted Pieces</div>
+      <div class="free-shipping-pill">
+        <span class="free-shipping-dot"></span> Free Worldwide Shipping on orders over <span class="calc-threshold">$200</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS GRID -->
+  <main class="catalog-main">
+    <section class="products-grid" id="products-grid">
+      <!-- Populated via script.js from products.json -->
+    </section>
+  </main>
+
+  <!-- BRAND HERITAGE & GUARANTEE SECTION -->
+  <section class="heritage-section">
+    <div class="heritage-container">
+      <div class="heritage-header">
+        <span class="section-tag">THE LUXE ATELIER ETHOS</span>
+        <h2>Crafted to Outlast the Decades</h2>
+        <p>We reject disposable consumerism in favor of materials that mature with grace and individual character.</p>
+      </div>
+
+      <div class="heritage-grid">
+        <div class="heritage-card">
+          <div class="heritage-icon">⏳</div>
+          <h3>Vegetable-Tanned Leathers</h3>
+          <p>Sourced exclusively from certified Tuscan family tanneries utilizing organic bark extracts, zero harsh chromium, and centuries-old drumming traditions.</p>
+        </div>
+
+        <div class="heritage-card">
+          <div class="heritage-icon">⚙️</div>
+          <h3>Aerospace Tolerance</h3>
+          <p>Machined from surgical-grade 316L stainless steel, custom beryllium drivers, and optical-grade sapphire crystal impervious to scratches.</p>
+        </div>
+
+        <div class="heritage-card">
+          <div class="heritage-icon">🛡️</div>
+          <h3>Lifetime Repair Pledge</h3>
+          <p>Every piece is accompanied by our lifetime repair guarantee. If a stitch or mechanical component falters, our workshop restores it free of charge.</p>
+        </div>
+
+        <div class="heritage-card">
+          <div class="heritage-icon">⚡</div>
+          <h3>Zero Server Overhead</h3>
+          <p>100% static architecture running seamlessly on GitHub Pages. Connect Stripe Payment Links or WhatsApp orders without monthly database bills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER / ATELIER SOCIETY SIGNUP -->
+  <section class="society-section">
+    <div class="society-card">
+      <span class="section-tag">PRIVATE ACCORD</span>
+      <h2>Join The Atelier Society</h2>
+      <p>Receive exclusive private access to limited batch releases, archival private sales, and a 10% welcome privilege.</p>
+      
+      <form class="society-form" id="society-form">
+        <input type="email" id="society-email" placeholder="Your email for private dispatches" required>
+        <button type="submit">Unlock 10% Privilege</button>
+      </form>
+      <div class="society-status hidden" id="society-status">
+        ✓ <strong>Welcome to the Society.</strong> Use promotion code <code style="color: var(--accent); font-weight: 800;">LUXE10</code> at checkout for 10% off your order.
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MODALS & DRAWERS (QUICK VIEW, CART DRAWER, WISHLIST, CHECKOUT)
+       ========================================================================= -->
+
+  <!-- PRODUCT QUICK-VIEW MODAL -->
+  <div id="quickview-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" id="quickview-backdrop"></div>
+    <div class="quickview-dialog">
+      <button class="modal-close-btn" id="quickview-close-btn" aria-label="Close modal">&times;</button>
+      <div class="quickview-body" id="quickview-body">
+        <!-- Dynamically populated via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OUT SHOPPING BAG CART DRAWER -->
+  <div id="cart-drawer" class="cart-drawer hidden" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <h3>Your Shopping Bag</h3>
+        <span id="drawer-cart-count" class="drawer-badge">0</span>
+      </div>
+      <button class="drawer-close-btn" id="cart-close-btn" aria-label="Close bag">&times;</button>
+    </div>
+
+    <!-- Free Shipping Progress Tracker -->
+    <div class="shipping-progress-container">
+      <div class="shipping-progress-text" id="shipping-progress-text">
+        Add $200.00 more for Free Worldwide Express Shipping
+      </div>
+      <div class="shipping-progress-bar-bg">
+        <div class="shipping-progress-fill" id="shipping-progress-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Bag Items List -->
+    <div class="cart-items-list" id="cart-items-list">
+      <!-- Populated via script.js -->
+    </div>
+
+    <!-- Bag Summary Footer -->
+    <div class="cart-drawer-footer">
+      <!-- Promo Code Input -->
+      <div class="promo-box">
+        <input type="text" id="promo-input" placeholder="Promo code (try LUXE10)" autocomplete="off">
+        <button id="apply-promo-btn">Apply</button>
+      </div>
+      <div id="promo-status" class="promo-status-msg hidden"></div>
+
+      <!-- Financial Totals -->
+      <div class="cart-totals">
+        <div class="totals-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-val">$0.00</span>
+        </div>
+        <div class="totals-row discount-row hidden" id="cart-discount-row">
+          <span>Privilege Discount (10%)</span>
+          <span id="cart-discount-val">-$0.00</span>
+        </div>
+        <div class="totals-row">
+          <span>Estimated Shipping</span>
+          <span id="cart-shipping-val">Calculated at step</span>
+        </div>
+        <div class="totals-row grand-total">
+          <span>Estimated Total</span>
+          <span id="cart-total-val" class="total-highlight">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Checkout Actions -->
+      <div class="cart-checkout-actions">
+        <button id="btn-stripe-checkout" class="btn btn-primary btn-block">
+          <span>🔒 Proceed to Express Checkout</span>
+        </button>
+        <button id="btn-whatsapp-order" class="btn btn-whatsapp btn-block">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.1 8.1 0 0 1-1.24-4.29c0-4.48 3.65-8.13 8.13-8.13 2.17 0 4.21.85 5.75 2.38a8.07 8.07 0 0 1 2.38 5.75c0 4.48-3.65 8.15-8.13 8.15z"/></svg>
+          <span>Order Directly via WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WISHLIST DRAWER -->
+  <div id="wishlist-drawer" class="cart-drawer hidden" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>♡</span>
+        <h3>Saved Objects</h3>
+        <span id="drawer-wishlist-count" class="drawer-badge">0</span>
+      </div>
+      <button class="drawer-close-btn" id="wishlist-close-btn" aria-label="Close wishlist">&times;</button>
+    </div>
+    <div class="wishlist-items-list" id="wishlist-items-list">
+      <!-- Populated via script.js -->
+    </div>
+  </div>
+
+  <div id="drawer-overlay-backdrop" class="drawer-backdrop hidden"></div>
+
+  <!-- ORDER SUCCESS CELEBRATION MODAL -->
+  <div id="order-success-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" id="order-success-backdrop"></div>
+    <div class="order-success-dialog">
+      <button class="modal-close-btn" id="order-success-close">&times;</button>
+      <div class="success-content">
+        <div class="success-icon">✨</div>
+        <span class="section-tag">ORDER CONFIRMED</span>
+        <h3>Thank You for Your Patronage</h3>
+        <p>Your requisition has been logged to the Luxe Atelier fulfillment desk. A bespoke craft confirmation receipt has been dispatched to your email.</p>
+        <div class="order-receipt-summary" id="order-receipt-summary"></div>
+        <button class="btn btn-primary btn-block" onclick="document.getElementById('order-success-modal').classList.add('hidden')">Return to Catalog</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div id="luxe-toast" class="luxe-toast hidden">
+    <span id="toast-icon">✓</span>
+    <span id="toast-text">Item added to shopping bag</span>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col-brand">
+        <div class="footer-logo">LUXE ATELIER</div>
+        <p>A static zero-dependency luxury e-commerce catalog template. Engineered for GitHub Pages, Vercel, Netlify, and direct payment orchestrations.</p>
+        <div class="footer-badge-pill">100% Free &amp; Open Source &bull; MIT License</div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Catalog</h4>
+        <ul>
+          <li><a href="#" class="footer-cat-link" data-category="timepieces">Timepieces</a></li>
+          <li><a href="#" class="footer-cat-link" data-category="leather">Tuscan Leatherware</a></li>
+          <li><a href="#" class="footer-cat-link" data-category="audio">Titanium Audio</a></li>
+          <li><a href="#" class="footer-cat-link" data-category="lifestyle">Everyday Carry</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Client Services</h4>
+        <ul>
+          <li><a href="#society-form">Private Society Privilege</a></li>
+          <li><a href="../../theme-detail.html?id=storefront-static">Theme Documentation</a></li>
+          <li><a href="../../themes.html">Zero Themes Directory</a></li>
+          <li><a href="https://github.com/mujtabacloud/zero-themes" target="_blank" rel="noopener">GitHub Source Code</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Atelier Verification</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          Hand-inspected for structural integrity. Payments supported via Stripe Payment Links, Snipcart, or Direct WhatsApp Concierge ordering.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Luxe Atelier Goods Inc. Distributed under MIT License via Zero Themes.</div>
+      <div>Designed for artisans, independent creators &amp; boutique merchants worldwide.</div>
+    </div>
+  </footer>
+
 </body>
 </html>

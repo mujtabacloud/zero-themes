@@ -1,0 +1,235 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Heritage Automatic Chronograph",
+    "slug": "heritage-automatic-chronograph",
+    "category": "timepieces",
+    "categoryLabel": "Timepieces",
+    "price": 380,
+    "rating": 4.9,
+    "reviews": 42,
+    "badge": "Bestseller",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Mechanical automatic chronograph movement featuring a 41mm aerospace grade 316L stainless steel case, sapphire crystal with dual anti-reflective coating, and vegetable-tanned bridle leather strap.",
+    "specs": {
+      "Movement": "Calibre LX-740 Automatic (42hr reserve)",
+      "Case Diameter": "41mm &bull; 11.2mm depth",
+      "Glass": "Scratch-resistant Sapphire Crystal",
+      "Water Resistance": "10 ATM (100 meters / 330 ft)"
+    },
+    "colors": [
+      { "name": "Obsidian Black", "hex": "#18181b" },
+      { "name": "Brushed Silver", "hex": "#cbd5e1" },
+      { "name": "Rose Gold", "hex": "#b45309" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-2",
+    "name": "Tuscan Bridle Leather Folio",
+    "slug": "tuscan-bridle-leather-folio",
+    "category": "leather",
+    "categoryLabel": "Leatherware",
+    "price": 220,
+    "rating": 4.95,
+    "reviews": 38,
+    "badge": "Artisanal",
+    "badgeType": "new",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Hand-stitched in Florence using full-grain Tuscan vegetable-tanned cowhide. Designed to carry a 14-inch or 16-inch laptop, legal documents, notebooks, and writing instruments with solid brass YKK Excella zippers.",
+    "specs": {
+      "Material": "100% Certified Tuscan Full-Grain Vachetta",
+      "Hardware": "Solid Brushed Brass Hardware",
+      "Dimensions": "38cm x 27cm x 3.5cm",
+      "Compatibility": "Laptops up to 16-inch MacBook Pro"
+    },
+    "colors": [
+      { "name": "Saddle Tan", "hex": "#92400e" },
+      { "name": "Espresso Brown", "hex": "#382314" },
+      { "name": "Jet Black", "hex": "#09090b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-3",
+    "name": "Titanium Wireless Studio Headphones",
+    "slug": "titanium-wireless-studio-headphones",
+    "category": "audio",
+    "categoryLabel": "Audio & Optics",
+    "price": 420,
+    "rating": 4.88,
+    "reviews": 56,
+    "badge": "Audiophile",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Precision acoustical tuning with 45mm beryllium drivers, active hybrid noise cancellation, memory-foam lambskin ear cushions, and 38-hour battery longevity on a single charge.",
+    "specs": {
+      "Drivers": "45mm Custom Beryllium Dynamic",
+      "Frequency Response": "10Hz - 42,000Hz (Hi-Res Certified)",
+      "Battery Life": "38 hours ANC active &bull; Fast charge 15m=6h",
+      "Connectivity": "Bluetooth 5.3 &bull; aptX Lossless &bull; 3.5mm"
+    },
+    "colors": [
+      { "name": "Matte Slate", "hex": "#334155" },
+      { "name": "Silver Anodized", "hex": "#94a3b8" },
+      { "name": "Midnight", "hex": "#0f172a" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-4",
+    "name": "Hand-Turned Brass Fountain Pen",
+    "slug": "hand-turned-brass-fountain-pen",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 145,
+    "rating": 4.96,
+    "reviews": 29,
+    "badge": "Signature",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Machined from a single rod of raw untreated solid brass that develops an exquisite individual patina over decades. Fitted with a German Peter Bock 18k gold-plated medium nib.",
+    "specs": {
+      "Weight": "58 grams (Perfect gravitational balance)",
+      "Nib": "German Peter Bock 18K Bi-Color Steel/Gold (M)",
+      "Filling System": "Standard International Converter & Cartridge",
+      "Finish": "Raw untreated unlacquered brass"
+    },
+    "colors": [
+      { "name": "Raw Brass", "hex": "#d97706" },
+      { "name": "Aged Copper", "hex": "#b45309" },
+      { "name": "Gunmetal PVD", "hex": "#475569" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-5",
+    "name": "Minimalist Card Wallet (RFID Shield)",
+    "slug": "minimalist-card-wallet",
+    "category": "leather",
+    "categoryLabel": "Leatherware",
+    "price": 85,
+    "rating": 4.92,
+    "reviews": 64,
+    "badge": "Essential",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Slim, featherlight front-pocket card sleeve hand-cut from Cordovan leather with an integrated aerospace aluminum RFID blocking internal shield. Holds up to 8 cards plus folded currency.",
+    "specs": {
+      "Capacity": "6 to 8 cards + 6 folded bills",
+      "Dimensions": "10.2cm x 6.8cm x 0.5cm (Ultra-slim)",
+      "Protection": "13.56 MHz RFID / NFC Anti-Skimming",
+      "Stitching": "Hand-waxed linen thread saddle-stitch"
+    },
+    "colors": [
+      { "name": "Cognac", "hex": "#78350f" },
+      { "name": "Forest Green", "hex": "#14532d" },
+      { "name": "Carbon Black", "hex": "#18181b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-6",
+    "name": "Architectural Sunglasses (Polarized Zeiss)",
+    "slug": "architectural-sunglasses-zeiss",
+    "category": "audio",
+    "categoryLabel": "Audio & Optics",
+    "price": 260,
+    "rating": 4.85,
+    "reviews": 21,
+    "badge": "Limited",
+    "badgeType": "new",
+    "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Crafted from Japanese cellulose acetate with reinforced 5-barrel German hinges. Equipped with Carl Zeiss Vision CR-39 polarized lenses offering 100% UVA/UVB protection and crystal visual acuity.",
+    "specs": {
+      "Frame Material": "Japanese Takiron Cellulose Acetate",
+      "Lenses": "Carl Zeiss Vision Polarized Grey Cat. 3",
+      "Hinges": "5-Barrel Teflon-coated stainless screws",
+      "Includes": "Handmade leather hardshell case + microfiber"
+    },
+    "colors": [
+      { "name": "Tokyo Tortoise", "hex": "#451a03" },
+      { "name": "Matte Crystal", "hex": "#cbd5e1" },
+      { "name": "Onyx Black", "hex": "#09090b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-7",
+    "name": "Weekender Duffle Bag in Waxed Canvas",
+    "slug": "weekender-duffle-bag-waxed-canvas",
+    "category": "leather",
+    "categoryLabel": "Leatherware",
+    "price": 310,
+    "rating": 4.94,
+    "reviews": 33,
+    "badge": "Signature",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Heavyweight 18oz water-repellent Scottish waxed canvas trimmed with thick vegetable-tanned harness leather. Sized specifically to fit overhead carry-on dimensions on all global airlines.",
+    "specs": {
+      "Volume": "42 Liters capacity",
+      "Dimensions": "52cm x 30cm x 28cm (IATA Carry-on compliant)",
+      "Canvas": "18oz Halley Stevensons Waxed Cotton (Scotland)",
+      "Straps": "Adjustable padded leather shoulder strap"
+    },
+    "colors": [
+      { "name": "British Tan / Olive", "hex": "#3f462a" },
+      { "name": "Charcoal / Black", "hex": "#1e293b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-8",
+    "name": "Desk Mat & Wireless Charging Pad",
+    "slug": "desk-mat-wireless-charging-pad",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 130,
+    "rating": 4.89,
+    "reviews": 47,
+    "badge": "Modern",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Dual-surface workspace mat made with premium vegan top-grain leather on top and natural non-slip cork underneath. Features an embedded 15W Qi fast wireless charging station for smartphones and earbuds.",
+    "specs": {
+      "Charging Station": "15W Qi-Certified Fast Wireless Pad",
+      "Dimensions": "80cm x 40cm (Full desk coverage)",
+      "Base": "Eco-friendly sustainable natural oak cork",
+      "Cable": "2-meter braided USB-C power cable included"
+    },
+    "colors": [
+      { "name": "Midnight Charcoal", "hex": "#1e293b" },
+      { "name": "Cognac Tan", "hex": "#9a3412" }
+    ],
+    "inStock": true
+  }
+]
