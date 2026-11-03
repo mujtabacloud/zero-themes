@@ -2,7 +2,8 @@
  * Luxe Atelier - Luxury Storefront & E-Commerce Catalog
  * High-performance, zero-dependency ES6
  * Real-time cart drawer, dynamic currency conversion, multi-faceted filtering,
- * interactive quick-view modal, WhatsApp checkout & promo codes.
+ * interactive quick-view modal, 1-Click Express Checkout, WhatsApp ordering,
+ * and Recently Viewed history.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCatalog();
   initCartDrawer();
   initWishlistDrawer();
+  initExpressCheckout();
+  initRecentlyViewed();
   initSocietyNewsletter();
   initKeyboardEvents();
 });
@@ -45,17 +48,18 @@ function initCurrencyConverter() {
     updateGlobalCurrencyDisplays();
     renderProducts();
     renderCartDrawer();
+    renderRecentlyViewed();
     showToast(`Currency updated to ${currentCurrency} (${CURRENCY_RATES[currentCurrency].symbol})`, '💱');
   });
 }
 
 function updateGlobalCurrencyDisplays() {
   const thresholdEl = document.getElementById('announcement-threshold');
-  const calcThresholdEl = document.querySelector('.calc-threshold');
+  const calcThresholdEls = document.querySelectorAll('.calc-threshold');
   const thresholdVal = formatCurrency(200);
 
   if (thresholdEl) thresholdEl.textContent = thresholdVal;
-  if (calcThresholdEl) calcThresholdEl.textContent = thresholdVal;
+  calcThresholdEls.forEach(el => el.textContent = thresholdVal);
 }
 
 /* ==========================================================================
@@ -98,74 +102,385 @@ let inStockOnly = false;
 // Color selections cache per product id
 const selectedColors = {};
 
-function initCatalog() {
-  const fallbackProducts = [
-    {
-      id: "prod-1",
-      name: "Heritage Automatic Chronograph",
-      category: "timepieces",
-      price: 380,
-      rating: 4.9,
-      badge: "Bestseller",
-      image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
-      description: "Mechanical automatic chronograph movement featuring a 41mm aerospace grade 316L stainless steel case.",
-      specs: { "Movement": "Calibre LX-740 Automatic", "Glass": "Sapphire Crystal" },
-      colors: [{ name: "Obsidian Black", hex: "#18181b" }, { name: "Brushed Silver", hex: "#cbd5e1" }],
-      inStock: true
+const fallbackProducts = [
+  {
+    "id": "prod-1",
+    "name": "Heritage Automatic Chronograph",
+    "slug": "heritage-automatic-chronograph",
+    "category": "timepieces",
+    "categoryLabel": "Timepieces",
+    "price": 380,
+    "rating": 4.9,
+    "reviews": 42,
+    "badge": "Bestseller",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Mechanical automatic chronograph movement featuring a 41mm aerospace grade 316L stainless steel case, sapphire crystal with dual anti-reflective coating, and vegetable-tanned bridle leather strap.",
+    "specs": {
+      "Movement": "Calibre LX-740 Automatic (42hr reserve)",
+      "Case Diameter": "41mm &bull; 11.2mm depth",
+      "Glass": "Scratch-resistant Sapphire Crystal",
+      "Water Resistance": "10 ATM (100 meters / 330 ft)"
     },
-    {
-      id: "prod-2",
-      name: "Tuscan Bridle Leather Folio",
-      category: "leather",
-      price: 220,
-      rating: 4.95,
-      badge: "Artisanal",
-      image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
-      description: "Hand-stitched in Florence using full-grain Tuscan vegetable-tanned cowhide.",
-      specs: { "Material": "Tuscan Vachetta", "Hardware": "Solid Brushed Brass" },
-      colors: [{ name: "Saddle Tan", hex: "#92400e" }, { name: "Espresso Brown", hex: "#382314" }],
-      inStock: true
+    "colors": [
+      { "name": "Obsidian Black", "hex": "#18181b" },
+      { "name": "Brushed Silver", "hex": "#cbd5e1" },
+      { "name": "Rose Gold", "hex": "#b45309" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-2",
+    "name": "Tuscan Bridle Leather Folio",
+    "slug": "tuscan-bridle-leather-folio",
+    "category": "leather",
+    "categoryLabel": "Leatherware",
+    "price": 220,
+    "rating": 4.95,
+    "reviews": 38,
+    "badge": "Artisanal",
+    "badgeType": "new",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Hand-stitched in Florence using full-grain Tuscan vegetable-tanned cowhide. Designed to carry a 14-inch or 16-inch laptop, legal documents, notebooks, and writing instruments with solid brass YKK Excella zippers.",
+    "specs": {
+      "Material": "100% Certified Tuscan Full-Grain Vachetta",
+      "Hardware": "Solid Brushed Brass Hardware",
+      "Dimensions": "38cm x 27cm x 3.5cm",
+      "Compatibility": "Laptops up to 16-inch MacBook Pro"
     },
-    {
-      id: "prod-3",
-      name: "Titanium Wireless Studio Headphones",
-      category: "audio",
-      price: 420,
-      rating: 4.88,
-      badge: "Audiophile",
-      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-      description: "Precision acoustical tuning with 45mm beryllium drivers and active hybrid noise cancellation.",
-      specs: { "Drivers": "45mm Beryllium", "Battery": "38 hours" },
-      colors: [{ name: "Matte Slate", hex: "#334155" }, { name: "Silver Anodized", hex: "#94a3b8" }],
-      inStock: true
+    "colors": [
+      { "name": "Saddle Tan", "hex": "#92400e" },
+      { "name": "Espresso Brown", "hex": "#382314" },
+      { "name": "Jet Black", "hex": "#09090b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-3",
+    "name": "Titanium Wireless Studio Headphones",
+    "slug": "titanium-wireless-studio-headphones",
+    "category": "audio",
+    "categoryLabel": "Audio & Optics",
+    "price": 420,
+    "rating": 4.88,
+    "reviews": 56,
+    "badge": "Audiophile",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Precision acoustical tuning with 45mm beryllium drivers, active hybrid noise cancellation, memory-foam lambskin ear cushions, and 38-hour battery longevity on a single charge.",
+    "specs": {
+      "Drivers": "45mm Custom Beryllium Dynamic",
+      "Frequency Response": "10Hz - 42,000Hz (Hi-Res Certified)",
+      "Battery Life": "38 hours ANC active &bull; Fast charge 15m=6h",
+      "Connectivity": "Bluetooth 5.3 &bull; aptX Lossless &bull; 3.5mm"
     },
-    {
-      id: "prod-4",
-      name: "Hand-Turned Brass Fountain Pen",
-      category: "lifestyle",
-      price: 145,
-      rating: 4.96,
-      badge: "Signature",
-      image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=800&q=80",
-      description: "Machined from a single rod of raw untreated solid brass that develops an exquisite individual patina.",
-      specs: { "Nib": "German Peter Bock 18K", "Weight": "58g" },
-      colors: [{ name: "Raw Brass", hex: "#d97706" }],
-      inStock: true
-    }
-  ];
+    "colors": [
+      { "name": "Matte Slate", "hex": "#334155" },
+      { "name": "Silver Anodized", "hex": "#94a3b8" },
+      { "name": "Midnight", "hex": "#0f172a" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-4",
+    "name": "Hand-Turned Brass Fountain Pen",
+    "slug": "hand-turned-brass-fountain-pen",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 145,
+    "rating": 4.96,
+    "reviews": 29,
+    "badge": "Signature",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1585336261026-40713b2e53ef?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1585336261026-40713b2e53ef?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Machined from a single rod of raw untreated solid brass that develops an exquisite individual patina over decades. Fitted with a German Peter Bock 18k gold-plated medium nib.",
+    "specs": {
+      "Weight": "58 grams (Gravitational balance)",
+      "Nib": "German Peter Bock 18K Bi-Color Steel/Gold (M)",
+      "Filling System": "Standard International Converter & Cartridge",
+      "Finish": "Raw untreated unlacquered brass"
+    },
+    "colors": [
+      { "name": "Raw Brass", "hex": "#d97706" },
+      { "name": "Aged Copper", "hex": "#b45309" },
+      { "name": "Gunmetal PVD", "hex": "#475569" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-5",
+    "name": "Minimalist Card Wallet (RFID Shield)",
+    "slug": "minimalist-card-wallet",
+    "category": "leather",
+    "categoryLabel": "Leatherware",
+    "price": 85,
+    "rating": 4.92,
+    "reviews": 64,
+    "badge": "Essential",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Slim, featherlight front-pocket card sleeve hand-cut from Cordovan leather with an integrated aerospace aluminum RFID blocking internal shield. Holds up to 8 cards plus folded currency.",
+    "specs": {
+      "Capacity": "6 to 8 cards + 6 folded bills",
+      "Dimensions": "10.2cm x 6.8cm x 0.5cm (Ultra-slim)",
+      "Protection": "13.56 MHz RFID / NFC Anti-Skimming",
+      "Stitching": "Hand-waxed linen thread saddle-stitch"
+    },
+    "colors": [
+      { "name": "Cognac", "hex": "#78350f" },
+      { "name": "Forest Green", "hex": "#14532d" },
+      { "name": "Carbon Black", "hex": "#18181b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-6",
+    "name": "Architectural Sunglasses (Polarized Zeiss)",
+    "slug": "architectural-sunglasses-zeiss",
+    "category": "audio",
+    "categoryLabel": "Audio & Optics",
+    "price": 260,
+    "rating": 4.85,
+    "reviews": 21,
+    "badge": "Limited",
+    "badgeType": "new",
+    "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Crafted from Japanese cellulose acetate with reinforced 5-barrel German hinges. Equipped with Carl Zeiss Vision CR-39 polarized lenses offering 100% UVA/UVB protection and crystal visual acuity.",
+    "specs": {
+      "Frame Material": "Japanese Takiron Cellulose Acetate",
+      "Lenses": "Carl Zeiss Vision Polarized Grey Cat. 3",
+      "Hinges": "5-Barrel Teflon-coated stainless screws",
+      "Includes": "Handmade leather hardshell case + microfiber"
+    },
+    "colors": [
+      { "name": "Tokyo Tortoise", "hex": "#451a03" },
+      { "name": "Matte Crystal", "hex": "#cbd5e1" },
+      { "name": "Onyx Black", "hex": "#09090b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-7",
+    "name": "Weekender Duffle Bag in Waxed Canvas",
+    "slug": "weekender-duffle-bag-waxed-canvas",
+    "category": "leather",
+    "categoryLabel": "Leatherware",
+    "price": 310,
+    "rating": 4.94,
+    "reviews": 33,
+    "badge": "Signature",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Heavyweight 18oz water-repellent Scottish waxed canvas trimmed with thick vegetable-tanned harness leather. Sized specifically to fit overhead carry-on dimensions on all global airlines.",
+    "specs": {
+      "Volume": "42 Liters capacity",
+      "Dimensions": "52cm x 30cm x 28cm (IATA Carry-on compliant)",
+      "Canvas": "18oz Halley Stevensons Waxed Cotton (Scotland)",
+      "Straps": "Adjustable padded leather shoulder strap"
+    },
+    "colors": [
+      { "name": "British Tan / Olive", "hex": "#3f462a" },
+      { "name": "Charcoal / Black", "hex": "#1e293b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-8",
+    "name": "Desk Mat & Wireless Charging Pad",
+    "slug": "desk-mat-wireless-charging-pad",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 130,
+    "rating": 4.89,
+    "reviews": 47,
+    "badge": "Modern",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Dual-surface workspace mat made with premium vegan top-grain leather on top and natural non-slip cork underneath. Features an embedded 15W Qi fast wireless charging station for smartphones and earbuds.",
+    "specs": {
+      "Charging Station": "15W Qi-Certified Fast Wireless Pad",
+      "Dimensions": "80cm x 40cm (Full desk coverage)",
+      "Base": "Eco-friendly sustainable natural oak cork",
+      "Cable": "2-meter braided USB-C power cable included"
+    },
+    "colors": [
+      { "name": "Midnight Charcoal", "hex": "#1e293b" },
+      { "name": "Cognac Tan", "hex": "#9a3412" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-9",
+    "name": "Damascus Steel Santoku Chef Knife",
+    "slug": "damascus-steel-santoku-knife",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 295,
+    "rating": 4.98,
+    "reviews": 51,
+    "badge": "Mastercraft",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Forged in Seki, Japan using 67 alternating layers of VG-10 high-carbon Japanese stainless steel. Features a balanced octagonal stabilized bog oak handle with brass bolster.",
+    "specs": {
+      "Blade Steel": "67-Layer VG-10 Damascus (61±1 HRC)",
+      "Blade Length": "180mm (7.1 inches)",
+      "Edge Angle": "Hand-honed 15° per side (Honbazuke)",
+      "Handle": "Stabilized European Bog Oak & Brass"
+    },
+    "colors": [
+      { "name": "Dark Bog Oak", "hex": "#27272a" },
+      { "name": "Desert Ironwood", "hex": "#713f12" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-10",
+    "name": "Minimalist Solid Brass Task Lamp",
+    "slug": "minimalist-solid-brass-task-lamp",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 340,
+    "rating": 4.91,
+    "reviews": 19,
+    "badge": "Architectural",
+    "badgeType": "new",
+    "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Counter-weighted cantilever desk lamp machined from heavy solid brass. Equipped with warm 2700K high-CRI LED matrix and capacitive touch dimming in the base.",
+    "specs": {
+      "Color Temperature": "2700K Warm Tungsten (98 CRI)",
+      "Dimming": "Stepless capacitive touch sensor",
+      "Material": "Solid Turned Unlacquered Brass",
+      "Lifespan": "50,000 hour integrated LED module"
+    },
+    "colors": [
+      { "name": "Brushed Brass", "hex": "#d97706" },
+      { "name": "Matte Obsidian", "hex": "#18181b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-11",
+    "name": "Custom Mechanical Keyboard (Brass Plate)",
+    "slug": "custom-mechanical-keyboard-brass-plate",
+    "category": "audio",
+    "categoryLabel": "Audio & Optics",
+    "price": 320,
+    "rating": 4.97,
+    "reviews": 73,
+    "badge": "Enthusiast",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "CNC milled from a 2.4kg block of 6063 aluminum with an internal polished brass weight and gasket-mounted acoustic dampening. Factory lubricated linear mechanical switches.",
+    "specs": {
+      "Layout": "75% Exploded Compact with Rotary Knob",
+      "Mounting": "Poron Gasket with Solid Brass Switch Plate",
+      "Switches": "Pre-lubricated Gateron Oil King Linears",
+      "Connection": "USB-C &bull; 2.4GHz Wireless &bull; Bluetooth 5.2"
+    },
+    "colors": [
+      { "name": "Anodized Silver", "hex": "#94a3b8" },
+      { "name": "Space Grey", "hex": "#334155" },
+      { "name": "E-White", "hex": "#f8fafc" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-12",
+    "name": "Fine Mongolian Cashmere Travel Throw",
+    "slug": "fine-mongolian-cashmere-travel-throw",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 190,
+    "rating": 4.87,
+    "reviews": 24,
+    "badge": "Heirloom",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Spun from 100% Grade-A Mongolian cashmere fibers under 15 microns in fineness. Includes a vegetable-tanned bridle leather carrying strap for journeys and flights.",
+    "specs": {
+      "Fiber": "100% Sustainable Grade-A Inner Mongolian Cashmere",
+      "Fineness": "14.5 Microns (Supreme softness)",
+      "Dimensions": "180cm x 135cm",
+      "Carrying Harness": "Included detachable English bridle leather strap"
+    },
+    "colors": [
+      { "name": "Oatmeal Melange", "hex": "#d6cfc7" },
+      { "name": "Charcoal Heather", "hex": "#3f3f46" },
+      { "name": "Deep Camel", "hex": "#a16207" }
+    ],
+    "inStock": true
+  }
+];
 
+function initCatalog() {
   fetch('./assets/data/products.json')
     .then(res => res.json())
     .then(data => {
       allProductsData = data;
       renderProducts();
+      renderRecentlyViewed();
     })
     .catch(() => {
       allProductsData = fallbackProducts;
       renderProducts();
+      renderRecentlyViewed();
     });
 
-  // Category Filter Pills (Toolbar & Header)
+  // Category Filter Pills (Toolbar & Header & Footer)
   const catButtons = document.querySelectorAll('.cat-pill, .nav-filter-btn, .footer-cat-link');
   catButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -227,8 +542,8 @@ function renderProducts() {
     const matchStock = !inStockOnly || p.inStock;
     const matchSearch = !currentSearchQuery || 
       p.name.toLowerCase().includes(currentSearchQuery) ||
-      p.categoryLabel.toLowerCase().includes(currentSearchQuery) ||
-      p.description.toLowerCase().includes(currentSearchQuery);
+      (p.categoryLabel && p.categoryLabel.toLowerCase().includes(currentSearchQuery)) ||
+      (p.description && p.description.toLowerCase().includes(currentSearchQuery));
 
     return matchCat && matchStock && matchSearch;
   });
@@ -266,18 +581,27 @@ function renderProducts() {
     return `
       <article class="product-card" data-id="${prod.id}">
         <div class="card-media">
-          <img src="${prod.image}" alt="${prod.name}" loading="lazy">
-          ${prod.badge ? `<span class="card-badge">${prod.badge}</span>` : ''}
+          <img src="${prod.image}" alt="${prod.name}" class="img-primary" loading="lazy">
+          ${prod.hoverImage ? `<img src="${prod.hoverImage}" alt="${prod.name} alternate view" class="img-hover" loading="lazy">` : ''}
+          ${prod.badge ? `<span class="card-badge ${prod.badgeType || ''}">${prod.badge}</span>` : ''}
           <button class="card-wishlist-btn ${isWishlisted ? 'active' : ''}" data-id="${prod.id}" title="${isWishlisted ? 'Saved in Wishlist' : 'Save to Wishlist'}">
             <span>${isWishlisted ? '♥' : '♡'}</span>
           </button>
           <div class="card-quickview-overlay">
             <button class="btn-quickview" data-id="${prod.id}">Quick View</button>
+            <button class="btn-card-buy-now" data-id="${prod.id}">⚡ Buy Now</button>
           </div>
         </div>
 
         <div class="card-details">
-          <span class="card-category">${prod.categoryLabel || prod.category}</span>
+          <div class="card-category-row">
+            <span class="card-category">${prod.categoryLabel || prod.category}</span>
+            <div class="card-rating">
+              <span>★</span>
+              <strong>${Number(prod.rating).toFixed(2)}</strong>
+              <span class="review-count">(${prod.reviews || 24})</span>
+            </div>
+          </div>
           <h3 class="card-name" data-id="${prod.id}">${prod.name}</h3>
 
           ${prod.colors && prod.colors.length > 0 ? `
@@ -290,7 +614,10 @@ function renderProducts() {
 
           <div class="card-pricing-row">
             <span class="card-price">${formatCurrency(prod.price)}</span>
-            <button class="btn-add-bag" data-id="${prod.id}">+ Add to Bag</button>
+            <div class="card-actions-group">
+              <button class="btn-add-bag" data-id="${prod.id}" title="Add to bag">+ Bag</button>
+              <button class="btn-buy-now-direct" data-id="${prod.id}" title="Instant 1-Click Checkout">⚡ Buy Now</button>
+            </div>
           </div>
         </div>
       </article>
@@ -301,12 +628,27 @@ function renderProducts() {
 }
 
 function attachCardEvents() {
-  // Quick View triggers
+  // Quick View triggers & Name clicks
   document.querySelectorAll('.btn-quickview, .card-name').forEach(el => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
       const id = el.getAttribute('data-id');
+      addRecentlyViewed(id);
       openQuickViewModal(id);
+    });
+  });
+
+  // Direct Buy Now buttons
+  document.querySelectorAll('.btn-buy-now-direct, .btn-card-buy-now').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = btn.getAttribute('data-id');
+      const prod = allProductsData.find(p => p.id === id);
+      if (!prod) return;
+      addRecentlyViewed(id);
+      const color = selectedColors[id] || (prod.colors && prod.colors[0] ? prod.colors[0].name : 'Standard');
+      openCheckoutModal(id, { color: color, quantity: 1 });
     });
   });
 
@@ -317,6 +659,7 @@ function attachCardEvents() {
       const id = btn.getAttribute('data-id');
       const prod = allProductsData.find(p => p.id === id);
       if (!prod) return;
+      addRecentlyViewed(id);
       const color = selectedColors[id] || (prod.colors && prod.colors[0] ? prod.colors[0].name : 'Standard');
       addToCart(prod, 1, color);
     });
@@ -361,6 +704,8 @@ function openQuickViewModal(productId) {
   const prod = allProductsData.find(p => p.id === productId);
   if (!prod) return;
 
+  addRecentlyViewed(prod.id);
+
   let selectedModalColor = selectedColors[prod.id] || (prod.colors && prod.colors[0] ? prod.colors[0].name : 'Default');
   let modalQty = 1;
 
@@ -380,13 +725,20 @@ function openQuickViewModal(productId) {
 
     <div class="qv-info">
       <div>
-        <span class="qv-category">${prod.categoryLabel || prod.category}</span>
+        <div class="card-category-row" style="margin-bottom: 0.3rem;">
+          <span class="qv-category">${prod.categoryLabel || prod.category}</span>
+          <div class="card-rating">
+            <span>★</span>
+            <strong>${Number(prod.rating).toFixed(2)}</strong>
+            <span class="review-count">(${prod.reviews || 24} reviews)</span>
+          </div>
+        </div>
         <h2 class="qv-title">${prod.name}</h2>
       </div>
 
       <div class="qv-price-row">
-        <span id="qv-price-val" style="color: var(--accent);">${formatCurrency(prod.price)}</span>
-        <span style="font-size: 0.85rem; color: #10b981; font-weight: 700;">● In Stock &bull; Ready to Dispatch</span>
+        <span id="qv-price-val" style="color: var(--accent); font-size: 1.4rem; font-weight: 800;">${formatCurrency(prod.price)}</span>
+        <span style="font-size: 0.85rem; color: #10b981; font-weight: 700;">● In Stock &bull; Ready for Courier Dispatch</span>
       </div>
 
       <p class="qv-desc">${prod.description}</p>
@@ -409,7 +761,7 @@ function openQuickViewModal(productId) {
           </label>
           <div class="card-swatches">
             ${prod.colors.map(c => `
-              <span class="color-dot ${c.name === selectedModalColor ? 'active' : ''}" style="background-color: ${c.hex}; width: 20px; height: 20px;" title="${c.name}" data-color="${c.name}"></span>
+              <span class="color-dot ${c.name === selectedModalColor ? 'active' : ''}" style="background-color: ${c.hex}; width: 22px; height: 22px;" title="${c.name}" data-color="${c.name}"></span>
             `).join('')}
           </div>
         </div>
@@ -425,9 +777,10 @@ function openQuickViewModal(productId) {
       </div>
 
       <div class="qv-actions">
-        <button id="qv-btn-add" class="btn btn-primary btn-block">Add to Shopping Bag &bull; ${formatCurrency(prod.price)}</button>
+        <button id="qv-btn-buynow" class="btn btn-buy-now-direct btn-block" style="padding: 0.75rem; font-size: 0.95rem;">⚡ Buy Now (Express 1-Click Checkout)</button>
+        <button id="qv-btn-add" class="btn btn-primary btn-block">+ Add to Shopping Bag &bull; ${formatCurrency(prod.price)}</button>
         <button id="qv-btn-whatsapp" class="btn btn-whatsapp btn-block">
-          <span>Inquire &amp; Order on WhatsApp</span>
+          <span>💬 Inquire &amp; Order on WhatsApp</span>
         </button>
       </div>
     </div>
@@ -463,14 +816,23 @@ function openQuickViewModal(productId) {
     if (modalQty > 1) {
       modalQty--;
       if (qtyVal) qtyVal.textContent = modalQty;
-      if (btnAdd) btnAdd.textContent = `Add to Shopping Bag • ${formatCurrency(prod.price * modalQty)}`;
+      if (btnAdd) btnAdd.textContent = `+ Add to Shopping Bag • ${formatCurrency(prod.price * modalQty)}`;
     }
   });
 
   document.getElementById('qv-qty-plus').addEventListener('click', () => {
     modalQty++;
     if (qtyVal) qtyVal.textContent = modalQty;
-    if (btnAdd) btnAdd.textContent = `Add to Shopping Bag • ${formatCurrency(prod.price * modalQty)}`;
+    if (btnAdd) btnAdd.textContent = `+ Add to Shopping Bag • ${formatCurrency(prod.price * modalQty)}`;
+  });
+
+  // Direct 1-Click Buy Now
+  document.getElementById('qv-btn-buynow').addEventListener('click', () => {
+    closeQuickViewModal();
+    openCheckoutModal(prod.id, {
+      color: selectedModalColor,
+      quantity: modalQty
+    });
   });
 
   // Add to Bag action
@@ -638,7 +1000,7 @@ function initCartDrawer() {
     });
   }
 
-  // Simulated Stripe Checkout
+  // Proceed to Express Checkout Modal
   const btnStripe = document.getElementById('btn-stripe-checkout');
   if (btnStripe) {
     btnStripe.addEventListener('click', () => {
@@ -647,7 +1009,8 @@ function initCartDrawer() {
         showToast('Your shopping bag is empty', '⚠️');
         return;
       }
-      openOrderSuccessModal();
+      closeCartDrawer();
+      openCheckoutModal('cart');
     });
   }
 
@@ -786,7 +1149,360 @@ function renderCartDrawer() {
 }
 
 /* ==========================================================================
-   6. WISHLIST SYSTEM (LOCALSTORAGE)
+   6. 1-CLICK STREAMLINED EXPRESS CHECKOUT SYSTEM
+   ========================================================================== */
+let checkoutManifestItems = [];
+let isCheckoutSingleItem = false;
+let checkoutSelectedMethod = 'card';
+
+function initExpressCheckout() {
+  const modal = document.getElementById('express-checkout-modal');
+  const closeBtn = document.getElementById('checkout-close-btn');
+  const backdrop = document.getElementById('checkout-backdrop');
+  const autofillBtn = document.getElementById('btn-autofill-demo');
+  const submitBtn = document.getElementById('btn-submit-order');
+  const cardRadio = document.getElementById('pay-method-card');
+  const whatsappRadio = document.getElementById('pay-method-whatsapp');
+  const cardLabel = document.getElementById('pay-opt-card-label');
+  const whatsappLabel = document.getElementById('pay-opt-whatsapp-label');
+  const cardWrapper = document.getElementById('card-fields-wrapper');
+  const whatsappWrapper = document.getElementById('whatsapp-notice-wrapper');
+  const promoInput = document.getElementById('checkout-promo-input');
+  const promoBtn = document.getElementById('checkout-apply-promo-btn');
+  const promoFeedback = document.getElementById('checkout-promo-feedback');
+
+  if (!modal) return;
+
+  if (closeBtn) closeBtn.addEventListener('click', closeCheckoutModal);
+  if (backdrop) backdrop.addEventListener('click', closeCheckoutModal);
+
+  // Auto-Fill Demo Button
+  if (autofillBtn) {
+    autofillBtn.addEventListener('click', () => {
+      document.getElementById('chk-email').value = 'alexander.vance@atelier-society.com';
+      document.getElementById('chk-phone').value = '+1 (212) 555-0198';
+      document.getElementById('chk-name').value = 'Alexander Vance';
+      document.getElementById('chk-address').value = '740 Park Avenue, Penthouse B';
+      document.getElementById('chk-city').value = 'New York';
+      document.getElementById('chk-postal').value = '10021';
+      document.getElementById('chk-country').value = 'United States';
+      
+      const cardNum = document.getElementById('chk-card-num');
+      const cardExp = document.getElementById('chk-card-exp');
+      const cardCvc = document.getElementById('chk-card-cvc');
+      if (cardNum) cardNum.value = '4242 8899 4432 1084';
+      if (cardExp) cardExp.value = '10/28';
+      if (cardCvc) cardCvc.value = '739';
+
+      showToast('Demo patron details populated!', '⚡');
+    });
+  }
+
+  // Payment Method Toggles
+  function updatePaymentMethod(method) {
+    checkoutSelectedMethod = method;
+    if (cardLabel) cardLabel.classList.toggle('active', method === 'card');
+    if (whatsappLabel) whatsappLabel.classList.toggle('active', method === 'whatsapp');
+    if (cardWrapper) cardWrapper.classList.toggle('hidden', method !== 'card');
+    if (whatsappWrapper) whatsappWrapper.classList.toggle('hidden', method !== 'whatsapp');
+
+    const submitLabel = document.getElementById('btn-submit-label');
+    const totalUSD = calculateCheckoutTotal();
+    if (submitLabel) {
+      if (method === 'whatsapp') {
+        submitLabel.textContent = `Direct WhatsApp Requisition • ${formatCurrency(totalUSD)}`;
+      } else {
+        submitLabel.textContent = `Confirm Requisition • ${formatCurrency(totalUSD)}`;
+      }
+    }
+  }
+
+  if (cardRadio) {
+    cardRadio.addEventListener('change', () => updatePaymentMethod('card'));
+  }
+  if (whatsappRadio) {
+    whatsappRadio.addEventListener('change', () => updatePaymentMethod('whatsapp'));
+  }
+
+  // Checkout Promo Code
+  if (promoBtn && promoInput) {
+    promoBtn.addEventListener('click', () => {
+      const code = promoInput.value.trim().toUpperCase();
+      if (code === 'LUXE10' || code === 'ZERO10') {
+        activeDiscountPercent = 10;
+        if (promoFeedback) {
+          promoFeedback.className = 'promo-feedback-inline success';
+          promoFeedback.textContent = '✓ 10% Society Privilege applied!';
+          promoFeedback.classList.remove('hidden');
+        }
+        updateCheckoutManifestTotals();
+        renderCartDrawer();
+        showToast('10% Privilege Applied!', '🎉');
+      } else {
+        if (promoFeedback) {
+          promoFeedback.className = 'promo-feedback-inline error';
+          promoFeedback.textContent = 'Invalid promo code. Try LUXE10';
+          promoFeedback.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
+  // Submit Requisition Handler
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      const email = document.getElementById('chk-email').value.trim();
+      const phone = document.getElementById('chk-phone').value.trim();
+      const name = document.getElementById('chk-name').value.trim();
+      const address = document.getElementById('chk-address').value.trim();
+      const city = document.getElementById('chk-city').value.trim();
+      const postal = document.getElementById('chk-postal').value.trim();
+      const country = document.getElementById('chk-country').value;
+
+      if (!email || !name || !address || !city || !postal) {
+        showToast('Please complete required contact & delivery fields', '⚠️');
+        return;
+      }
+
+      const totalUSD = calculateCheckoutTotal();
+      const orderNumber = 'LX-' + Math.floor(100000 + Math.random() * 900000);
+
+      const orderData = {
+        orderNumber: orderNumber,
+        patronName: name,
+        patronEmail: email,
+        patronPhone: phone,
+        shippingAddress: `${address}, ${city}, ${postal}, ${country}`,
+        items: [...checkoutManifestItems],
+        totalUSD: totalUSD,
+        paymentMethod: checkoutSelectedMethod === 'whatsapp' ? 'WhatsApp Direct Requisition' : 'Direct Encrypted Card (Simulated)'
+      };
+
+      if (checkoutSelectedMethod === 'whatsapp') {
+        let text = `*LUXE ATELIER BESPOKE REQUISITION*%0A` +
+                   `Order: ${orderNumber}%0A` +
+                   `Patron: ${name}%0A` +
+                   `Delivery: ${address}, ${city}, ${postal}, ${country}%0A` +
+                   `------------------------------------%0A`;
+
+        checkoutManifestItems.forEach((item, idx) => {
+          text += `${idx + 1}. ${item.name} (${item.color}) x${item.quantity} - ${formatCurrency(item.price * item.quantity)}%0A`;
+        });
+        text += `------------------------------------%0A` +
+                `*Total:* ${formatCurrency(totalUSD)} (${currentCurrency})%0A` +
+                `Please confirm dispatch timeline and provide secure payment link.`;
+
+        window.open(`https://wa.me/?text=${text}`, '_blank');
+
+        if (!isCheckoutSingleItem) {
+          saveCart([]);
+        }
+        closeCheckoutModal();
+        openOrderSuccessModal(orderData);
+      } else {
+        // Credit card / instant checkout
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Processing Requisition...</span>';
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+          if (!isCheckoutSingleItem) {
+            saveCart([]);
+          }
+          closeCheckoutModal();
+          openOrderSuccessModal(orderData);
+        }, 650);
+      }
+    });
+  }
+}
+
+function calculateCheckoutTotal() {
+  const subtotal = checkoutManifestItems.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+  const discount = (subtotal * activeDiscountPercent) / 100;
+  const shipping = subtotal >= 200 ? 0 : 25;
+  return subtotal - discount + shipping;
+}
+
+function openCheckoutModal(target, singleConfig) {
+  const modal = document.getElementById('express-checkout-modal');
+  if (!modal) return;
+
+  if (target === 'cart') {
+    const cart = getCart();
+    if (cart.length === 0) {
+      showToast('Your shopping bag is empty', '⚠️');
+      return;
+    }
+    checkoutManifestItems = [...cart];
+    isCheckoutSingleItem = false;
+  } else {
+    // Single product ID
+    const prod = allProductsData.find(p => p.id === target);
+    if (!prod) return;
+    checkoutManifestItems = [{
+      id: prod.id,
+      name: prod.name,
+      price: prod.price,
+      image: prod.image,
+      color: singleConfig?.color || 'Standard',
+      quantity: singleConfig?.quantity || 1
+    }];
+    isCheckoutSingleItem = true;
+  }
+
+  renderCheckoutManifestItems();
+  updateCheckoutManifestTotals();
+
+  modal.classList.remove('hidden');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckoutModal() {
+  const modal = document.getElementById('express-checkout-modal');
+  if (!modal) return;
+  modal.classList.add('hidden');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function renderCheckoutManifestItems() {
+  const listEl = document.getElementById('checkout-items-list');
+  if (!listEl) return;
+
+  listEl.innerHTML = checkoutManifestItems.map(item => `
+    <div class="chk-item">
+      <img src="${item.image}" alt="${item.name}" class="chk-item-img">
+      <div class="chk-item-meta">
+        <span class="chk-item-title">${item.name}</span>
+        <span class="chk-item-sub">Color: ${item.color} &bull; Qty: ${item.quantity}</span>
+      </div>
+      <span class="chk-item-price">${formatCurrency(item.price * item.quantity)}</span>
+    </div>
+  `).join('');
+}
+
+function updateCheckoutManifestTotals() {
+  const subtotalEl = document.getElementById('chk-subtotal-val');
+  const discountRow = document.getElementById('chk-discount-row');
+  const discountVal = document.getElementById('chk-discount-val');
+  const shippingEl = document.getElementById('chk-shipping-val');
+  const totalEl = document.getElementById('chk-total-val');
+  const submitLabel = document.getElementById('btn-submit-label');
+
+  const subtotalUSD = checkoutManifestItems.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+  const discountUSD = (subtotalUSD * activeDiscountPercent) / 100;
+  const isFree = subtotalUSD >= 200;
+  const shippingUSD = isFree ? 0 : 25;
+  const totalUSD = subtotalUSD - discountUSD + shippingUSD;
+
+  if (subtotalEl) subtotalEl.textContent = formatCurrency(subtotalUSD);
+
+  if (discountRow && discountVal) {
+    if (activeDiscountPercent > 0) {
+      discountRow.classList.remove('hidden');
+      discountVal.textContent = `-${formatCurrency(discountUSD)}`;
+    } else {
+      discountRow.classList.add('hidden');
+    }
+  }
+
+  if (shippingEl) {
+    shippingEl.textContent = isFree ? 'FREE (Express Courier)' : formatCurrency(25);
+    shippingEl.style.color = isFree ? 'var(--success)' : 'inherit';
+  }
+
+  if (totalEl) totalEl.textContent = formatCurrency(totalUSD);
+
+  if (submitLabel) {
+    if (checkoutSelectedMethod === 'whatsapp') {
+      submitLabel.textContent = `Direct WhatsApp Requisition • ${formatCurrency(totalUSD)}`;
+    } else {
+      submitLabel.textContent = `Confirm Requisition • ${formatCurrency(totalUSD)}`;
+    }
+  }
+}
+
+/* ==========================================================================
+   7. RECENTLY VIEWED OBJECTS SHELF
+   ========================================================================== */
+function getRecentlyViewed() {
+  try {
+    return JSON.parse(localStorage.getItem('luxe_recently_viewed') || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function addRecentlyViewed(productId) {
+  let list = getRecentlyViewed();
+  list = list.filter(id => id !== productId);
+  list.unshift(productId);
+  if (list.length > 4) list = list.slice(0, 4);
+  localStorage.setItem('luxe_recently_viewed', JSON.stringify(list));
+  renderRecentlyViewed();
+}
+
+function renderRecentlyViewed() {
+  const section = document.getElementById('recently-viewed-section');
+  const grid = document.getElementById('recently-viewed-grid');
+  if (!section || !grid) return;
+
+  const list = getRecentlyViewed();
+  if (list.length === 0 || allProductsData.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+
+  const items = list.map(id => allProductsData.find(p => p.id === id)).filter(Boolean);
+  if (items.length === 0) {
+    section.classList.add('hidden');
+    return;
+  }
+
+  section.classList.remove('hidden');
+  grid.innerHTML = items.map(prod => `
+    <div class="product-card" style="font-size: 0.9rem;" data-id="${prod.id}">
+      <div class="card-media" style="height: 200px;">
+        <img src="${prod.image}" alt="${prod.name}" class="img-primary" loading="lazy">
+        ${prod.hoverImage ? `<img src="${prod.hoverImage}" alt="${prod.name}" class="img-hover" loading="lazy">` : ''}
+        <div class="card-quickview-overlay">
+          <button class="btn-quickview" data-id="${prod.id}">Inspect</button>
+        </div>
+      </div>
+      <div class="card-details" style="padding: 0.8rem;">
+        <span class="card-category" style="font-size: 0.68rem;">${prod.categoryLabel || prod.category}</span>
+        <h4 class="card-name" data-id="${prod.id}" style="font-size: 0.95rem; margin-bottom: 0.4rem;">${prod.name}</h4>
+        <div class="card-pricing-row" style="padding-top: 0.4rem;">
+          <span class="card-price" style="font-size: 1rem;">${formatCurrency(prod.price)}</span>
+          <button class="btn-add-bag" data-id="${prod.id}">+ Bag</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.btn-quickview, .card-name').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-id');
+      openQuickViewModal(id);
+    });
+  });
+
+  grid.querySelectorAll('.btn-add-bag').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = btn.getAttribute('data-id');
+      const prod = allProductsData.find(p => p.id === id);
+      if (prod) addToCart(prod, 1, 'Standard');
+    });
+  });
+}
+
+/* ==========================================================================
+   8. WISHLIST SYSTEM (LOCALSTORAGE)
    ========================================================================== */
 function getWishlist() {
   try {
@@ -917,57 +1633,63 @@ function renderWishlistDrawer() {
 }
 
 /* ==========================================================================
-   7. ORDER SUCCESS CHECKOUT CELEBRATION MODAL
+   9. ORDER SUCCESS CHECKOUT CELEBRATION MODAL
    ========================================================================== */
-function openOrderSuccessModal() {
+function openOrderSuccessModal(orderData) {
   const modal = document.getElementById('order-success-modal');
   const summaryEl = document.getElementById('order-receipt-summary');
   const closeBtn = document.getElementById('order-success-close');
   const backdrop = document.getElementById('order-success-backdrop');
+  const printBtn = document.getElementById('btn-print-receipt');
 
   if (!modal || !summaryEl) return;
 
-  const cart = getCart();
-  const orderNumber = 'LX-' + Math.floor(100000 + Math.random() * 900000);
-  const subtotalUSD = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const discountUSD = (subtotalUSD * activeDiscountPercent) / 100;
-  const shippingUSD = subtotalUSD >= 200 ? 0 : 25;
-  const total = subtotalUSD - discountUSD + shippingUSD;
+  const data = orderData || {
+    orderNumber: 'LX-' + Math.floor(100000 + Math.random() * 900000),
+    patronName: 'Distinguished Patron',
+    patronEmail: 'patron@luxe-atelier.com',
+    shippingAddress: 'Express Atelier Courier Dispatch',
+    items: getCart(),
+    totalUSD: 0,
+    paymentMethod: 'Encrypted Atelier Payment'
+  };
 
   summaryEl.innerHTML = `
-    <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.8rem; display: flex; justify-content: space-between;">
-      <span>REQUISITION: <strong>${orderNumber}</strong></span>
+    <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.8rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+      <span>REQUISITION: <strong>${data.orderNumber}</strong></span>
       <span>DATE: ${new Date().toLocaleDateString()}</span>
     </div>
+    <div style="font-size: 0.82rem; margin-bottom: 0.8rem; color: var(--text-muted); line-height: 1.5; background: var(--bg-surface-elevated); padding: 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+      <div><strong>Patron:</strong> ${data.patronName} (${data.patronEmail})</div>
+      <div><strong>Delivery Destination:</strong> ${data.shippingAddress}</div>
+      <div><strong>Orchestration:</strong> ${data.paymentMethod}</div>
+    </div>
     <div style="border-top: 1px dashed var(--border-color); padding-top: 0.6rem; margin-bottom: 0.6rem;">
-      ${cart.map(i => `
-        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+      ${data.items.map(i => `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.84rem;">
           <span>${i.name} &bull; ${i.color} &times; ${i.quantity}</span>
           <strong>${formatCurrency(i.price * i.quantity)}</strong>
         </div>
       `).join('')}
     </div>
     <div style="border-top: 1px solid var(--border-color); padding-top: 0.6rem; display: flex; justify-content: space-between; font-weight: 800;">
-      <span>Grand Total Charged:</span>
-      <span style="color: var(--accent); font-size: 1.1rem;">${formatCurrency(total)}</span>
+      <span>Total Requisition Value:</span>
+      <span style="color: var(--accent); font-size: 1.15rem;">${formatCurrency(data.totalUSD)}</span>
     </div>
   `;
-
-  // Clear cart upon successful order
-  saveCart([]);
-  closeCartDrawer();
 
   modal.classList.remove('hidden');
   modal.setAttribute('aria-hidden', 'false');
 
   if (closeBtn) closeBtn.onclick = () => modal.classList.add('hidden');
   if (backdrop) backdrop.onclick = () => modal.classList.add('hidden');
+  if (printBtn) printBtn.onclick = () => window.print();
 
-  showToast('Order confirmed! Check your email.', '✨');
+  showToast('Requisition logged successfully!', '✨');
 }
 
 /* ==========================================================================
-   8. ATELIER SOCIETY NEWSLETTER FORM
+   10. ATELIER SOCIETY NEWSLETTER FORM
    ========================================================================== */
 function initSocietyNewsletter() {
   const form = document.getElementById('society-form');
@@ -987,7 +1709,7 @@ function initSocietyNewsletter() {
 }
 
 /* ==========================================================================
-   9. KEYBOARD EVENTS (ESCAPE CLOSE MODALS)
+   11. KEYBOARD EVENTS (ESCAPE CLOSE MODALS)
    ========================================================================== */
 function initKeyboardEvents() {
   document.addEventListener('keydown', (e) => {
@@ -995,6 +1717,7 @@ function initKeyboardEvents() {
       closeQuickViewModal();
       closeCartDrawer();
       closeWishlistDrawer();
+      closeCheckoutModal();
       const orderModal = document.getElementById('order-success-modal');
       if (orderModal) orderModal.classList.add('hidden');
     }
@@ -1002,7 +1725,7 @@ function initKeyboardEvents() {
 }
 
 /* ==========================================================================
-   10. FLOATING TOAST NOTIFICATION HELPER
+   12. FLOATING TOAST NOTIFICATION HELPER
    ========================================================================== */
 let toastTimeout;
 

@@ -11,6 +11,7 @@
     "badge": "Bestseller",
     "badgeType": "hot",
     "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
     "gallery": [
       "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80"
@@ -41,6 +42,7 @@
     "badge": "Artisanal",
     "badgeType": "new",
     "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80",
     "gallery": [
       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1200&q=80"
@@ -71,6 +73,7 @@
     "badge": "Audiophile",
     "badgeType": "hot",
     "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80",
     "gallery": [
       "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1200&q=80"
@@ -101,12 +104,14 @@
     "badge": "Signature",
     "badgeType": "popular",
     "image": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1585336261026-40713b2e53ef?auto=format&fit=crop&w=800&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1585336261026-40713b2e53ef?auto=format&fit=crop&w=1200&q=80"
     ],
     "description": "Machined from a single rod of raw untreated solid brass that develops an exquisite individual patina over decades. Fitted with a German Peter Bock 18k gold-plated medium nib.",
     "specs": {
-      "Weight": "58 grams (Perfect gravitational balance)",
+      "Weight": "58 grams (Gravitational balance)",
       "Nib": "German Peter Bock 18K Bi-Color Steel/Gold (M)",
       "Filling System": "Standard International Converter & Cartridge",
       "Finish": "Raw untreated unlacquered brass"
@@ -130,6 +135,7 @@
     "badge": "Essential",
     "badgeType": "popular",
     "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80",
     "gallery": [
       "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=1200&q=80"
     ],
@@ -159,8 +165,10 @@
     "badge": "Limited",
     "badgeType": "new",
     "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1200&q=80"
     ],
     "description": "Crafted from Japanese cellulose acetate with reinforced 5-barrel German hinges. Equipped with Carl Zeiss Vision CR-39 polarized lenses offering 100% UVA/UVB protection and crystal visual acuity.",
     "specs": {
@@ -188,6 +196,7 @@
     "badge": "Signature",
     "badgeType": "hot",
     "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
     "gallery": [
       "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=1200&q=80"
     ],
@@ -216,6 +225,7 @@
     "badge": "Modern",
     "badgeType": "popular",
     "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80",
     "gallery": [
       "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=80"
     ],
@@ -229,6 +239,124 @@
     "colors": [
       { "name": "Midnight Charcoal", "hex": "#1e293b" },
       { "name": "Cognac Tan", "hex": "#9a3412" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-9",
+    "name": "Damascus Steel Santoku Chef Knife",
+    "slug": "damascus-steel-santoku-knife",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 295,
+    "rating": 4.98,
+    "reviews": 51,
+    "badge": "Mastercraft",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Forged in Seki, Japan using 67 alternating layers of VG-10 high-carbon Japanese stainless steel. Features a balanced octagonal stabilized bog oak handle with brass bolster.",
+    "specs": {
+      "Blade Steel": "67-Layer VG-10 Damascus (61±1 HRC)",
+      "Blade Length": "180mm (7.1 inches)",
+      "Edge Angle": "Hand-honed 15° per side (Honbazuke)",
+      "Handle": "Stabilized European Bog Oak & Brass"
+    },
+    "colors": [
+      { "name": "Dark Bog Oak", "hex": "#27272a" },
+      { "name": "Desert Ironwood", "hex": "#713f12" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-10",
+    "name": "Minimalist Solid Brass Task Lamp",
+    "slug": "minimalist-solid-brass-task-lamp",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 340,
+    "rating": 4.91,
+    "reviews": 19,
+    "badge": "Architectural",
+    "badgeType": "new",
+    "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Counter-weighted cantilever desk lamp machined from heavy solid brass. Equipped with warm 2700K high-CRI LED matrix and capacitive touch dimming in the base.",
+    "specs": {
+      "Color Temperature": "2700K Warm Tungsten (98 CRI)",
+      "Dimming": "Stepless capacitive touch sensor",
+      "Material": "Solid Turned Unlacquered Brass",
+      "Lifespan": "50,000 hour integrated LED module"
+    },
+    "colors": [
+      { "name": "Brushed Brass", "hex": "#d97706" },
+      { "name": "Matte Obsidian", "hex": "#18181b" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-11",
+    "name": "Custom Mechanical Keyboard (Brass Plate)",
+    "slug": "custom-mechanical-keyboard-brass-plate",
+    "category": "audio",
+    "categoryLabel": "Audio & Optics",
+    "price": 320,
+    "rating": 4.97,
+    "reviews": 73,
+    "badge": "Enthusiast",
+    "badgeType": "hot",
+    "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "CNC milled from a 2.4kg block of 6063 aluminum with an internal polished brass weight and gasket-mounted acoustic dampening. Factory lubricated linear mechanical switches.",
+    "specs": {
+      "Layout": "75% Exploded Compact with Rotary Knob",
+      "Mounting": "Poron Gasket with Solid Brass Switch Plate",
+      "Switches": "Pre-lubricated Gateron Oil King Linears",
+      "Connection": "USB-C &bull; 2.4GHz Wireless &bull; Bluetooth 5.2"
+    },
+    "colors": [
+      { "name": "Anodized Silver", "hex": "#94a3b8" },
+      { "name": "Space Grey", "hex": "#334155" },
+      { "name": "E-White", "hex": "#f8fafc" }
+    ],
+    "inStock": true
+  },
+  {
+    "id": "prod-12",
+    "name": "Fine Mongolian Cashmere Travel Throw",
+    "slug": "fine-mongolian-cashmere-travel-throw",
+    "category": "lifestyle",
+    "categoryLabel": "Everyday Carry",
+    "price": 190,
+    "rating": 4.87,
+    "reviews": 24,
+    "badge": "Heirloom",
+    "badgeType": "popular",
+    "image": "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=800&q=80",
+    "hoverImage": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "description": "Spun from 100% Grade-A Mongolian cashmere fibers under 15 microns in fineness. Includes a vegetable-tanned bridle leather carrying strap for journeys and flights.",
+    "specs": {
+      "Fiber": "100% Sustainable Grade-A Inner Mongolian Cashmere",
+      "Fineness": "14.5 Microns (Supreme softness)",
+      "Dimensions": "180cm x 135cm",
+      "Carrying Harness": "Included detachable English bridle leather strap"
+    },
+    "colors": [
+      { "name": "Oatmeal Melange", "hex": "#d6cfc7" },
+      { "name": "Charcoal Heather", "hex": "#3f3f46" },
+      { "name": "Deep Camel", "hex": "#a16207" }
     ],
     "inStock": true
   }

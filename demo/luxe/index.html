@@ -114,6 +114,51 @@
     </div>
   </section>
 
+  <!-- LUXE TRUST & SERVICE GUARANTEES BAR -->
+  <section class="trust-perks-bar" aria-label="Store Guarantees">
+    <div class="trust-perks-container">
+      <div class="trust-perk-item">
+        <div class="trust-perk-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="trust-perk-text">
+          <strong>Complimentary Express Delivery</strong>
+          <span>Carbon-neutral worldwide courier on orders over <span class="calc-threshold">$200</span></span>
+        </div>
+      </div>
+
+      <div class="trust-perk-item">
+        <div class="trust-perk-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="trust-perk-text">
+          <strong>Lifetime Craftsmanship Pledge</strong>
+          <span>Complimentary atelier repair &amp; bespoke restoration</span>
+        </div>
+      </div>
+
+      <div class="trust-perk-item">
+        <div class="trust-perk-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V8"/></svg>
+        </div>
+        <div class="trust-perk-text">
+          <strong>30-Day In-Home Trial</strong>
+          <span>Discreet returns with pre-paid courier pick-up</span>
+        </div>
+      </div>
+
+      <div class="trust-perk-item">
+        <div class="trust-perk-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="trust-perk-text">
+          <strong>Atelier Concierge WhatsApp</strong>
+          <span>Direct private styling &amp; instant ordering</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- STORE CONTROLS & FILTER TOOLBAR -->
   <section class="catalog-toolbar-section" id="catalog">
     <div class="toolbar-container">
@@ -152,7 +197,7 @@
 
     <!-- Live Status Row -->
     <div class="toolbar-status-bar">
-      <div id="catalog-count-display">Displaying <strong>8</strong> Handcrafted Pieces</div>
+      <div id="catalog-count-display">Displaying <strong>12</strong> Handcrafted Pieces</div>
       <div class="free-shipping-pill">
         <span class="free-shipping-dot"></span> Free Worldwide Shipping on orders over <span class="calc-threshold">$200</span>
       </div>
@@ -165,6 +210,19 @@
       <!-- Populated via script.js from products.json -->
     </section>
   </main>
+
+  <!-- RECENTLY VIEWED OBJECTS -->
+  <section class="recently-viewed-section hidden" id="recently-viewed-section">
+    <div class="recently-viewed-container">
+      <div class="recently-viewed-header">
+        <span class="section-tag">CURATED HISTORY</span>
+        <h3>Recently Inspected Objects</h3>
+      </div>
+      <div class="recently-viewed-grid" id="recently-viewed-grid">
+        <!-- Populated via script.js -->
+      </div>
+    </div>
+  </section>
 
   <!-- BRAND HERITAGE & GUARANTEE SECTION -->
   <section class="heritage-section">
@@ -320,6 +378,187 @@
 
   <div id="drawer-overlay-backdrop" class="drawer-backdrop hidden"></div>
 
+  <!-- STREAMLINED 1-CLICK EXPRESS CHECKOUT MODAL -->
+  <div id="express-checkout-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" id="checkout-backdrop"></div>
+    <div class="checkout-dialog">
+      <button class="modal-close-btn" id="checkout-close-btn" aria-label="Close checkout">&times;</button>
+      
+      <div class="checkout-header">
+        <div class="checkout-title-group">
+          <span class="checkout-badge">⚡ EXPRESS REQUISITION</span>
+          <h2>Secure Atelier Checkout</h2>
+          <p>Complete your luxury acquisition with 256-bit encryption &bull; Zero external fees</p>
+        </div>
+        <button type="button" id="btn-autofill-demo" class="btn-autofill" title="Quickly populate demo shipping & payment fields">
+          ⚡ Auto-Fill Demo Details
+        </button>
+      </div>
+
+      <div class="checkout-grid">
+        <!-- Left: Guest Details & Payment Selection -->
+        <div class="checkout-form-col">
+          <form id="express-checkout-form" onsubmit="return false;">
+            
+            <!-- Contact Section -->
+            <div class="checkout-section">
+              <h3 class="checkout-section-title">
+                <span class="sec-num">1</span> Patron Contact
+              </h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="chk-email">Email Address <span class="req">*</span></label>
+                  <input type="email" id="chk-email" placeholder="patron@domain.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="chk-phone">Mobile Phone (Delivery SMS) <span class="req">*</span></label>
+                  <input type="tel" id="chk-phone" placeholder="+1 (555) 019-2834" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Shipping Destination -->
+            <div class="checkout-section">
+              <h3 class="checkout-section-title">
+                <span class="sec-num">2</span> Delivery Destination
+              </h3>
+              <div class="form-group">
+                <label for="chk-name">Full Patron Name <span class="req">*</span></label>
+                <input type="text" id="chk-name" placeholder="Lord / Lady / Full Name" required>
+              </div>
+              <div class="form-group">
+                <label for="chk-address">Street Address <span class="req">*</span></label>
+                <input type="text" id="chk-address" placeholder="Apartment, suite, unit, building, street" required>
+              </div>
+              <div class="form-row form-row-3">
+                <div class="form-group">
+                  <label for="chk-city">City <span class="req">*</span></label>
+                  <input type="text" id="chk-city" placeholder="City" required>
+                </div>
+                <div class="form-group">
+                  <label for="chk-postal">Postal Code <span class="req">*</span></label>
+                  <input type="text" id="chk-postal" placeholder="Postal / ZIP" required>
+                </div>
+                <div class="form-group">
+                  <label for="chk-country">Country <span class="req">*</span></label>
+                  <select id="chk-country">
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="France">France</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="checkout-section">
+              <h3 class="checkout-section-title">
+                <span class="sec-num">3</span> Payment Orchestration
+              </h3>
+
+              <div class="payment-method-options">
+                <label class="payment-option-card active" id="pay-opt-card-label">
+                  <input type="radio" name="payment-method" id="pay-method-card" value="card" checked>
+                  <div class="pay-opt-info">
+                    <strong>💳 Credit / Debit Card</strong>
+                    <span>Encrypted direct payment &bull; Instant confirmation</span>
+                  </div>
+                  <span class="pay-instant-badge">Instant</span>
+                </label>
+
+                <label class="payment-option-card" id="pay-opt-whatsapp-label">
+                  <input type="radio" name="payment-method" id="pay-method-whatsapp" value="whatsapp">
+                  <div class="pay-opt-info">
+                    <strong>💬 WhatsApp Concierge</strong>
+                    <span>Direct manifest inquiry &amp; bank wire arrangement</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Card Input Details (Visible when Card is selected) -->
+              <div id="card-fields-wrapper" class="card-fields-wrapper">
+                <div class="form-group">
+                  <label for="chk-card-num">Card Number <span class="req">*</span></label>
+                  <div class="input-with-icon">
+                    <input type="text" id="chk-card-num" placeholder="4242 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4242" maxlength="19">
+                    <span class="card-brand-icon">💳</span>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="chk-card-exp">Expiry (MM/YY) <span class="req">*</span></label>
+                    <input type="text" id="chk-card-exp" placeholder="12/28" maxlength="5">
+                  </div>
+                  <div class="form-group">
+                    <label for="chk-card-cvc">Security CVC <span class="req">*</span></label>
+                    <input type="text" id="chk-card-cvc" placeholder="888" maxlength="4">
+                  </div>
+                </div>
+              </div>
+
+              <!-- WhatsApp Notice (Visible when WhatsApp selected) -->
+              <div id="whatsapp-notice-wrapper" class="whatsapp-notice-wrapper hidden">
+                <p>Upon clicking &ldquo;Confirm Requisition&rdquo;, our senior atelier concierge will be contacted on WhatsApp with your full order requisition pre-composed.</p>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Right: Order Requisition Summary Sidebar -->
+        <div class="checkout-summary-col">
+          <div class="checkout-summary-box">
+            <h3 class="summary-heading">Order Manifest</h3>
+
+            <div class="checkout-items-list" id="checkout-items-list">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div class="checkout-promo-inline">
+              <input type="text" id="checkout-promo-input" placeholder="Promo code (try LUXE10)">
+              <button type="button" id="checkout-apply-promo-btn">Apply</button>
+            </div>
+            <div id="checkout-promo-feedback" class="promo-feedback-inline hidden"></div>
+
+            <div class="checkout-totals-breakdown">
+              <div class="chk-totals-row">
+                <span>Subtotal</span>
+                <span id="chk-subtotal-val">$0.00</span>
+              </div>
+              <div class="chk-totals-row discount hidden" id="chk-discount-row">
+                <span>Society Privilege (10%)</span>
+                <span id="chk-discount-val">-$0.00</span>
+              </div>
+              <div class="chk-totals-row">
+                <span>Express Insured Courier</span>
+                <span id="chk-shipping-val">FREE</span>
+              </div>
+              <div class="chk-totals-row total">
+                <span>Final Requisition Value</span>
+                <span id="chk-total-val" class="chk-total-accent">$0.00</span>
+              </div>
+            </div>
+
+            <button type="button" id="btn-submit-order" class="btn btn-primary btn-block btn-place-order">
+              <span id="btn-submit-label">Confirm Requisition &bull; $0.00</span>
+            </button>
+
+            <div class="checkout-trust-seals">
+              <div class="trust-seal-item">🔒 256-Bit SSL Encrypted</div>
+              <div class="trust-seal-item">🛡️ Lifetime Authenticity</div>
+              <div class="trust-seal-item">📦 Dispatch Within 24h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ORDER SUCCESS CELEBRATION MODAL -->
   <div id="order-success-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-backdrop" id="order-success-backdrop"></div>
@@ -331,7 +570,10 @@
         <h3>Thank You for Your Patronage</h3>
         <p>Your requisition has been logged to the Luxe Atelier fulfillment desk. A bespoke craft confirmation receipt has been dispatched to your email.</p>
         <div class="order-receipt-summary" id="order-receipt-summary"></div>
-        <button class="btn btn-primary btn-block" onclick="document.getElementById('order-success-modal').classList.add('hidden')">Return to Catalog</button>
+        <div class="order-success-actions">
+          <button class="btn btn-secondary" id="btn-print-receipt">🖨️ Print Receipt</button>
+          <button class="btn btn-primary" onclick="document.getElementById('order-success-modal').classList.add('hidden')">Return to Catalog</button>
+        </div>
       </div>
     </div>
   </div>
