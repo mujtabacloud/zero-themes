@@ -1,0 +1,336 @@
+{
+  "profile": {
+    "name": "Marcus Vance",
+    "title": "Staff Distributed Systems & Infrastructure Architect",
+    "location": "San Francisco, CA &bull; Remote",
+    "email": "marcus.vance@zenith-dev.io",
+    "phone": "+1 (415) 890-4219",
+    "website": "https://marcusvance.dev",
+    "github": "https://github.com/marcusvance",
+    "linkedin": "https://linkedin.com/in/marcus-vance-eng",
+    "twitter": "@marcusvance_sys",
+    "bio": "Staff Infrastructure Architect with 12+ years of experience designing fault-tolerant distributed databases, high-throughput edge execution runtimes, and multi-region Kubernetes topologies. Open source author of Rust consensus primitives and high-performance network proxies powering 4.8B+ daily requests.",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+    "status": "Available for Select Advisory & Advisory Eng Roles",
+    "terminalCommand": "curl -s https://zenith.dev/marcus.json | jq .experience[0]"
+  },
+  "metrics": [
+    {
+      "label": "Years Experience",
+      "value": "12+",
+      "sub": "Distributed Systems & Cloud"
+    },
+    {
+      "label": "Daily Request Volume",
+      "value": "4.8B+",
+      "sub": "Zero-drop Edge Pipeline"
+    },
+    {
+      "label": "Global Uptime SLA",
+      "value": "99.999%",
+      "sub": "Multi-region Failover"
+    },
+    {
+      "label": "Open Source Stars",
+      "value": "14.2k+",
+      "sub": "Rust & Go Developer Tooling"
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "role": "Principal Infrastructure Architect",
+      "company": "Voxel Cloud Platform",
+      "location": "San Francisco, CA (Hybrid)",
+      "period": "2023 \u2014 Present",
+      "duration": "2+ yrs",
+      "summary": "Directing the global distributed execution engine and serverless edge runtime spanning 32 PoPs across North America, Europe, and Asia-Pacific.",
+      "achievements": [
+        "Architected custom Rust-based WebAssembly edge sandbox reducing cold-start latency from 120ms to 4.2ms at P99 across 32 data centers.",
+        "Engineered global Anycast ingress mesh handling 4.8B+ requests/day with automated zero-packet-loss BGP route shifting during ISP outages.",
+        "Cut monthly cloud transit and egress expenditure by $380,000 via peer interconnects, UDP packet pacing, and custom zstandard compression buffers.",
+        "Mentored a 14-person distributed systems engineering group, instituting deterministic fuzz testing and chaos engineering game days."
+      ],
+      "technologies": [
+        "Rust",
+        "eBPF",
+        "WebAssembly",
+        "Kubernetes",
+        "Anycast BGP",
+        "Go",
+        "Terraform",
+        "Prometheus"
+      ]
+    },
+    {
+      "id": "exp-2",
+      "role": "Staff Systems Engineer",
+      "company": "Hyperion Observability & Telemetry",
+      "location": "Seattle, WA (Remote)",
+      "period": "2020 \u2014 2023",
+      "duration": "3 yrs",
+      "summary": "Technical lead for the columnar metrics ingestion pipeline, indexing 85M samples per second for Tier-1 enterprise SaaS customers.",
+      "achievements": [
+        "Replaced memory-bound Java time-series ingestion cluster with a SIMD-accelerated Go and Apache Arrow pipeline, yielding a 4.6x throughput boost.",
+        "Engineered zero-alloc inverted index caching layer that lowered P99 metric query latencies from 3.8s down to 180ms during heavy incident bursts.",
+        "Spearheaded SOC2 Type II compliance audit and end-to-end envelope encryption for cross-tenant time-series datasets.",
+        "Authored the company's distributed tracing RFC adopted across 22 microservices teams, integrating OpenTelemetry standards."
+      ],
+      "technologies": [
+        "Go",
+        "Apache Arrow",
+        "Kafka",
+        "ClickHouse",
+        "gRPC",
+        "Docker",
+        "AWS Graviton",
+        "OpenTelemetry"
+      ]
+    },
+    {
+      "id": "exp-3",
+      "role": "Senior Cloud Platform Engineer",
+      "company": "Starlight Financial & Payments",
+      "location": "New York, NY",
+      "period": "2017 \u2014 2020",
+      "duration": "3 yrs",
+      "summary": "Core infrastructure team member maintaining PCI-DSS Level 1 compliant ledger transaction clusters and active-active database replicas.",
+      "achievements": [
+        "Led migration of monolithic payment services into containerized Kubernetes clusters across AWS and Google Cloud Platform with zero downtime.",
+        "Built distributed idempotency and distributed lock coordinator in Go/Redis, eliminating recurring $120k duplicate transaction authorizations.",
+        "Designed real-time disaster recovery replication keeping cross-region PostgreSQL data loss (RPO) under 2 seconds and RTO under 90 seconds."
+      ],
+      "technologies": [
+        "Go",
+        "PostgreSQL",
+        "Redis",
+        "Kubernetes",
+        "GCP",
+        "Vault",
+        "Envoy",
+        "Python"
+      ]
+    },
+    {
+      "id": "exp-4",
+      "role": "Systems Software Engineer",
+      "company": "Nexus Micro Networks",
+      "location": "Austin, TX",
+      "period": "2014 \u2014 2017",
+      "duration": "3 yrs",
+      "summary": "Developed low-latency Linux kernel networking patches and high-speed packet capture tools for financial trading data providers.",
+      "achievements": [
+        "Optimized Linux network socket queues and ring buffers (DPDK / AF_XDP), shaving 14 microseconds off multicast UDP packet arrival times.",
+        "Automated continuous integration testing across bare-metal server clusters running Debian and RedHat Enterprise Linux."
+      ],
+      "technologies": [
+        "C",
+        "Linux Kernel",
+        "DPDK",
+        "Python",
+        "Bash",
+        "Wireshark",
+        "Git"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Systems & Languages",
+      "items": [
+        {
+          "name": "Rust",
+          "level": 95,
+          "tag": "Primary"
+        },
+        {
+          "name": "Go (Golang)",
+          "level": 94,
+          "tag": "Primary"
+        },
+        {
+          "name": "C / Modern C++",
+          "level": 82,
+          "tag": "Systems"
+        },
+        {
+          "name": "TypeScript / Node",
+          "level": 85,
+          "tag": "Tooling"
+        },
+        {
+          "name": "Python & Bash",
+          "level": 88,
+          "tag": "Automation"
+        }
+      ]
+    },
+    {
+      "category": "Distributed Systems & Cloud",
+      "items": [
+        {
+          "name": "Kubernetes & Operator SDK",
+          "level": 94,
+          "tag": "Cloud Native"
+        },
+        {
+          "name": "Distributed Storage & Raft",
+          "level": 92,
+          "tag": "Consensus"
+        },
+        {
+          "name": "Kafka & Event Mesh",
+          "level": 88,
+          "tag": "Streaming"
+        },
+        {
+          "name": "eBPF & Kernel Tracing",
+          "level": 84,
+          "tag": "Low Level"
+        },
+        {
+          "name": "AWS & Google Cloud (GCP)",
+          "level": 92,
+          "tag": "Infra"
+        }
+      ]
+    },
+    {
+      "category": "Databases & Observability",
+      "items": [
+        {
+          "name": "PostgreSQL & Citus",
+          "level": 90,
+          "tag": "RDBMS"
+        },
+        {
+          "name": "ClickHouse Columnar OLAP",
+          "level": 88,
+          "tag": "Analytics"
+        },
+        {
+          "name": "Redis & Valkey In-Memory",
+          "level": 95,
+          "tag": "Caching"
+        },
+        {
+          "name": "Prometheus & Grafana",
+          "level": 92,
+          "tag": "Metrics"
+        },
+        {
+          "name": "OpenTelemetry & Jaeger",
+          "level": 89,
+          "tag": "Tracing"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "aegis-raft",
+      "description": "High-throughput, pipelined Raft consensus engine implemented in Rust with zero-allocation log persistence and snapshot streaming.",
+      "stars": 6240,
+      "forks": 510,
+      "language": "Rust",
+      "languageColor": "#dea584",
+      "repoUrl": "https://github.com/marcusvance/aegis-raft",
+      "demoUrl": "https://crates.io/crates/aegis-raft",
+      "highlights": [
+        "Zero unsafe memory",
+        "SIMD CRC32 validation",
+        "1.2M ops/sec benchmark"
+      ]
+    },
+    {
+      "name": "orbit-proxy",
+      "description": "Ultra-low-latency eBPF-powered TCP/UDP transparent reverse proxy for cloud microservices with sub-5-microsecond routing jitter.",
+      "stars": 4820,
+      "forks": 380,
+      "language": "Go & C",
+      "languageColor": "#00add8",
+      "repoUrl": "https://github.com/marcusvance/orbit-proxy",
+      "demoUrl": "https://orbit-proxy.dev",
+      "highlights": [
+        "eBPF sockmap bypass",
+        "Prometheus exporter",
+        "Hot reload without dropped conns"
+      ]
+    },
+    {
+      "name": "pulsar-time",
+      "description": "Precision clock synchronization agent using PTP (IEEE 1588) and hardware timestamping for multi-region distributed databases.",
+      "stars": 1940,
+      "forks": 145,
+      "language": "Rust",
+      "languageColor": "#dea584",
+      "repoUrl": "https://github.com/marcusvance/pulsar-time",
+      "demoUrl": "https://crates.io/crates/pulsar-time",
+      "highlights": [
+        "Sub-microsecond bounds",
+        "Hardware NIC timestamping",
+        "Linux PHC support"
+      ]
+    },
+    {
+      "name": "k8s-mesh-operator",
+      "description": "Kubernetes CRD operator automating Canary egress failover, mTLS certificate rotation, and dynamic envoy configuration.",
+      "stars": 1280,
+      "forks": 98,
+      "language": "Go",
+      "languageColor": "#00add8",
+      "repoUrl": "https://github.com/marcusvance/k8s-mesh-operator",
+      "demoUrl": "https://github.com/marcusvance/k8s-mesh-operator",
+      "highlights": [
+        "Operator SDK v2",
+        "Automatic cert renewal",
+        "Zero downtime rolling upgrades"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "author": "Dr. Aris Thorne",
+      "role": "VP of Infrastructure Engineering",
+      "company": "Voxel Cloud Platform",
+      "avatar": "AT",
+      "quote": "Marcus is the rare Staff engineer who seamlessly navigates from Linux kernel socket buffers to high-level executive infrastructure roadmaps. His WebAssembly runtime architecture directly reduced our multi-million dollar transit bill while delivering record-low P99 latencies for enterprise workloads."
+    },
+    {
+      "author": "Claire Beaumont",
+      "role": "Head of Platform & SRE",
+      "company": "Hyperion Observability",
+      "avatar": "CB",
+      "quote": "When our metrics ingestion cluster was buckling under 4x traffic during Black Friday, Marcus led the team with unmatched calm and technical mastery. His SIMD-accelerated pipeline redesign turned a crisis into the most reliable subsystem in our entire architecture."
+    },
+    {
+      "author": "Kenji Takahashi",
+      "role": "Principal Security Architect",
+      "company": "Starlight Financial",
+      "avatar": "KT",
+      "quote": "In high-stakes PCI-DSS environments, you need engineers who treat distributed state and consensus with absolute mathematical rigor. Marcus Vance is that engineer. His multi-region active replication design set the gold standard across our entire organization."
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.S. in Computer Science & Distributed Systems",
+      "institution": "University of California, Berkeley",
+      "year": "2010 \u2014 2014",
+      "honors": "Summa Cum Laude &bull; Dean's Honor List &bull; Research in Parallel Computing"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Deterministic Fault Injection in Raft-based State Machines",
+      "venue": "USENIX ATC Workshops",
+      "year": "2023",
+      "link": "https://usenix.org/example-paper"
+    },
+    {
+      "title": "Scaling Anycast BGP Ingress for Sub-millisecond Serverless Runtimes",
+      "venue": "Communications of the ACM (Queue Magazine)",
+      "year": "2021",
+      "link": "https://queue.acm.org/example-article"
+    }
+  ]
+}

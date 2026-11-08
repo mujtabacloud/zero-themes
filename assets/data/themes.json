@@ -251,7 +251,7 @@
   {
     "id": "zenith-resume",
     "name": "Zenith Developer CV & Resume",
-    "tagline": "Interactive CV for senior engineers, tech leads & consultants",
+    "tagline": "Interactive executive CV & technical portfolio for Staff/Principal engineers & tech leads",
     "category": "portfolio",
     "categoryLabel": "Portfolio",
     "price": "Free",
@@ -261,7 +261,8 @@
     "badgeType": "hot",
     "compatibleWith": [
       "GitHub Pages",
-      "Print-ready",
+      "Print-Ready PDF",
+      "Vanilla JS",
       "HTML5"
     ],
     "description": "Stand out to hiring managers and clients. Includes timeline career history, skill competency badges, project showcases with GitHub stars counters, and 1-click PDF print styling.",
@@ -271,11 +272,12 @@
     ],
     "features": [
       "100% Free & Open Source (MIT License)",
-      "Print to PDF optimized stylesheet",
-      "Interactive timeline of career milestones",
-      "GitHub repo showcase cards",
-      "Recommendation / testimonial quotes carousel",
-      "Quick contact modal"
+      "Print to PDF optimized stylesheet (@media print) for A4 & Letter formats",
+      "Interactive career history timeline with quantified engineering impact metrics",
+      "GitHub open-source repository cards with star counts and language indicators",
+      "Domain-filterable skill competency matrix with animated proficiency bars",
+      "Executive recommendation quote cards from VPs of Engineering and Tech Leads",
+      "Terminal cURL quick-copy box and advisory inquiry modal"
     ],
     "demoUrl": "https://mujtabacloud.github.io/zero-themes/demo/zenith/",
     "repoUrl": "https://github.com/mujtabacloud/zenith-developer-cv",
