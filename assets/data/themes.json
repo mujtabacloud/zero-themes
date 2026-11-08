@@ -215,7 +215,7 @@
   {
     "id": "nexus-dashboard",
     "name": "Nexus Admin & Analytics UI",
-    "tagline": "Comprehensive clean admin interface template with charts and widgets",
+    "tagline": "Senior-engineered B2B SaaS analytics, financial run-rate & telemetry dashboard",
     "category": "saas",
     "categoryLabel": "SaaS & Tech",
     "price": "Free",
@@ -225,7 +225,8 @@
     "badgeType": "new",
     "compatibleWith": [
       "GitHub Pages",
-      "Chart.js",
+      "HTML5 Canvas",
+      "Vanilla JS",
       "HTML5"
     ],
     "description": "An ultra-responsive dashboard kit designed for web applications and client portals. Built with pure modular HTML/CSS/JS without heavyweight node build steps.",
@@ -235,10 +236,11 @@
     ],
     "features": [
       "100% Free & Open Source (MIT License)",
-      "Pre-configured interactive Chart.js graphs",
-      "User permission table & data grids",
-      "Light/Dark theme sync with system",
-      "Fully responsive on mobile & tablets"
+      "Native Retina HTML5 Canvas revenue & inflow curves with hover crosshairs",
+      "Searchable, sortable, filterable subscription & transaction data grid",
+      "1-Click Client-side RFC-4180 CSV export with Blob streaming",
+      "Team RBAC access control & interactive provisioning modal",
+      "Persistent Light & Dark mode synchronization"
     ],
     "demoUrl": "https://mujtabacloud.github.io/zero-themes/demo/nexus/",
     "repoUrl": "https://github.com/mujtabacloud/nexus-admin-ui",

@@ -1,76 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus Admin UI – Live Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0f19; color: #f3f4f6; line-height: 1.6; }
-    .demo-bar { position: sticky; top: 0; z-index: 100; background: #111827; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; border-bottom: 1px solid #1f2937; }
-    .demo-bar a { color: #60a5fa; text-decoration: none; font-weight: 600; }
-    .btn-back { padding: 0.35rem 0.8rem; background: rgba(96, 165, 250, 0.15); border-radius: 4px; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .stat-card { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 1.5rem; }
-    .stat-val { font-size: 2rem; font-weight: 800; color: #60a5fa; margin: 0.4rem 0; }
-    .table-card { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 1.5rem; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 0.8rem 1rem; border-bottom: 1px solid #1f2937; font-size: 0.9rem; }
-    th { color: #9ca3af; text-transform: uppercase; font-size: 0.75rem; }
-  </style>
+  <title>Nexus Admin & Analytics UI — Zero Themes Live Demo</title>
+  <meta name="description" content="Senior Human-Engineered B2B SaaS Admin & Analytics Dashboard. High-DPI Canvas charts, dynamic customer data grid, RBAC management, CSV export, and edge telemetry.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230284c7'/><path d='M30 70 L50 30 L70 70 Z' fill='none' stroke='white' stroke-width='10' stroke-linejoin='round'/></svg>">
 </head>
 <body>
-  <div class="demo-bar">
-    <div><strong>Nexus Admin UI</strong> &bull; Zero Themes Live Demo</div>
-    <a href="../../theme-detail.html?id=nexus-dashboard" class="btn-back">&larr; Back to Theme Details</a>
+
+  <!-- Zero Themes Top Live Demo Bar -->
+  <header class="demo-bar" role="banner">
+    <div class="demo-bar-left">
+      <div class="demo-bar-brand">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span>Nexus Admin UI</span>
+      </div>
+      <span class="demo-bar-tag">Zero Themes Official Demo</span>
+    </div>
+    <div class="demo-bar-actions">
+      <a href="../../themes.html" class="demo-bar-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>All Themes</span>
+      </a>
+      <a href="../../theme-detail.html?id=nexus-dashboard" class="demo-bar-btn" style="background: rgba(56, 189, 248, 0.18); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Back to Theme Details</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Dashboard App Shell -->
+  <div class="app-container">
+
+    <!-- Left Sidebar Navigation -->
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar-header">
+        <div class="brand-wrapper">
+          <div class="brand-icon">N</div>
+          <span class="brand-name">Nexus Cloud</span>
+          <span class="brand-version">v2.8.4</span>
+        </div>
+        <select class="workspace-selector" id="workspace-select" aria-label="Select Workspace">
+          <option value="prod">Acme Cloud (Prod)</option>
+          <option value="staging">Acme Staging</option>
+          <option value="dev">Dev Sandbox</option>
+        </select>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Telemetry & Analytics</div>
+        <a href="#overview" class="nav-link active" data-nav="overview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          <span>Executive Overview</span>
+          <span class="nav-badge">Live</span>
+        </a>
+        <a href="#billing" class="nav-link" data-nav="billing">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          <span>Billing & ARR</span>
+        </a>
+        <a href="#clusters" class="nav-link" data-nav="clusters">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+          <span>Edge Clusters</span>
+          <span class="nav-badge">4 Nodes</span>
+        </a>
+
+        <div class="nav-section-title" style="margin-top: 1rem;">Management</div>
+        <a href="#team" class="nav-link" data-nav="team">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Team & RBAC</span>
+          <span class="nav-badge" id="sidebar-team-count">5</span>
+        </a>
+        <a href="#audit" class="nav-link" data-nav="audit">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Audit Trail</span>
+        </a>
+        <a href="#settings" class="nav-link" data-nav="settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Environment Settings</span>
+        </a>
+      </nav>
+
+      <!-- Edge Status Widget -->
+      <div class="sidebar-edge-status">
+        <div class="edge-status-head">
+          <span>Global Anycast Edge</span>
+          <span class="status-indicator">
+            <span class="pulse-dot"></span>
+            <span>42ms</span>
+          </span>
+        </div>
+        <div style="color: var(--text-muted); font-size: 0.72rem;">
+          4/4 Edge clusters nominal & synced.
+        </div>
+      </div>
+
+      <!-- Current User Profile -->
+      <div class="sidebar-user">
+        <div class="user-avatar" title="Alexander Vance">AV</div>
+        <div class="user-meta">
+          <div class="user-name">Alexander Vance</div>
+          <div class="user-role">Workspace Owner</div>
+        </div>
+        <button class="icon-button" style="width: 28px; height: 28px;" title="User Settings" aria-label="User Settings">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="app-main" id="main-content">
+
+      <!-- Top App Bar -->
+      <div class="app-topbar">
+        <div class="topbar-left">
+          <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div class="breadcrumbs">
+            <span>Workspaces</span>
+            <span>/</span>
+            <span>Acme Cloud (Prod)</span>
+            <span>/</span>
+            <span class="current">Financials & Telemetry</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="search-command-btn" id="btn-search-cmd" aria-label="Quick Search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>Search records...</span>
+            <span class="kbd-shortcut">Ctrl K</span>
+          </button>
+
+          <!-- Timeframe Group -->
+          <div class="timeframe-group" role="group" aria-label="Timeframe selector">
+            <button class="timeframe-btn" data-timeframe="7d">7D</button>
+            <button class="timeframe-btn active" data-timeframe="30d">30D</button>
+            <button class="timeframe-btn" data-timeframe="q4">Q4</button>
+            <button class="timeframe-btn" data-timeframe="ytd">YTD</button>
+          </div>
+
+          <!-- Export CSV -->
+          <button class="btn-secondary" id="btn-export-csv" title="Export complete analytics dataset to CSV">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Export CSV</span>
+          </button>
+
+          <!-- Notifications Bell -->
+          <button class="icon-button" id="btn-notifications" aria-label="Notifications Center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="notif-badge-dot" id="notif-badge"></span>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button class="icon-button" id="btn-theme-toggle" aria-label="Toggle Light/Dark Theme" title="Toggle theme">
+            <svg id="theme-sun-icon" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg id="theme-moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dashboard Workspace Body -->
+      <div class="workspace-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Executive Revenue & Telemetry</h1>
+            <p class="page-subtitle">Real-time ARR run-rate, customer expansion, and distributed edge health indicators.</p>
+          </div>
+          <div class="header-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Real-time Stream Connected</span>
+            <span style="opacity: 0.5;">•</span>
+            <span id="last-sync-label">Sync 4s ago</span>
+          </div>
+        </div>
+
+        <!-- 4 Metric / KPI Cards -->
+        <section class="metrics-grid" aria-label="Executive Key Performance Indicators">
+          
+          <!-- MRR Card -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Monthly Recurring Revenue</span>
+              <span class="metric-badge badge-positive">↑ 12.4%</span>
+            </div>
+            <div class="metric-body">
+              <span class="metric-value" id="kpi-mrr">$128,450</span>
+              <svg class="sparkline-svg" viewBox="0 0 90 32" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="spark-grad-1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,32 0,26 15,22 30,19 45,16 60,11 75,7 90,2 90,32" fill="url(#spark-grad-1)"/>
+                <polyline class="sparkline-path" points="0,26 15,22 30,19 45,16 60,11 75,7 90,2" />
+              </svg>
+            </div>
+            <div class="metric-footer">+ $14,180 net ARR increase this billing cycle</div>
+          </div>
+
+          <!-- Active Seats Card -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Active Enterprise Seats</span>
+              <span class="metric-badge badge-positive">↑ 8.1%</span>
+            </div>
+            <div class="metric-body">
+              <span class="metric-value" id="kpi-seats">4,892</span>
+              <svg class="sparkline-svg" viewBox="0 0 90 32" preserveAspectRatio="none">
+                <polygon points="0,32 0,28 15,24 30,22 45,17 60,13 75,8 90,4 90,32" fill="url(#spark-grad-1)"/>
+                <polyline class="sparkline-path" points="0,28 15,24 30,22 45,17 60,13 75,8 90,4" />
+              </svg>
+            </div>
+            <div class="metric-footer">+368 enterprise seats provisioned this month</div>
+          </div>
+
+          <!-- NRR Card -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Net Retention Rate (NRR)</span>
+              <span class="metric-badge badge-neutral">118.4%</span>
+            </div>
+            <div class="metric-body">
+              <span class="metric-value" id="kpi-nrr">118.4%</span>
+              <svg class="sparkline-svg" viewBox="0 0 90 32" preserveAspectRatio="none">
+                <polygon points="0,32 0,22 15,20 30,18 45,15 60,12 75,9 90,6 90,32" fill="url(#spark-grad-1)"/>
+                <polyline class="sparkline-path" points="0,22 15,20 30,18 45,15 60,12 75,9 90,6" />
+              </svg>
+            </div>
+            <div class="metric-footer">Expansion outpacing churn by 4.2x ratio</div>
+          </div>
+
+          <!-- P99 Latency Card -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">P99 Edge Latency & Uptime</span>
+              <span class="metric-badge badge-positive">99.98% SLA</span>
+            </div>
+            <div class="metric-body">
+              <span class="metric-value" id="kpi-latency">42ms</span>
+              <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.2rem;">
+                <span class="status-indicator">
+                  <span class="pulse-dot"></span>
+                  <span style="font-weight: 700; font-size: 0.78rem;">Optimal</span>
+                </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Median 28ms</span>
+              </div>
+            </div>
+            <div class="metric-footer">0 degradations across 4 global edge nodes</div>
+          </div>
+
+        </section>
+
+        <!-- Financial Chart & Channel Breakdown Row -->
+        <section class="charts-row" aria-label="Visualizations">
+          
+          <!-- Financial Canvas Chart -->
+          <div class="card-container">
+            <div class="card-header-flex">
+              <div>
+                <h2 class="card-title">Financial Velocity & Run-rate</h2>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.2rem;">Comparative analysis of MRR Run-rate trajectory vs. Net New Inflows.</p>
+              </div>
+              <div class="chart-toggles">
+                <button class="chart-toggle-btn active" id="btn-chart-mrr" data-metric="mrr">MRR Trajectory</button>
+                <button class="chart-toggle-btn" id="btn-chart-inflow" data-metric="inflow">Net Inflow ($)</button>
+              </div>
+            </div>
+
+            <div class="canvas-wrapper">
+              <canvas id="revenue-canvas" height="290"></canvas>
+              <div class="chart-tooltip" id="chart-tooltip"></div>
+            </div>
+          </div>
+
+          <!-- Channel Acquisition Card -->
+          <div class="card-container">
+            <div class="card-header-flex">
+              <div>
+                <h2 class="card-title">Traffic & Acquisition</h2>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.2rem;">Share of qualified signup channels.</p>
+              </div>
+              <span class="kbd-shortcut" style="font-size: 0.75rem;">124,500 Total</span>
+            </div>
+
+            <div class="breakdown-list" id="traffic-breakdown-list">
+              <!-- Rendered dynamically by script.js -->
+            </div>
+
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-size: 0.8rem;">
+              <span style="color: var(--text-muted);">Free-to-Paid Conversion</span>
+              <strong style="color: var(--accent-emerald);">4.62% (+0.8%)</strong>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Customer Subscriptions & Transactions Table -->
+        <section class="card-container" id="billing" aria-label="Customer Subscriptions Table">
+          <div class="card-header-flex">
+            <div>
+              <h2 class="card-title">Enterprise Accounts & Transactions</h2>
+              <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.2rem;">Verified Stripe webhook events and active subscription contracts.</p>
+            </div>
+            <div class="chart-toggles">
+              <button class="btn-secondary" id="btn-table-csv">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Export Filtered Table</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Table Controls Toolbar -->
+          <div class="table-toolbar">
+            <input type="text" class="table-search-input" id="table-search" placeholder="Search customer, email, or invoice..." aria-label="Search customer subscriptions">
+            <div class="status-pills">
+              <button class="status-pill-btn active" data-filter="All">All (<span id="count-all">12</span>)</button>
+              <button class="status-pill-btn" data-filter="Paid">Paid (<span id="count-paid">10</span>)</button>
+              <button class="status-pill-btn" data-filter="Past Due">Past Due (<span id="count-pastdue">1</span>)</button>
+              <button class="status-pill-btn" data-filter="Trialing">Trialing (<span id="count-trialing">1</span>)</button>
+            </div>
+          </div>
+
+          <!-- Table Wrapper -->
+          <div class="data-table-wrapper">
+            <table class="data-table" id="transactions-table">
+              <thead>
+                <tr>
+                  <th data-sort="id">Invoice ID ↕</th>
+                  <th data-sort="customer">Customer / Domain ↕</th>
+                  <th data-sort="plan">Plan & Interval ↕</th>
+                  <th data-sort="seats" style="text-align: right;">Seats ↕</th>
+                  <th data-sort="amount" style="text-align: right;">Amount ($) ↕</th>
+                  <th data-sort="status">Payment Status ↕</th>
+                  <th data-sort="date">Date ↕</th>
+                  <th style="text-align: center;">Receipt</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-tbody">
+                <!-- Dynamically rendered by script.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table Pagination Footer -->
+          <div class="table-pagination">
+            <div id="pagination-info">Showing 1-8 of 12 records</div>
+            <div class="pagination-controls">
+              <button class="page-btn" id="btn-prev-page" disabled>&larr; Previous</button>
+              <span id="page-indicator" style="font-weight: 600; padding: 0 0.5rem;">Page 1 of 2</span>
+              <button class="page-btn" id="btn-next-page">Next &rarr;</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Edge Health & Team RBAC Row -->
+        <section class="infra-team-row" id="clusters" aria-label="Infrastructure and Team RBAC">
+          
+          <!-- Edge Nodes List -->
+          <div class="card-container">
+            <div class="card-header-flex">
+              <div>
+                <h2 class="card-title">Anycast Edge Nodes</h2>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.2rem;">Live node ping and global SLA.</p>
+              </div>
+              <span class="status-indicator">
+                <span class="pulse-dot"></span>
+                <span style="font-size: 0.75rem; font-weight: 600;">All Nominal</span>
+              </span>
+            </div>
+
+            <div class="edge-nodes-list" id="edge-nodes-container">
+              <!-- Dynamically populated by script.js -->
+            </div>
+          </div>
+
+          <!-- Team & Access Control -->
+          <div class="card-container" id="team">
+            <div class="card-header-flex">
+              <div>
+                <h2 class="card-title">Team & Access Control (RBAC)</h2>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.2rem;">Authorized workspace administrators and SSO credentials.</p>
+              </div>
+              <button class="btn-primary" id="btn-open-invite">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Invite Member</span>
+              </button>
+            </div>
+
+            <div class="team-list" id="team-list-container">
+              <!-- Dynamically populated by script.js -->
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+
   </div>
-  <div class="container">
-    <h2 style="margin-bottom: 1.5rem;">Analytics Overview</h2>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div>Total Revenue</div>
-        <div class="stat-val">$84,230</div>
-        <div style="color: #10b981; font-size: 0.85rem;">+14.2% vs last month</div>
+
+  <!-- Slide-out Notifications Center Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="notifications-drawer" id="notifications-drawer" aria-label="Notifications Center" aria-hidden="true">
+    <div class="drawer-header">
+      <div>
+        <h3 class="drawer-title">System Notifications</h3>
+        <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.1rem;"><span id="unread-count">3</span> unread alerts</p>
       </div>
-      <div class="stat-card">
-        <div>Active Sessions</div>
-        <div class="stat-val">12,450</div>
-        <div style="color: #10b981; font-size: 0.85rem;">+8.7% vs last month</div>
-      </div>
-      <div class="stat-card">
-        <div>Avg. Conversion</div>
-        <div class="stat-val">4.82%</div>
-        <div style="color: #10b981; font-size: 0.85rem;">+1.1% vs last month</div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="btn-secondary" id="btn-mark-all-read" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Clear all</button>
+        <button class="drawer-close" id="btn-close-drawer" aria-label="Close Drawer">&times;</button>
       </div>
     </div>
-    <div class="table-card">
-      <h3 style="margin-bottom: 1rem;">Recent Transactions</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Status</th>
-            <th>Amount</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Acme Software Corp</td>
-            <td><span style="color: #10b981;">Completed</span></td>
-            <td>$1,200.00</td>
-            <td>Nov 02, 2026</td>
-          </tr>
-          <tr>
-            <td>Starlight Studio</td>
-            <td><span style="color: #10b981;">Completed</span></td>
-            <td>$450.00</td>
-            <td>Nov 01, 2026</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="drawer-body" id="drawer-notifications-list">
+      <!-- Injected by script.js -->
+    </div>
+  </aside>
+
+  <!-- Invite Team Member Modal -->
+  <div class="modal-backdrop" id="invite-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-invite-title">
+      <div class="modal-header">
+        <h3 id="modal-invite-title" style="font-size: 1.15rem; font-weight: 700;">Invite New Team Member</h3>
+        <button class="drawer-close" id="btn-close-modal" aria-label="Close Modal">&times;</button>
+      </div>
+      <form id="invite-form">
+        <div class="form-group">
+          <label class="form-label" for="invite-name">Full Name</label>
+          <input type="text" id="invite-name" class="form-input" placeholder="e.g. Maya Lin" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="invite-email">Corporate Work Email</label>
+          <input type="email" id="invite-email" class="form-input" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="invite-role">Workspace Role</label>
+          <select id="invite-role" class="form-select">
+            <option value="Staff Platform Architect">Staff Platform Architect</option>
+            <option value="Lead SRE & Security">Lead SRE & Security</option>
+            <option value="Billing & Revenue Ops">Billing & Revenue Ops</option>
+            <option value="Frontend Engineer">Frontend Engineer</option>
+            <option value="Viewer (Read-Only)">Viewer (Read-Only)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">2FA Security Policy</label>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">
+            <input type="checkbox" id="invite-2fa" checked>
+            <label for="invite-2fa">Enforce Hardware Security Key (FIDO2 / YubiKey)</label>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="btn-cancel-invite">Cancel</button>
+          <button type="submit" class="btn-primary">Send Provisioning Invite</button>
+        </div>
+      </form>
     </div>
   </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
